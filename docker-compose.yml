@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  frontend:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USER
+        - UID
+        - GID
+    restart: unless-stopped
+    volumes:
+      - ./src:/var/www/html/frontend
+  nginx:
+    env_file: .env
+    restart: on-failure:10
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
