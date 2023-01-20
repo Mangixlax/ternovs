@@ -3,7 +3,6 @@ import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRender } from '@nuxt/types/config/render'
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
 import { NuxtRouteConfig } from '@nuxt/types/config/router'
-import getScopedName from './lib/getScopedName'
 
 const isDev = process.env.NODE_ENV === 'development'
 const time = new Date().valueOf()
@@ -24,9 +23,6 @@ export default <NuxtConfig>{
   env: {
     BASE_URL: process.env.BASE_URL,
     APP_ENV: process.env.APP_ENV,
-    CDN_PATH: process.env.CDN_PATH,
-    CDN_REALTY_PATH: process.env.CDN_REALTY_PATH,
-    API_URL_FIXED: process.env.API_URL_FIXED,
   },
 
   head: {
@@ -85,19 +81,7 @@ export default <NuxtConfig>{
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/modal/index.ts', mode: 'client' },
-    { src: '~directives/vue-sticky-directive.js', mode: 'client' },
-    { src: '~directives/vue-input-autowidth.js', mode: 'client' },
-    { src: '~directives/vue-click-outside.ts', mode: 'client' },
-    { src: '~plugins/vue-slider-component.js', mode: 'client' },
-    { src: '~plugins/vue-form-slider.js', mode: 'client' },
-    { src: '~plugins/vue-cool-lightbox', mode: 'client' },
-    { src: '~/plugins/yandex-map.js',  mode: 'client' },
-    '~plugins/vuelidate',
-    '~plugins/slider-swiper',
-    '~plugins/jsonld',
     '~plugins/axios',
-    '~plugins/vue-fragment',
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -123,46 +107,12 @@ export default <NuxtConfig>{
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxt-precompress',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/svg-sprite',
     '@nuxt/image',
-    '@nuxtjs/recaptcha',
-    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/component-cache',
-    'vue-scrollto/nuxt',
-    '~modules/jivosite',
-    '~modules/yandex-metrika/index.js',
-    '~modules/google-analytics/index.js',
-    '@nuxtjs/dayjs',
   ],
-
-  yandexMetrika: {
-    id: '88006014',
-    clickmap: true,
-    trackLinks: true,
-    accurateTrackBounce: true,
-    webvisor: true,
-    debug: isDev,
-  },
-
-  googleAnalytics: {
-    id: 'UA-128049596-1',
-    checkDuplicatedScript: true,
-    autoTracking: {
-      screenview: true,
-      pageviewOnLoad: true,
-      page: true,
-      transformQueryString: false,
-    },
-    dev: isDev,
-  },
-
-  jivosite: {
-    url: process.env.JIVOSITE_URL,
-  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -219,32 +169,9 @@ export default <NuxtConfig>{
     publicPath: '/_nuxt/',
   },
 
-  recaptcha: {
-    siteKey: process.env.RECAPTCHA_SITE_KEY,
-    version: 2,
-  },
-
   image: {
     dir: 'assets/images',
-    domains: [process.env.BASE_URL, process.env.CDN_PATH],
-    alias: {
-      s1: process.env.BASE_URL,
-      s3: [
-        process.env.CDN_PATH,
-        process.env.APP_ENV,
-        process.env.CDN_REALTY_PATH,
-        'original',
-      ].join('/'),
-      st3: [process.env.CDN_PATH, process.env.APP_ENV, 'app/public'].join('/'),
-      media: [process.env.CDN_PATH, process.env.APP_ENV, 'media'].join('/'),
-    },
-  },
-
-  dayjs: {
-    locales: ['ru'],
-    defaultLocale: 'ru',
-    defaultTimeZone: 'Europe/Moscow',
-    plugins: ['utc', 'timezone'],
+    domains: process.env.BASE_URL,
   },
 
   /*
@@ -271,22 +198,7 @@ export default <NuxtConfig>{
 
     extractCSS: false,
 
-    loaders: {
-      cssModules: {
-        modules: isDev
-          ? {
-              localIdentName: '[local]_[hash:hex:8]',
-            }
-          : {
-              // @ts-ignore
-              getLocalIdent: (
-                context: webpack.loader.LoaderContext,
-                localIdentName: string,
-                localName: string
-              ) => getScopedName(localName, context.resourcePath),
-            },
-      },
-    },
+    loaders: {},
 
     html: {
       minify: {

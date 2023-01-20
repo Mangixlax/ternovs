@@ -1,8 +1,7 @@
-# pronovostroiki
+# ternovs
 
 ## Build Setup
 
-```bash
 # install dependencies
 yarn install
 
@@ -19,16 +18,5 @@ yarn generate
 
 ## Run in docker container
 
-Unpack project by [instruction](https://gitlab.com/sellmore-moscow/pronovostroyki/infra)
 
-Run docker compose and attach to container:
-```bash
-# Attache container from infra folder
-docker-compose exec frontend /bin/sh
 
-# Run yarn
-yarn
-
-# Run dev mode
-yarn dev
-```

@@ -3,13 +3,8 @@ import { AxiosRequestConfig } from 'axios'
 
 export default function (ctx: NuxtApp) {
   ctx.$axios.interceptors.request.use((config: AxiosRequestConfig) => {
-    if (process.env.API_URL_FIXED) {
-      config.baseURL = process.env.API_URL_FIXED
-    } else {
-      config.baseURL = process.server
-        ? 'http://nginx:8080'
-        : process.env.BASE_URL
-    }
+    config.baseURL = process.server ? 'http://nginx:8080' : process.env.BASE_URL
+    
     return config
   })
 
