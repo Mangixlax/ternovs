@@ -1,0 +1,717 @@
+@import './mixins/breakpoints';
+
+/* Containers */
+@mixin container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+
+  @include media-breakpoint-up('sm') {
+    max-width: 540px;
+  }
+
+  @include media-breakpoint-up('md') {
+    max-width: 744px;
+  }
+
+  @include media-breakpoint-up('lg') {
+    max-width: 976px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    max-width: 1200px;
+  }
+}
+
+/* Print */
+@mixin hidden-print {
+  @media print {
+    .hidden-print {
+      display: none !important;
+    }
+  }
+}
+
+/* Effects */
+@mixin effect-hover-and-active($scale: 0.99) {
+  opacity: 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: scale(1);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+    transform: scale($scale);
+  }
+}
+
+/* Scrollbar */
+@mixin scrollbar-hide {
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+}
+
+/*  Fonts */
+@mixin size-9-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 12px;
+}
+
+@mixin size-10-semi-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+@mixin size-11-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+@mixin size-12-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin size-12-regular {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@mixin size-12-regular-underline {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-decoration-line: underline;
+}
+
+@mixin size-12-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@mixin size-13-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 175%;
+}
+
+@mixin size-13-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 175%;
+}
+
+@mixin size-13-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 175%;
+}
+
+@mixin size-14-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 175%;
+}
+
+@mixin size-14-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 175%;
+}
+
+@mixin size-14-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 175%;
+}
+
+@mixin size-15-light {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 175%;
+}
+
+@mixin size-15-regular {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 175%;
+}
+
+@mixin size-15-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 175%;
+}
+
+@mixin size-16-regular {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 175%;
+}
+
+@mixin size-16-light {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 175%;
+}
+
+@mixin size-16-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 175%;
+}
+
+@mixin size-16-semi-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 175%;
+}
+
+@mixin size-16-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 175%;
+}
+
+@mixin size-17-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 135%;
+}
+
+@mixin size-17-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 135%;
+}
+
+@mixin size-17-medium-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 135%;
+}
+
+@mixin size-17-semi-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 135%;
+}
+
+@mixin size-17-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 135%;
+}
+
+@mixin size-20-regular {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 140%;
+}
+
+@mixin size-20-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 164%;
+}
+
+@mixin size-20-medium {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 135%;
+}
+
+@mixin size-20-semi-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+}
+
+@mixin size-20-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 140%;
+}
+
+@mixin size-24-regular {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-24-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 135%;
+}
+
+@mixin size-24-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-26-regular-line {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-26-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-26-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-32-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-40-extra-bold {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 135%;
+  letter-spacing: -0.02em;
+}
+
+@mixin size-48-extra-bold {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 58px;
+  letter-spacing: -0.02em;
+}
+
+@mixin font-h1-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 34px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 40px;
+  }
+}
+
+@mixin font-h1-semibold {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26.55px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 34px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 40px;
+  }
+}
+
+@mixin font-h2-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 35px;
+  }
+}
+
+@mixin font-h2-semibold {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 35px;
+  }
+}
+
+@mixin font-h3-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 27px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 30px;
+  }
+}
+
+@mixin font-h3-semibold {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 27px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 30px;
+  }
+}
+
+@mixin font-h4-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 24px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 26px;
+  }
+}
+
+@mixin font-h4-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 24px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 26px;
+  }
+}
+
+@mixin font-h5-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 21px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 23px;
+  }
+}
+
+@mixin font-h5-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 21px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 23px;
+  }
+}
+
+@mixin font-h6-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 21px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 20px;
+  }
+}
+
+@mixin font-h6-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 21px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 20px;
+  }
+}
+
+@mixin font-lead-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 17px;
+  }
+}
+
+@mixin font-lead-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 17px;
+  }
+}
+
+@mixin font-p-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+}
+
+@mixin font-p-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 160%;
+}
+
+@mixin font-small-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 13px;
+  }
+}
+
+@mixin font-small-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 13px;
+  }
+}
+
+@mixin font-extra-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+}
+
+@mixin font-extra-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 160%;
+}
+
+@mixin font-super-regular {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('xl') {
+    font-size: 10px;
+  }
+}
+
+@mixin font-super-medium {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('xl') {
+    font-size: 10px;
+  }
+}
+
+@mixin font-big-semibold {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 19px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 20px;
+  }
+}

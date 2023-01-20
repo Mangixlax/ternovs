@@ -1,0 +1,35 @@
+variables:
+  NETWORK_NAME: "sabr_net"
+  BACKEND_CONTAINER_NAME: "backend"
+  FRONTEND_CONTAINER_NAME: "frontend"
+  REDIS_CONTAINER_NAME: "redis"
+
+stages:
+  - build-prod
+  - deploy-prod
+
+build-prod:
+  stage: build-prod
+  tags:
+    - prod
+  script:
+    - cp .env.prod .env
+    - env | grep '^PROD_ENV_' | sed -e  's/PROD_ENV_//g' >> .env
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --file ./Dockerfile.prod --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+  only:
+    - tags
+
+deploy-prod:
+  stage: deploy-prod
+  tags:
+    - prod
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - docker stop $FRONTEND_CONTAINER_NAME || true
+    - docker rm $FRONTEND_CONTAINER_NAME || true
+    - docker run -d --network $NETWORK_NAME --restart unless-stopped --name $FRONTEND_CONTAINER_NAME $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  only:
+    - tags
