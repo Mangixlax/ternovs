@@ -47,14 +47,11 @@ export default class UiFormInput extends Vue {
     color: $color-gray-100;
     width: 100%;
     border: none;
-
-    &:focus ~ .input {
-      background-color: $color-white-100;
-      outline: 2px solid $color-primary-100;
-    }
   }
 
-  &:hover {
+  &:focus-within {
+    background-color: $color-white-100;
+    outline: 2px solid $color-primary-100;
   }
 
   &__submit {
