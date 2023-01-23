@@ -1,9 +1,9 @@
 <template>
   <section :class="$style['fastlinks']">
-    <h3 :class="$style['fastlinks-title']" @click="onClick">
+    <span :class="$style['fastlinks-title']" @click="onClick">
       {{ title }}
-      <svg-icon name="dropdown-mini"></svg-icon>
-    </h3>
+      <svg-icon name="dropdown-mini" />
+    </span>
     <div
       :style="{ height: contentHeight }"
       :class="$style['fastlinks__wrapper']"
@@ -25,7 +25,7 @@
         <slot />
       </ol>
     </div>
-    <slot :name="`link-${$vnode.key}`"></slot>
+    <slot :name="`link-${$vnode.key}`" />
   </section>
 </template>
 

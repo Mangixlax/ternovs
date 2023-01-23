@@ -44,7 +44,7 @@ export default class UiFormInput extends Vue {
   &__instance {
     padding: 11px 0 7px 20px;
     @include font-p-regular-160;
-    color: $color-gray-100;
+    color: $color-gray-72;
     width: 100%;
     border: none;
   }
