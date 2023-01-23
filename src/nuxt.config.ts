@@ -171,7 +171,7 @@ export default <NuxtConfig>{
 
   image: {
     dir: 'assets/images',
-    domains: process.env.BASE_URL,
+    domains: [process.env.BASE_URL],
   },
 
   /*

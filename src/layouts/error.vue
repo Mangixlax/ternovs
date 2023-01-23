@@ -110,7 +110,6 @@ export default Vue.extend({
 }
 
 .h1 {
-  @include size-20-bold;
   font-size: 200px;
   line-height: 296px;
   text-align: center;
@@ -133,14 +132,13 @@ export default Vue.extend({
     a {
       margin: 0 4px;
       text-decoration: none;
-      color: $color-black-100;
-      border-bottom: 1px solid $color-black-100;
+      color: $color-gray-100;
+      border-bottom: 1px solid $color-gray-100;
       padding-bottom: 4px;
     }
   }
 
   ul {
-    @include size-14-regular;
     list-style: none;
     padding-left: 34px;
     margin-top: 0;

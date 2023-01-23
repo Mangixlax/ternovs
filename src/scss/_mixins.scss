@@ -8,22 +8,24 @@
   padding-left: 12px;
   padding-right: 12px;
 
+ 
   @include media-breakpoint-up('sm') {
-    max-width: 540px;
+    max-width: 696px;
+    padding: 0 36px;
   }
 
   @include media-breakpoint-up('md') {
-    max-width: 744px;
+    max-width: 984px;
+    padding: 0 28px;
   }
 
   @include media-breakpoint-up('lg') {
-    max-width: 976px;
-    padding-left: 24px;
-    padding-right: 24px;
+    max-width: 984px;
+    padding: 0 28px;
   }
 
   @include media-breakpoint-up('xl') {
-    max-width: 1200px;
+    max-width: 1152px;
   }
 }
 
@@ -54,19 +56,326 @@
 
 /*  Fonts */
 @mixin font-h1-regular {
-  font-family: 'Inter';
+  font-family: 'TT Norms Pro';
   font-style: normal;
   font-weight: 400;
-  font-size: 27px;
+  font-size: 28.32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 36.49px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 42.56px;
+  }
+}
+
+@mixin font-h1-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28.32px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 36.49px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 42.56px;
+  }
+}
+
+@mixin font-h2-regular {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26.1px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 32.44px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 37.01px;
+  }
+}
+
+@mixin font-h2-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26.1px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 32.44px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 37.01px;
+  }
+}
+
+@mixin font-h3-regular {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24.06px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 28.83px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 30.17px;
+  }
+}
+
+@mixin font-h3-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24.06px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 28.83px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 32.18px;
+  }
+}
+
+@mixin font-h4-regular {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22.17px;
   line-height: 130%;
   letter-spacing: -0.01em;
 
   @include media-breakpoint-up('md') {
-    font-size: 34px;
+    font-size: 25.63px;
   }
 
   @include media-breakpoint-up('xl') {
-    font-size: 40px;
+    font-size: 27.98px;
   }
 }
 
+@mixin font-h4-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22.17px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+
+  @include media-breakpoint-up('md') {
+    font-size: 25.63px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 27.98px;
+  }
+}
+
+@mixin font-h5-regular {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20.44px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 22.78px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 24.33px;
+  }
+}
+
+@mixin font-h5-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20.44px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 22.78px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 24.33px;
+  }
+}
+
+@mixin font-h6-regular {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18.84px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 20.25px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 21.16px;
+  }
+}
+
+@mixin font-h6-medium {
+  font-family: 'TT Norms Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18.84px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 20.25px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 21.16px;
+  }
+}
+
+@mixin font-lead-regular-130 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17.36px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 18.4px;
+  }
+}
+
+@mixin font-lead-regular-160 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17.36px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 18.4px;
+  }
+}
+
+@mixin font-lead-medium-130 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 130%;
+
+  @include media-breakpoint-up('xl') {
+    font-size: 18.4px;
+  }
+}
+
+@mixin font-lead-medium-160 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17.36px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 18px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 18.4px;
+  }
+}
+
+@mixin font-p-regular-130 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+}
+
+@mixin font-p-regular-160 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+
+@mixin font-p-medium-130 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+}
+
+@mixin font-p-medium-160 {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+@mixin font-small-regular {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13.91px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 14.22px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 14.75px;
+  }
+}
+
+@mixin font-small-medium {
+  font-family: 'TT Commons';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13.91px;
+  line-height: 160%;
+
+  @include media-breakpoint-up('md') {
+    font-size: 14.22px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    font-size: 14.75px;
+  }
+}
