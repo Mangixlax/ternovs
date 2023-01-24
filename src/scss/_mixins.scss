@@ -23,8 +23,23 @@
 }
 
 @mixin grid-container {
-  grid-template-columns: repeat(12, 1fr);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 24px;
+  width: fit-content;
+  padding: 0 12px;
+  
+  @include media-breakpoint-up('md') {
+    grid-template-columns: repeat(8, 66px);
+  }
+
+  @include media-breakpoint-up('lg') {
+    grid-template-columns: repeat(10, 72px);
+  }
+
+  @include media-breakpoint-up('xl') {
+    grid-template-columns: repeat(12, 72px);
+  }
 }
 
 /* Print */
