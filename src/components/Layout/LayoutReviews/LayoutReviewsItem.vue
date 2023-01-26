@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import LayoutReviewsItem from '@/components/Layout/LayoutReviews/LayoutReviewsItem.vue'
 
 @Component({
   components: {},
