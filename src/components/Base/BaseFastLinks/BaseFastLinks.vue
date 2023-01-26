@@ -2,7 +2,7 @@
   <section :class="$style['fastlinks']">
     <span :class="$style['fastlinks-title']" @click="onClick">
       {{ title }}
-      <svg-icon name="dropdown-mini" />
+      <svg-icon name="form/dropdown" />
     </span>
     <div
       :style="{ height: contentHeight }"
@@ -114,6 +114,9 @@ export default class BaseFastLinks extends Vue {
 
     svg {
       display: none;
+      width: 30px;
+      height: 30px;
+      fill: $color-gray-80;
     }
   }
 
@@ -160,13 +163,6 @@ export default class BaseFastLinks extends Vue {
 
       svg {
         display: inline-block;
-        width: 24px;
-        height: 24px;
-        stroke: $color-gray-88;
-
-        .dark & {
-          stroke: $color-white-96;
-        }
       }
     }
 

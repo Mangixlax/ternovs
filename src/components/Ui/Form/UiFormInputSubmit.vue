@@ -7,6 +7,9 @@
       :class="$style['input__instance']"
       @input="onInput($event.target.value)"
     />
+    <span :class="$style['input__submit']">
+      <svg-icon name="form/submit" />
+    </span>
   </div>
 </template>
 
@@ -19,7 +22,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
     event: 'input',
   },
 })
-export default class UiFormInput extends Vue {
+export default class UiFormInputSubmit extends Vue {
   @Prop({ type: String, default: '' }) value!: string
   @Prop({ type: String, default: 'input' }) tag!: string
 
@@ -33,13 +36,13 @@ export default class UiFormInput extends Vue {
 .input {
   width: 100%;
   display: flex;
-  border-radius: 10px;
+  border-radius: 90px;
   transition: background-color 0.25s ease;
   outline: 2px solid $color-gray-6;
   align-items: center;
 
   &__instance {
-    padding: 11px 0 7px 16px;
+    padding: 11px 0 7px 20px;
     @include font-p-regular-160;
     color: $color-gray-72;
     width: 100%;

@@ -47,7 +47,7 @@
           нашей клиники!
         </div>
         <div :class="$style['footer__row-input']">
-          <ui-form-input placeholder="Номер телефона" />
+          <ui-form-input-submit placeholder="Номер телефона" />
         </div>
         <div :class="$style['footer__row-agreement']">
           Нажимая кнопку «<svg-icon name="form/submit" />», я подтверждаю и даю
@@ -80,7 +80,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import BaseFastLinks from '@/components/Base/BaseFastLinks/BaseFastLinks.vue'
-import UiFormInput from '@/components/Ui/Form/UiFormInput.vue'
+import UiFormInputSubmit from '@/components/Ui/Form/UiFormInputSubmit.vue'
 import { Location } from 'vue-router/types/router'
 
 interface fastLinks {
@@ -96,7 +96,7 @@ interface fastLink {
 @Component({
   components: {
     BaseFastLinks,
-    UiFormInput,
+    UiFormInputSubmit,
   },
 })
 export default class BaseFooter extends Vue {

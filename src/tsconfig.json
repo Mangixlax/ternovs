@@ -31,7 +31,7 @@
       "@types/node",
       "@types/lodash.debounce",
       "@types/object-path",
-      "dayjs/plugin/relativeTime",
+      "@types/vue-the-mask",
     ]
   },
   "vueCompilerOptions": {

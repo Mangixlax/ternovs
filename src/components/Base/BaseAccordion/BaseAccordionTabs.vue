@@ -28,7 +28,7 @@ export default class BaseAccordionTabs extends Vue {
 
   public show = this.active
 
-  onClick(index) {
+  onClick(index: number) {
     this.$emit('change', index)
   }
 }
@@ -41,7 +41,7 @@ export default class BaseAccordionTabs extends Vue {
   grid-gap: 12px;
   width: fit-content;
   margin-bottom: 50px;
-  
+
   &__control {
     @include font-small-medium;
     border-radius: 30px;

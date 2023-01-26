@@ -10,7 +10,7 @@
         {{ title }}
       </h2>
       <svg-icon
-        name="dropdown-mini"
+        name="form/dropdown"
         :class="$style['accordion__header-button']"
       ></svg-icon>
     </div>
@@ -101,6 +101,7 @@ export default class BaseAccordionItem extends Vue {
     &-button {
       width: 30px;
       height: 30px;
+      fill: $color-primary-88;
     }
   }
 

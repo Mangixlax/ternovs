@@ -1,20 +1,23 @@
 <template>
   <div>
     <nuxt />
-    <base-accordions-home/>
+    <base-callback />
+    <base-accordions-home />
     <base-footer />
-  </div> 
+  </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
+import BaseCallback from '@/components/Base/BaseCallback/BaseCallback.vue'
 import BaseAccordionsHome from '@/components/Base/BaseAccordion/BaseAccordionsHome.vue'
+import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
 
 @Component({
   components: {
-    BaseFooter,
+    BaseCallback,
     BaseAccordionsHome,
+    BaseFooter,
   },
 })
 export default class DefaultLayout extends Vue {}
