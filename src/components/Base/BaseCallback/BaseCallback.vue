@@ -41,7 +41,7 @@
           :class="$style['callback__grid-clinic']"
         />
         <img
-          :src="$img('/layout/callback-diamond.png')"
+          :src="$img('/layout/diamond.png')"
           alt="diamond"
           :class="$style['callback__grid-diamond']"
         />

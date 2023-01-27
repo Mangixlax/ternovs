@@ -1,8 +1,8 @@
 <template>
   <div :class="$style['reviews__item']">
     <svg-icon name="layout/review-quote" />
-    <div :class="$style['reviews__item-text']">{{ review.text }}</div>
-    <div :class="$style['reviews__item-name']">{{ review.name }}</div>
+    <div :class="$style['reviews__item-text']">{{ item.text }}</div>
+    <div :class="$style['reviews__item-name']">{{ item.name }}</div>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
   components: {},
 })
 export default class LayoutReviewsItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) review!: object
+  @Prop({ type: Object, default: () => {} }) item!: object
 }
 </script>
 

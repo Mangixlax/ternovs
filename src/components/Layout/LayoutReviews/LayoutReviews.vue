@@ -17,17 +17,44 @@
           />
         </div>
       </div>
-      <layout-reviews-item
+      <div
         v-for="(item, index) in reviews"
         :key="index"
-        :review="item"
         :class="[
           $style['reviews__grid-container'],
           $style[`reviews__grid-container-${index + 1}`],
         ]"
-      />
+      >
+        <layout-reviews-item :item="item" />
+      </div>
       <div :class="$style['reviews__grid-slider']">
-        <layout-reviews-item :review="reviews[0]" />
+        <swiper
+          ref="mySwiper"
+          :options="swiperOption"
+          :class="$style['slider']"
+        >
+          <swiper-slide
+            v-for="(item, i) in reviews"
+            :key="i"
+            :class="$style['slider__slide']"
+          >
+            <layout-reviews-item :item="item" />
+          </swiper-slide>
+          <div slot="pagination" :class="$style['slider__navigation']">
+            <div
+              @click.prevent="$refs.mySwiper.swiperInstance.slidePrev()"
+              :class="[$style['slider__navigation-prev']]"
+            >
+              <svg-icon name="arrow-left"></svg-icon>
+            </div>
+            <div
+              @click.prevent="$refs.mySwiper.swiperInstance.slideNext()"
+              :class="[$style['slider__navigation-next']]"
+            >
+              <svg-icon name="arrow-right"></svg-icon>
+            </div>
+          </div>
+        </swiper>
       </div>
     </div>
   </section>
@@ -35,6 +62,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { SwiperOptions } from 'swiper'
 import LayoutReviewsItem from '@/components/Layout/LayoutReviews/LayoutReviewsItem.vue'
 
 interface review {
@@ -43,9 +72,17 @@ interface review {
 }
 
 @Component({
-  components: { LayoutReviewsItem },
+  components: { LayoutReviewsItem, Swiper, SwiperSlide },
 })
 export default class LayoutReviews extends Vue {
+  public swiperOption: SwiperOptions = {
+    slidesPerView: 1.3,
+    spaceBetween: 24,
+    loop: false,
+    autoHeight: true,
+    autoplay: false,
+  }
+
   public reviews: review[] = [
     {
       text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
@@ -127,7 +164,8 @@ export default class LayoutReviews extends Vue {
       padding-top: 202px;
       padding-bottom: 22px;
       grid-column: 1 / 6;
-      min-width: 100%;
+      width: calc(100% + 12px);
+      position: relative;
     }
   }
 
@@ -271,6 +309,25 @@ export default class LayoutReviews extends Vue {
           grid-column: 7 / 10;
         }
       }
+    }
+  }
+}
+
+.slider {
+  &__navigation {
+    display: flex;
+    padding-top: 14px;
+
+    &-prev {
+      padding: 8px 14px 8px 0;
+    }
+
+    &-next {
+      padding: 8px 0 8px 14px;
+    }
+    svg {
+      height: 30px;
+      width: 30px;
     }
   }
 }
