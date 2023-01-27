@@ -7,12 +7,12 @@
           от наших пациентов
         </h2>
         <span> 4.9/5.0 </span>
-        <svg-icon name="layout/star" />
+        <svg-icon name="stars" />
       </div>
       <div :class="$style['reviews__grid-decore']">
         <div :class="$style['reviews__grid-decore-container']">
           <img
-            :src="$img('/layout/reviews-bg.png')"
+            :src="$img('/sections/home/reviews-bg.png')"
             alt="Графика зуба в образе брилианта"
           />
         </div>
@@ -25,7 +25,7 @@
           $style[`reviews__grid-container-${index + 1}`],
         ]"
       >
-        <layout-reviews-item :item="item" />
+        <sections-home-reviews-item :item="item" />
       </div>
       <div :class="$style['reviews__grid-slider']">
         <swiper
@@ -38,7 +38,7 @@
             :key="i"
             :class="$style['slider__slide']"
           >
-            <layout-reviews-item :item="item" />
+            <sections-home-reviews-item :item="item" />
           </swiper-slide>
           <div slot="pagination" :class="$style['slider__navigation']">
             <div
@@ -64,7 +64,7 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { SwiperOptions } from 'swiper'
-import LayoutReviewsItem from '@/components/Layout/LayoutReviews/LayoutReviewsItem.vue'
+import SectionsHomeReviewsItem from '@/components/Sections/Home/SectionsHomeReviews/SectionsHomeReviewsItem.vue'
 
 interface review {
   text: string
@@ -72,9 +72,9 @@ interface review {
 }
 
 @Component({
-  components: { LayoutReviewsItem, Swiper, SwiperSlide },
+  components: { SectionsHomeReviewsItem, Swiper, SwiperSlide },
 })
-export default class LayoutReviews extends Vue {
+export default class SectionsHomeReviews extends Vue {
   public swiperOption: SwiperOptions = {
     slidesPerView: 1.3,
     spaceBetween: 24,

@@ -14,7 +14,7 @@
       </div>
       <div :class="$style['services__grid-decore']">
         <img
-          :src="$img('/layout/serviсes-decore.png')"
+          :src="$img('/sections/home/serviсes-decore.png')"
           alt="Девушка с красивыми зубами"
           :class="$style['services__grid-decore-image']"
         />
@@ -26,7 +26,7 @@
       </div>
       <div :class="$style['services__grid-row']">
         <div :class="$style['services__grid-row-container']">
-          <layout-services-item
+          <sections-home-services-item
             v-for="(item, index) in services"
             :key="index"
             :item="item"
@@ -43,7 +43,7 @@
               :key="i"
               :class="$style['slider__slide']"
             >
-              <layout-services-item :item="item" />
+              <sections-home-services-item :item="item" />
             </swiper-slide>
             <div slot="pagination" :class="$style['slider__navigation']">
               <div
@@ -72,7 +72,7 @@ import { Location } from 'vue-router/types/router'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { SwiperOptions } from 'swiper'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
-import LayoutServicesItem from '@/components/Layout/LayoutServices/LayoutServicesItem.vue'
+import SectionsHomeServicesItem from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServicesItem.vue'
 
 interface service {
   icon: string
@@ -84,12 +84,12 @@ interface service {
 @Component({
   components: {
     UiFormButton,
-    LayoutServicesItem,
     Swiper,
     SwiperSlide,
+    SectionsHomeServicesItem,
   },
 })
-export default class LayoutServices extends Vue {
+export default class SectionsHomeServices extends Vue {
   public swiperOption: SwiperOptions = {
     slidesPerView: 1.3,
     spaceBetween: 24,

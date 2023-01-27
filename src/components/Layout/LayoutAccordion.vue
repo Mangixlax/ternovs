@@ -20,17 +20,16 @@
 </template>
 
 <script lang="ts">
-import BaseAccordions from '@/components/Base/BaseAccordion/BaseAccordions.vue'
-import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
-
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
+import BaseAccordions from '@/components/Base/BaseAccordion/BaseAccordions.vue'
+import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
 
 @Jsonld
 @Component({
   components: { BaseAccordions, BaseAccordionTabs },
 })
-export default class BaseAccordionsHome extends Vue {
+export default class LayoutAccordion extends Vue {
   public activeTab = 0
 
   public controls = ['Категория 1', 'Категория 2', 'Категория 3']

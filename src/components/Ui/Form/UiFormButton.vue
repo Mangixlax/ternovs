@@ -27,7 +27,7 @@
     >
       <slot name="icon-before" />
     </span>
-      <slot />
+    <slot />
     <span
       v-if="$slots['icon-after']"
       :class="[$style['icon'], $style['icon--after']]"
@@ -83,7 +83,7 @@ export default class UiFormButton extends Vue {
   cursor: pointer;
   border: none;
   justify-content: center;
-  padding: 12px  24px 10px 24px;
+  padding: 13px 24px 10px 24px;
   background-color: $color-primary-100;
   min-height: 42px;
   position: relative;
@@ -92,7 +92,7 @@ export default class UiFormButton extends Vue {
   color: $color-white-100;
   text-decoration: none;
   border-radius: 28px;
-  
+
   &--xl {
   }
 
@@ -175,7 +175,6 @@ export default class UiFormButton extends Vue {
     width: 16px;
   }
 }
-
 
 @keyframes order-animation {
   0% {

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style['reviews__item']">
-    <svg-icon name="layout/review-quote" />
+    <svg-icon name="review-quote" />
     <div :class="$style['reviews__item-text']">{{ item.text }}</div>
     <div :class="$style['reviews__item-name']">{{ item.name }}</div>
   </div>
@@ -9,10 +9,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({
-  components: {},
-})
-export default class LayoutReviewsItem extends Vue {
+@Component
+export default class SectionsHomeReviewsItem extends Vue {
   @Prop({ type: Object, default: () => {} }) item!: object
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <div :class="$style['reviews__item']">
-    <div :class="$style['reviews__item-icon']">
-      <svg-icon :name="`layout/${item.icon}`" />
+  <div :class="$style['about__item']">
+    <div :class="$style['about__item-icon']">
+      <svg-icon :name="item.icon" />
     </div>
-    <div :class="$style['reviews__item-title']">{{ item.title }}</div>
-    <div :class="$style['reviews__item-text']">{{ item.text }}</div>
-    <nuxt-link :to="item.route" :class="$style['reviews__item-link']">
+    <div :class="$style['about__item-title']">{{ item.title }}</div>
+    <div :class="$style['about__item-text']">{{ item.text }}</div>
+    <nuxt-link :to="item.route" :class="$style['about__item-link']">
       <span>К услугам</span>
-      <svg-icon :name="'layout/back-arrow'" />
+      <svg-icon :name="'back-arrow'" />
     </nuxt-link>
   </div>
 </template>
@@ -15,16 +15,14 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-@Component({
-  components: {},
-})
-export default class LayoutServicesItem extends Vue {
+@Component
+export default class SectionsHomeAboutItem extends Vue {
   @Prop({ type: Object, default: () => {} }) item!: object
 }
 </script>
 
 <style lang="scss" module>
-.reviews__item {
+.about__item {
   width: 100%;
   display: flex;
   flex-direction: column;

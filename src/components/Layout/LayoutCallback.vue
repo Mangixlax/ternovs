@@ -95,7 +95,7 @@ interface Form {
     },
   },
 })
-export default class BaseCallback extends Vue {
+export default class LayoutCallback extends Vue {
   public form: Form = {
     phone: '',
     visit: '',
