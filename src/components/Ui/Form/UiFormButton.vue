@@ -9,7 +9,7 @@
       data.class,
       {
         [$style['button']]: true,
-        [$style['button--sm']]: props.variant === 'sm',
+        [$style['button--gray']]: props.variant === 'gray',
         [$style['button--md']]: props.variant === 'md',
         [$style['button--xl']]: props.variant === 'xl',
         [$style['button--full-size']]: props.fullSize,
@@ -93,13 +93,9 @@ export default class UiFormButton extends Vue {
   text-decoration: none;
   border-radius: 28px;
 
-  &--xl {
-  }
-
-  &--md {
-  }
-
-  &--sm {
+  &--gray {
+    background-color: $color-gray-100;
+    color: $color-white-100;
   }
 
   &::before {

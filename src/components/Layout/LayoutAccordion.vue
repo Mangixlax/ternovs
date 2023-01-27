@@ -25,6 +25,11 @@ import { Jsonld } from 'nuxt-jsonld'
 import BaseAccordions from '@/components/Base/BaseAccordion/BaseAccordions.vue'
 import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
 
+interface accordionItem {
+  title: string
+  content: string[]
+}
+
 @Jsonld
 @Component({
   components: { BaseAccordions, BaseAccordionTabs },
@@ -34,7 +39,7 @@ export default class LayoutAccordion extends Vue {
 
   public controls = ['Категория 1', 'Категория 2', 'Категория 3']
 
-  public accordionsTabs = [
+  public accordionsTabs: Array<accordionItem[]> = [
     [
       {
         title:
@@ -241,6 +246,7 @@ export default class LayoutAccordion extends Vue {
 
   &-grid {
     @include grid-container;
+    padding: 0 12px;
     margin: 0 auto;
   }
 

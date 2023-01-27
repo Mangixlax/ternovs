@@ -74,7 +74,7 @@ import { SwiperOptions } from 'swiper'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsHomeAboutItem from '@/components/Sections/Home/SectionsHomeAbout/SectionsHomeAboutItem'
 
-interface service {
+interface about {
   icon: string
   title: string
   text: string
@@ -104,7 +104,7 @@ export default class SectionsHomeAbout extends Vue {
     },
   }
 
-  public about: service[] = [
+  public about: about[] = [
     {
       icon: 'tooth-cracked',
       title: 'Ортопедия',
@@ -281,25 +281,6 @@ export default class SectionsHomeAbout extends Vue {
       &-row {
         grid-column: 2 / 11;
       }
-    }
-  }
-}
-
-.slider {
-  &__navigation {
-    display: flex;
-    padding-top: 14px;
-
-    &-prev {
-      padding: 8px 14px 8px 0;
-    }
-
-    &-next {
-      padding: 8px 0 8px 14px;
-    }
-    svg {
-      height: 30px;
-      width: 30px;
     }
   }
 }
