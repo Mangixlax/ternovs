@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import LayoutCallback from '@/components/Layout/LayoutCallback'
-import LayoutAccordion from '@/components/Layout/LayoutAccordion'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
+import LayoutAccordion from '@/components/Layout/LayoutAccordion.vue'
 import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
 
 @Component({

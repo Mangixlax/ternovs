@@ -72,7 +72,7 @@ import { Location } from 'vue-router/types/router'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { SwiperOptions } from 'swiper'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
-import SectionsHomeAboutItem from '@/components/Sections/Home/SectionsHomeAbout/SectionsHomeAboutItem'
+import SectionsHomeAboutItem from '@/components/Sections/Home/SectionsHomeAbout/SectionsHomeAboutItem.vue'
 
 interface about {
   icon: string
