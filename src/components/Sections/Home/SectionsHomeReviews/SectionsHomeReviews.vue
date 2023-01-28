@@ -154,6 +154,7 @@ export default class SectionsHomeReviews extends Vue {
       }
 
       svg {
+        fill: #f2b600;
         width: 100px;
         height: 20px;
       }
