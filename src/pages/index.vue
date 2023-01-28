@@ -1,5 +1,6 @@
 <template>
   <main>
+    <sections-home-services />
     <layout-address />
     <!-- <sections-home-about /> -->
     <sections-home-benefits />

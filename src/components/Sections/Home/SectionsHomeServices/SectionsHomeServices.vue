@@ -21,6 +21,10 @@
         <img
           :src="$img('/layout/diamond.png')"
           alt="diamond"
+          v-rellax="{
+            speed: 3,
+            center: true,
+          }"
           :class="$style['services__grid-decore-diamond']"
         />
       </div>
@@ -179,8 +183,8 @@ export default class SectionsHomeServices extends Vue {
       &-diamond {
         position: absolute;
         left: 0;
-        top: 38px;
-        transform: translate(-50%, 0);
+        top: 90px;
+        left: -67px;
         height: 90px;
         width: auto;
       }

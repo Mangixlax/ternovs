@@ -85,6 +85,7 @@ export default <NuxtConfig>{
     '~plugins/vuelidate.js',
     '~plugins/slider-swiper.js',
     { src: '~directives/vue-click-outside.ts', mode: 'client' },
+    { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', mode: 'client' }
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

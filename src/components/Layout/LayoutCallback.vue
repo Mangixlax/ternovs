@@ -44,6 +44,10 @@
           :src="$img('/layout/diamond.png')"
           alt="diamond"
           :class="$style['callback__grid-diamond']"
+          v-rellax="{
+            speed: 3,
+            center: true,
+          }"
         />
       </div>
     </div>
@@ -177,8 +181,8 @@ export default class LayoutCallback extends Vue {
     &-diamond {
       position: absolute;
       left: 0;
-      top: 38px;
-      transform: translate(-50%, 0);
+      top: 70px;
+      left: -67px;
       height: 90px;
       width: auto;
     }

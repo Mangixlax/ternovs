@@ -14,6 +14,10 @@
           <img
             :src="$img('/sections/home/reviews-bg.png')"
             alt="Графика зуба в образе брилианта"
+            v-rellax="{
+              speed: 4,
+              center: true,
+            }"
           />
         </div>
       </div>

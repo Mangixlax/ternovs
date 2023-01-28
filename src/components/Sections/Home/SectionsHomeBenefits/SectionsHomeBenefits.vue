@@ -79,7 +79,7 @@ export default class SectionsHomeAbout extends Vue {
     },
   }
 
-  public benefits: service[] = [
+  public benefits: benefits[] = [
     {
       icon: 'welding-tool',
       title: 'Новейшее<br/>оборудование',

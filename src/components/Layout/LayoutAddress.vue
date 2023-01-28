@@ -6,6 +6,10 @@
           <img
             :src="$img('/layout/emblem-mini.png')"
             alt="Графика зуба в образе брилианта"
+            v-rellax="{
+              speed: 2,
+              center: true,
+            }"
           />
         </div>
       </div>
@@ -62,6 +66,7 @@ export default class LayoutAddress extends Vue {}
           width: 360px;
           height: 240px;
           position: absolute;
+          top: 20px;
           right: -168px;
         }
       }
