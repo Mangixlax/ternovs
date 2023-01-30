@@ -36,6 +36,8 @@ interface review {
     stars: string
     link: string
   }
+  title: string
+  text: string
 }
 
 @Component({

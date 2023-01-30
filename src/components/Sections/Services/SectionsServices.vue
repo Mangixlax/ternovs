@@ -49,6 +49,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { SwiperOptions } from 'swiper'
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
 @Component({
