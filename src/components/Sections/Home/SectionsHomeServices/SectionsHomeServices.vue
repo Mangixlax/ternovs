@@ -101,7 +101,7 @@ export default class SectionsHomeServices extends Vue {
     autoHeight: true,
     autoplay: false,
     breakpoints: {
-      // when window width is >= 250
+      // when window width is >= 768
       768: {
         slidesPerView: 3.3,
       },

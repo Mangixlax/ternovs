@@ -22,3 +22,29 @@ export const getScrollbarWidth = () => {
 
   return widthNoScroll - widthWithScroll
 }
+
+export const scrollLeft = (element, to, duration) => {
+  return new Promise((resolve) => {
+    const start = element.scrollLeft
+    const change = to - start
+    let currentTime = 0
+    const increment = 20
+
+    const animateScroll = () => {
+      currentTime += increment
+      element.scrollLeft = Math.easeInOutQuad(
+        currentTime,
+        start,
+        change,
+        duration
+      )
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment)
+      } else {
+        resolve()
+      }
+    }
+
+    animateScroll()
+  })
+}

@@ -69,10 +69,13 @@ export default class BaseHeaderNavItem extends Vue {
 
   > ul {
     position: absolute;
+    padding: 0 20px;
     padding-top: 8px;
     top: 100%;
     list-style: none;
     display: none;
+    background: $color-white-100;
+    left: -20px;
 
     > li {
       a {
@@ -80,10 +83,11 @@ export default class BaseHeaderNavItem extends Vue {
         text-decoration: none;
         color: $color-gray-100;
         padding-top: 4px;
+        white-space: nowrap;
       }
 
       & + li {
-        margin-top: 4px;
+        margin-top: 8px;
       }
     }
   }

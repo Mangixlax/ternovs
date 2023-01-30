@@ -138,5 +138,31 @@ body[menu-open] {
     left: 0;
     z-index: 10;
   }
+
+  @include media-breakpoint-up('md') {
+    &__grid {
+      &-container {
+        grid-column: 1 / 9;
+      }
+    }
+  }
+
+  @include media-breakpoint-up('lg') {
+    display: none;
+
+    &__grid {
+      &-container {
+        grid-column: 1 / 11;
+      }
+    }
+  }
+
+  @include media-breakpoint-up('xl') {
+    &__grid {
+      &-container {
+        grid-column: 1 / 13;
+      }
+    }
+  }
 }
 </style>
