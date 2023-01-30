@@ -84,3 +84,24 @@ button {
   font-weight: 500;
   font-style: normal;
 }
+
+.mobile__menu-enter-active,
+.mobile__menu-leave-active {
+  transition: all 0.3s ease;
+}
+
+.mobile__menu-enter,
+.mobile__menu-leave-active {
+  transform: translateX(-100vw);
+}
+
+//Mobile sidebar overlay animation
+.mobile__menu-overlay-enter-active,
+.mobile__menu-overlay-leave-active {
+  transition: opacity .3s;
+}
+
+.mobile__menu-overlay-enter,
+.mobile__menu-overlay-leave-active {
+  opacity: 0;
+}

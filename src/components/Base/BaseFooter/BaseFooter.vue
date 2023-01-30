@@ -107,20 +107,20 @@ export default class BaseFooter extends Vue {
         {
           label: 'Наша команда',
           route: {
-            name: 'our-team',
+            name: 'about-our-team',
           },
         },
         {
           label: 'Наши работы',
           route: {
-            name: 'portfolio',
+            name: 'about-portfolio',
           },
         },
 
         {
           label: 'Оборудование',
           route: {
-            name: 'equipment',
+            name: 'about-equipment',
           },
         },
       ],
@@ -131,55 +131,55 @@ export default class BaseFooter extends Vue {
         {
           label: 'Терапия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Гигиена',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Имплантация',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Хирургия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Ортодонтия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Отбеливание зубов',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Протезирование',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Обезболивание',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Цены на услуги',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
       ],
@@ -190,55 +190,55 @@ export default class BaseFooter extends Vue {
         {
           label: 'Терапия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Гигиена',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Имплантация',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Хирургия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Ортодонтия',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Отбеливание зубов',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Протезирование',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Обезболивание',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
         {
           label: 'Цены на услуги',
           route: {
-            name: 'services-therapy',
+            name: 'services',
           },
         },
       ],

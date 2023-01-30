@@ -8,7 +8,7 @@
   padding-left: 12px;
   padding-right: 12px;
 
- 
+
   @include media-breakpoint-up('sm') {
     max-width: 720px;
   }
@@ -25,11 +25,11 @@
 @mixin grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
   grid-gap: 24px;
-  width: fit-content;
   padding: 0 12px;
   margin: 0 auto;
-  
+
   @include media-breakpoint-up('md') {
     grid-template-columns: repeat(8, 66px);
   }
