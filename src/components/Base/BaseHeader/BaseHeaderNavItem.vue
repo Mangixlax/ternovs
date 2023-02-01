@@ -70,11 +70,12 @@ export default class BaseHeaderNavItem extends Vue {
   > ul {
     position: absolute;
     padding: 0 20px;
+    padding-bottom: 10px;
     padding-top: 8px;
     top: 100%;
     list-style: none;
     display: none;
-    background: $color-white-100;
+    background: #eef7f1;
     left: -20px;
 
     > li {
