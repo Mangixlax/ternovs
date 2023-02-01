@@ -1,5 +1,6 @@
 <template>
   <main>
+    <sections-home-slider />
     <sections-home-about />
     <layout-address />
     <sections-home-benefits />
@@ -10,6 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import SectionsHomeSlider from '@/components/Sections/Home/SectionsHomeSlider.vue'
 import LayoutAddress from '@/components/Layout/LayoutAddress.vue'
 import SectionsHomeAbout from '@/components/Sections/Home/SectionsHomeAbout.vue'
 import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefits.vue'
@@ -18,6 +20,7 @@ import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeService
 
 @Component({
   components: {
+    SectionsHomeSlider,
     LayoutAddress,
     SectionsHomeAbout,
     SectionsHomeBenefits,

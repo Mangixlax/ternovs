@@ -137,7 +137,7 @@ export default class BaseHeader extends Vue {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: $color-white-100;
+  background-color: #eef7f1;
 
   &__grid {
     @include grid-container;

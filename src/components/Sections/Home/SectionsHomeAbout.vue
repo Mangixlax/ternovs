@@ -50,7 +50,7 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component
-export default class LayoutCallback extends Vue {}
+export default class SectionsHomeAbout extends Vue {}
 </script>
 
 <style lang="scss" module>

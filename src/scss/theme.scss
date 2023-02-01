@@ -105,3 +105,22 @@ button {
 .mobile__menu-overlay-leave-active {
   opacity: 0;
 }
+
+.cutdown-bullet {
+  @include font-small-medium;
+  height: 26px;
+  width: 26px;
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+
+  &__count {
+    position: absolute;
+    top: 10%;
+    left: 53%;
+    transform: translateX(-50%);
+  }
+  svg {
+    position: absolute;
+  }
+}
