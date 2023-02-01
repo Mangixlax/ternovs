@@ -111,8 +111,10 @@ button {
   height: 26px;
   width: 26px;
   display: flex;
-  margin: 0 auto;
   position: relative;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 
   &__count {
     position: absolute;
@@ -120,7 +122,30 @@ button {
     left: 53%;
     transform: translateX(-50%);
   }
+
+  &__counter {
+    display: none;
+    
+    .cutdown-bullet-active & {
+      display: block;
+    }
+  }
+
+  &__point {
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background: $color-primary-24;
+  }
+
   svg {
     position: absolute;
+    overflow: overlay;
+    top: 0;
+    left: 0;
   }
+}
+
+.cutdown-bullet-active {
+  background: $color-white-100;
 }

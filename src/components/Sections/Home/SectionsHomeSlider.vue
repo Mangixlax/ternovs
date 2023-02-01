@@ -83,10 +83,10 @@ export default class SectionsHomeSlider extends Vue {
   public swiperOption: SwiperOptions = {
     slidesPerView: 1,
     spaceBetween: 24,
+    autoHeight: true,
     loop: true,
     autoplay: {
       delay: 5700,
-      disableOnInteraction: false,
     },
     pagination: {
       el: '.swiper-pagination',
@@ -95,43 +95,56 @@ export default class SectionsHomeSlider extends Vue {
       bulletClass: 'cutdown-bullet',
       bulletActiveClass: 'cutdown-bullet-active',
       renderCustom(swiper, current, total) {
-        return `
-          <span class="cutdown-bullet">
-            <span class="cutdown-bullet__count">${current}</span>
-            <svg width="26" height="26">
-              <circle
-                class="bg"
-                cx="13"
-                cy="13"
-                r="11"
-                fill="none"
-                stroke="#F5F6FB"
-                stroke-width="2"
-                stroke-dasharray="500"
-              />
-              <circle
-                id="my-circle-${current}"
-                class="fill"
-                cx="13"
-                cy="13"
-                r="11"
-                fill="none"
-                stroke="#39A05F"
-                stroke-width="2"
-                stroke-dasharray="69"
-              />
+        let cbhtml = ''
 
-              <animate
-                xlink:href="#my-circle-${current}"
-                attributeName="stroke-dashoffset"
-                from="69"
-                to="0"
-                dur="6s"
-                repeatCount="indefinite"
-              />
-            </svg>
-          </span>
-        `
+        for (var i = 0; i < total; i++) {
+          let isActive = i == current - 1
+
+          cbhtml += `<span class="cutdown-bullet ${
+            isActive ? 'cutdown-bullet-active ' : ''
+          }">
+              <span class="cutdown-bullet__counter">
+                <span class="cutdown-bullet__count">${i + 1}</span>
+                <svg width="26" height="26">
+                  <circle
+                    class="bg"
+                    cx="13"
+                    cy="13"
+                    r="13"
+                    fill="none"
+                    stroke="#F5F6FB"
+                    stroke-width="2"
+                    stroke-dasharray="500"
+                  />
+                  <circle
+                    id="my-circle-${i}"
+                    class="fill"
+                    cx="13"
+                    cy="13"
+                    r="13"
+                    fill="none"
+                    stroke="#39A05F"
+                    stroke-width="2"
+                    stroke-dasharray="80"
+                  />
+
+                  <animate
+                    xlink:href="#my-circle-${i}"
+                    attributeName="stroke-dashoffset"
+                    from="80"
+                    to="0"
+                    dur="6s"
+                    repeatCount="indefinite"
+                  />
+                </svg>
+              </span>
+              <span class="cutdown-bullet__point">
+
+              </span>
+            </span>`
+        }
+
+        return cbhtml
       },
     },
   }
@@ -225,7 +238,9 @@ export default class SectionsHomeSlider extends Vue {
 
   &__pagination {
     position: absolute;
-    bottom: 40px;
+    display: none;
+    grid-gap: 8px;
+    justify-content: center;
   }
 }
 
@@ -297,13 +312,18 @@ export default class SectionsHomeSlider extends Vue {
         border-radius: 38px 0 0 38px;
       }
     }
+
+    &__pagination {
+      display: flex;
+      bottom: 23px;
+    }
   }
 }
 
 @include media-breakpoint-up('xl') {
   .home_slider {
     padding: 118px 0 0;
-    background-position: 85% bottom;
+    background-position: 88% bottom;
     background-size: 1042px 694px;
 
     &__slider {
@@ -311,11 +331,15 @@ export default class SectionsHomeSlider extends Vue {
         padding-left: calc((100vw - 935px) / 2);
       }
     }
+
+    &__pagination {
+      bottom: 48px;
+    }
   }
 
   .slider {
     &__navigation {
-      top: 50%;
+      top: 35%;
       padding: 0 calc((100vw - 1338px) / 2);
 
       &-prev {
@@ -327,6 +351,10 @@ export default class SectionsHomeSlider extends Vue {
         padding: 8px 14px;
         border-radius: 38px;
       }
+    }
+
+    &__pagination {
+      bottom: 48px;
     }
   }
 }
