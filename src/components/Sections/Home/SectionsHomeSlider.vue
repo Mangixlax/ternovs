@@ -71,7 +71,6 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { SwiperOptions } from 'swiper'
-import BaseAnimationCutdown from '@/components/Base/BaseAnimation/BaseAnimationCutdown.vue'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 
 @Component({
