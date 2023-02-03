@@ -3,26 +3,23 @@
     <div :class="$style['our_team__grid']">
       <div :class="$style['our_team__grid-container']">
         <h2>Наша команда</h2>
-        <span>
+        <p>
           Однако опорой клиники являются её собственные профессиональные
           стоматологи с колоссальным стажем работы.
           <br />
-          Здесь Вам помогут снова
-          обрести крепкие зубы и ослепительную улыбку, а также почувствовать
-          радость и облегчение от получения других сопутствующих оздоровительных
-          и реставрационных услуг.
+          Здесь Вам помогут снова обрести крепкие зубы и ослепительную улыбку, а
+          также почувствовать радость и облегчение от получения других
+          сопутствующих оздоровительных и реставрационных услуг.
           <br />
-          Миссия нашей команды — больше здоровых
-          красивых улыбок!
-        </span>
+          Миссия нашей команды — больше здоровых красивых улыбок!
+        </p>
         <div :class="$style['our_team__grid-items']">
-          <sections-our_team-item
-            v-for="(item, index) in our_team"
+          <sections-about-our-team-item
+            v-for="(item, index) in employeesList"
             :key="index"
             :item="item"
           />
         </div>
-        <ui-form-button variant="gray">Показать больше</ui-form-button>
       </div>
     </div>
   </div>
@@ -30,93 +27,18 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import SectionsReviewsItem from '@/components/Sections/Reviews/SectionsReviewsItem.vue'
-import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
-
-interface review {
-  avatar: string
-  name: string
-  date: string
-  platform: {
-    logo: string
-    label: string
-    stars: string
-    link: string
-  }
-  title: string
-  text: string
-}
+import { Employee } from '@/types/models'
+import SectionsAboutOurTeamItem from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamItem.vue'
 
 @Component({
   components: {
-    SectionsReviewsItem,
-    UiFormButton,
+    SectionsAboutOurTeamItem,
   },
 })
 export default class SectionsAboutOurTeam extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
-
-  public our_team: review[] = [
-    {
-      id: 1,
-      avatar: 'employee-1',
-      name: 'Новиков Тимур Вадимович',
-      position: 'Хирург-имплантолог',
-    },
-    {
-      avatar: 'employee-2',
-      name: 'Марина Юдина',
-      date: '',
-      platform: {
-        logo: 'google',
-        label: 'Google',
-        stars: '5',
-        link: '',
-      },
-      title: 'Врачи с большой буквы, профессионалы своего дела.',
-      text: 'Замечательная стоматология! Врачи с большой буквы, профессионалы своего дела, всегда с большой заботой и вниманием к каждому пациенту. Рекомендую всем своим друзьям и коллегам, не задумываясь.',
-    },
-    {
-      avatar: 'employee-3',
-      name: 'Cергей Дорофеев',
-      date: '18 сентября 2021',
-      platform: {
-        logo: 'zoon',
-        label: 'Zoon',
-        stars: '4',
-        link: '',
-      },
-      title:
-        'Отличная клиника реально высокого уровня с современным оборудованием.',
-      text: 'Хочу выразить огромную благодарность всему персоналу клиники Этна-Дент за высокопрофессиональное и качественное обслуживание. Отличная клиника реально высокого уровня с современным оборудованием, материалами и передовыми технологиями в лечении и протезировании.',
-    },
-    {
-      avatar: 'employee-4',
-      name: 'Елена',
-      date: '13 сентября 2022',
-      platform: {
-        logo: 'google',
-        label: 'Google',
-        stars: '5',
-        link: '',
-      },
-      title: 'Профессиональное и дущевное отношение',
-      text: 'Волей случая, точнее, дочь уговорила заняться зубами, попал в стоматологическую клинику Этна Дент, ул. Б Каменщики д.6, все было выполнено на высшем уровне, сделал два импланта, мостик из трех зубов, 4 коронки, появилась голивудская улыбка, чего не наблюдалось с 1905 года, огромное спасибо Юрию Кудинову, Мартиросу Кочканяну, Бичахчану Роберту, всему обслуживающему персоналу, отношение очень профессиональное и душевное, ещё раз спасибо всем.',
-    },
-    {
-      avatar: 'employee-5',
-      name: 'Сергей Михалицкий',
-      date: '10 сентября 2022',
-      platform: {
-        logo: 'prodoctorov',
-        label: 'ProDoctorov',
-        stars: '5',
-        link: '',
-      },
-      title: 'Врач объясняет понятным языком',
-      text: 'Стоматологей довольен! Лечу зубы только здесь, столько клиник прошел... Нравится отношение к пациентам, качество выполненных работ, делают всё на совесть, столько уже зубов мне переделали за другими докторами и тем самым спасли зубы от удаления!!!',
-    },
-  ]
+  get employeesList(): Employee[] {
+    return this.$store.getters['employees/getEmployeesList']
+  }
 }
 </script>
 
@@ -131,26 +53,31 @@ export default class SectionsAboutOurTeam extends Vue {
     &-container {
       grid-column: 1 / 5;
 
-      > h1 {
+      > h2 {
         @include font-h1-medium;
         margin: 0;
         margin-bottom: 24px;
         color: $color-gray-100;
       }
 
-      > span {
+      > p {
         @include font-lead-regular-160;
+        margin: 0;
         color: $color-gray-88;
-      }
+        margin-bottom: 32px;
 
-      > button {
-        margin: 0 auto;
+        > br {
+          display: block;
+          content: '';
+          margin-top: 10px;
+        }
       }
     }
 
     &-items {
-      margin-top: 56px;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-row-gap: 24px;
     }
   }
 
@@ -158,6 +85,10 @@ export default class SectionsAboutOurTeam extends Vue {
     &__grid {
       &-container {
         grid-column: 1 / 9;
+      }
+
+      &-items {
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
   }
@@ -167,17 +98,20 @@ export default class SectionsAboutOurTeam extends Vue {
 
     &__grid {
       &-container {
-        padding: 0 72px;
-
         grid-column: 1 / 11;
 
-        > h1 {
-          margin-bottom: 32px;
+        > h2 {
+          padding: 0 96px;
         }
 
-        &-items {
-          margin-bottom: 32px;
+        > p {
+          padding: 0 96px;
         }
+      }
+
+      &-items {
+        padding: 0 72px;
+        grid-row-gap: 24px;
       }
     }
   }
@@ -187,17 +121,16 @@ export default class SectionsAboutOurTeam extends Vue {
 
     &__grid {
       &-container {
-        padding: initial;
-        grid-column: 2 / 12;
+        grid-column: 1 / 13;
 
-        > span {
-          max-width: 744px;
-          display: block;
+        > h2 {
+          margin-bottom: 32px;
         }
-      }
 
-      &-items {
-        margin-top: 96px;
+        > p {
+          padding: 0 96px;
+          margin-bottom: 48px;
+        }
       }
     }
   }

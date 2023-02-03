@@ -56,7 +56,7 @@ export default class SectionsHomeServicesItem extends Vue {
   }
 
   &-link {
-    @include font-p-regular-160;
+    @include font-p-medium-160;
     display: flex;
     align-items: center;
     text-decoration: none;

@@ -92,15 +92,15 @@ export default class BaseHeader extends Vue {
       list: [
         {
           label: 'Комманда',
-          route: { name: 'about' },
+          route: { name: 'about-our-team' },
         },
         {
-          label: 'О клинике',
-          route: { name: 'about' },
+          label: 'Портфолио',
+          route: { name: 'portfolio' },
         },
         {
-          label: 'О клинике',
-          route: { name: 'about' },
+          label: 'Оборудование',
+          route: { name: 'equipment' },
         },
       ],
     },

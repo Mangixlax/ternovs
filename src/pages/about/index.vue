@@ -15,6 +15,7 @@
     </div>
     <sections-home-benefits />
     <sections-home-services />
+    <sections-about-our-team />
   </main>
 </template>
 
@@ -22,11 +23,13 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefits.vue'
 import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServices.vue'
+import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
 
 @Component({
   components: {
     SectionsHomeBenefits,
     SectionsHomeServices,
+    SectionsAboutOurTeam,
   },
 })
 export default class AboutPage extends Vue {}
