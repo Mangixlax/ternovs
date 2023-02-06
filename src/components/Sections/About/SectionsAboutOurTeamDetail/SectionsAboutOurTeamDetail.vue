@@ -3,12 +3,12 @@
     <div :class="$style['our_team__grid']">
       <div :class="$style['our_team__grid-container']">
         <img
-          :src="$img(`/sections/about/employees/${this.employeeIdByRoute}.png`)"
+          :src="$img(`/sections/about/employees/${employeeById.image}.png`)"
           alt="Автор отзыва"
         />
         <span>{{ employeeById.position }}</span>
         <h1>{{ employeeById.name }}</h1>
-        <div>{{ employeeById.expirience }}</div>
+        <div>{{ employeeById.expierence }}</div>
         <p>{{ employeeById.description }}</p>
         <ui-form-button>Записаться на примем</ui-form-button>
       </div>
@@ -27,14 +27,14 @@ import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
   },
 })
 export default class SectionsAboutOurTeam extends Vue {
-  get employeeById(): Employee[] {
+  get employeeById(): Employee {
     return this.$store.getters['employees/getEmployeeById'](
       this.employeeIdByRoute - 1
     )
   }
 
-  get employeeIdByRoute(): number {
-    return this.$route.path.split('/').slice(1, -1).pop().split('-').pop()
+  get employeeIdByRoute(): any {
+    return (this as any).$route.path.split('/').slice(1, -1).pop().split('-').pop()
   }
 }
 </script>

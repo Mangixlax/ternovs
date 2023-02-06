@@ -1,11 +1,11 @@
 <template>
   <div :class="$style['our_team__item']">
     <img
-      :src="$img(`/sections/about/employees/${$vnode.key + 1}.png`)"
+      :src="$img(`/sections/about/employees/${item.image}.png`)"
       alt="Автор отзыва"
     />
     <h3>{{ item.name }}</h3>
-    <span>{{ item.position }}</span>
+    <span>{{ item.position }}</span>  
     <div :class="$style['our_team__item-link']">
       <span>Немного о враче</span>
       <svg-icon :name="'back-arrow'" />
@@ -14,7 +14,7 @@
       :to="{
         name: 'about-our-team-employee',
         params: {
-          employee: 'person-' + ($vnode.key + 1),
+          employee: item.image + '-' + (Number($vnode.key) + 1),
         },
       }"
     >
@@ -24,10 +24,15 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Employee } from '@/types/models'
 
 @Component
 export default class SectionsReviewsItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
+  @Prop({ type: Object, default: () => {} }) item!: Employee
+
+  mounted() {
+    console.log(this.$vnode.key);
+  }
 }
 </script>
 

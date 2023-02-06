@@ -96,11 +96,11 @@ export default class BaseHeader extends Vue {
         },
         {
           label: 'Портфолио',
-          route: { name: 'portfolio' },
+          route: { name: 'about-portfolio' },
         },
         {
           label: 'Оборудование',
-          route: { name: 'equipment' },
+          route: { name: 'about-equipment' },
         },
       ],
     },
