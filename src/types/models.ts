@@ -19,3 +19,10 @@ export interface AboutContentBlock {
     subtitle?: string[]
   }
 }
+
+export interface portfolioBlocks {
+  [key: string]: {
+    title: string
+    blocks: AboutContentBlock[]
+  }
+}

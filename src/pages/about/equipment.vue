@@ -85,7 +85,7 @@ export default class EquipmentPage extends Vue {
 .equipment {
   &__grid {
     @include grid-container;
-    padding: 80px 0 24px;
+    padding: 80px 12px 40px 12px;
 
     &-container {
       grid-column: 1 / 5;
@@ -124,7 +124,7 @@ export default class EquipmentPage extends Vue {
 
   @include media-breakpoint-up('lg') {
     &__grid {
-      padding: 96px 0 24px;
+      padding: 96px 12px 24px 12px;
 
       &-container {
         grid-column: 1 / 11;
@@ -135,7 +135,7 @@ export default class EquipmentPage extends Vue {
 
   @include media-breakpoint-up('xl') {
     &__grid {
-      padding: 144px 0 24px;
+      padding: 144px 12px 24px 12px;
 
       &-container {
         grid-column: 1 / 13;

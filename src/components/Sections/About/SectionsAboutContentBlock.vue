@@ -50,7 +50,7 @@ export default class SectionsAboutOurTeam extends Vue {
       flex-direction: column;
 
       &--text {
-        padding: 0 40px;
+        padding: 40px 0;
 
         > h2 {
           @include font-h2-medium;
