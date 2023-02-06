@@ -1,16 +1,32 @@
 <template>
-  <main :class="$style['about']">
+  <main :class="$style['our_team']">
+    <div :class="$style['our_team__grid']">
+      <div :class="$style['our_team__grid-container']">
+        <h1>О команде</h1>
+        <p>
+          Однако опорой клиники являются её собственные профессиональные
+          стоматологи с колоссальным стажем работы. <br />
+          Здесь Вам помогут снова обрести крепкие зубы и ослепительную улыбку, а
+          также почувствовать радость и облегчение от получения других
+          сопутствующих оздоровительных и реставрационных услуг.<br />
+          Миссия нашей команды — больше здоровых красивых улыбок!
+        </p>
+        <img :src="$img('/sections/about/our-team.jpg')" alt="Наша команда" />
+        <span>Команда клиники «Авторская стоматология Терновых»</span>
+      </div>
+    </div>
     <sections-about-our-team />
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-
+import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
 
 @Component({
   components: {
+    UiFormButton,
     SectionsAboutOurTeam,
   },
 })
@@ -18,7 +34,7 @@ export default class AboutOurTeamPage extends Vue {}
 </script>
 
 <style lang="scss" module>
-.about {
+.our_team {
   &__grid {
     @include grid-container;
 
@@ -40,6 +56,12 @@ export default class AboutOurTeamPage extends Vue {}
         margin: 0;
         margin-bottom: 40px;
         color: $color-gray-88;
+
+        > br {
+          display: block;
+          content: '';
+          margin-top: 10px;
+        }
       }
 
       > img {
