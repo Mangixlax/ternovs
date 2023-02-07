@@ -1,12 +1,3 @@
-export interface Employee {
-  id: number
-  name: string
-  image: string
-  position: string
-  expierence: string
-  description: string
-}
-
 export interface AboutContentBlock {
   title?: string
   subtitle?: string[]
@@ -19,8 +10,7 @@ export interface AboutContentBlock {
     subtitle?: string[]
   }
 }
-
-export interface portfolioBlocks {
+export interface PortfolioBlocks {
   [key: string]: {
     title: string
     blocks: AboutContentBlock[]

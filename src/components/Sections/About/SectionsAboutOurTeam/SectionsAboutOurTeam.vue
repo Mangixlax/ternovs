@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Employee } from '@/types/models'
+import { Employee } from '@/types/models/employee'
 import SectionsAboutOurTeamItem from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamItem.vue'
 
 @Component({
@@ -117,7 +117,7 @@ export default class SectionsAboutOurTeam extends Vue {
   }
 
   @include media-breakpoint-up('xl') {
-    padding: 144px 0 72px;
+    padding: 72px 0;
 
     &__grid {
       &-container {

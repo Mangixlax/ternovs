@@ -183,7 +183,7 @@ export default class SectionsHomeServices extends Vue {
       &-diamond {
         position: absolute;
         left: 0;
-        top: 90px;
+        top: 140px;
         left: -67px;
         height: 90px;
         width: auto;

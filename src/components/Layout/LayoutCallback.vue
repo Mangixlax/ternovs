@@ -44,10 +44,8 @@
           :src="$img('/layout/diamond.png')"
           alt="diamond"
           :class="$style['callback__grid-diamond']"
-          v-rellax="{
-            speed: 3,
-            center: true,
-          }"
+          ref="rellax"
+          v-rellax="relax"
         />
       </div>
     </div>
@@ -59,6 +57,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { validationMixin } from 'vuelidate'
 import { email, required, minLength } from 'vuelidate/lib/validators'
 import { mask } from 'vue-the-mask'
+import VueRellax from 'vue-rellax'
 import UiFormGroup from '@/components/Ui/Form/UiFormGroup.vue'
 import UiFormInput from '@/components/Ui/Form/UiFormInput.vue'
 import UiFormDropdown from '@/components/Ui/Form/UiFormDropdown.vue'
@@ -78,6 +77,7 @@ interface Form {
 
 @Component({
   components: {
+    VueRellax,
     UiFormGroup,
     UiFormInput,
     UiFormDropdown,
@@ -118,6 +118,19 @@ export default class LayoutCallback extends Vue {
   ]
 
   public dropdownControlSelected: DropdownItem | null = this.dropdownControls[0]
+
+  public relax: boolean | object = false
+
+  mounted() {
+    console.log(this.$refs.rellax)
+
+    this.$nextTick(() => {
+      this.relax = {
+        speed: 2,
+        center: true,
+      }
+    })
+  }
 }
 </script>
 

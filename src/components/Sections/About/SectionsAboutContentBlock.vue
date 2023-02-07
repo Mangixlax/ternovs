@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { AboutContentBlock } from '~/types/models'
+import { AboutContentBlock } from '~/types/models/models.js'
 
 @Component
 export default class SectionsAboutOurTeam extends Vue {

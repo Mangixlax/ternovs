@@ -15,18 +15,18 @@
 </template>
 
 <script lang="ts">
-import BaseAccordionItem from '@/components/Base/BaseAccordion/BaseAccordionItem.vue'
-import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
-
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
+import { AccordionItem } from '@/types/components'
+import BaseAccordionItem from '@/components/Base/BaseAccordion/BaseAccordionItem.vue'
+import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
 
 @Jsonld
 @Component({
   components: { BaseAccordionItem, BaseAccordionTabs },
 })
 export default class BaseAccordions extends Vue {
-  @Prop({ type: Array, default: () => {} }) list!: object[]
+  @Prop({ type: Array, default: () => {} }) list!: AccordionItem[]
 
   jsonld() {
     const items = (this.list || []).map((item: any) => {
@@ -56,6 +56,12 @@ export default class BaseAccordions extends Vue {
   &-item {
     & + & {
       border-top: solid 2px $color-primary-8;
+    }
+
+    p {
+      & + p {
+        margin-top: 8px;
+      }
     }
   }
 }

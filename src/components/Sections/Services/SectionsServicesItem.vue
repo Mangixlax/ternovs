@@ -16,10 +16,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { ServiceItem } from '@/types/models/servises'
 
 @Component
 export default class SectionsServicesItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
+  @Prop({ type: Object, default: () => {} }) item!: ServiceItem
 }
 </script>
 

@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { portfolioBlocks } from '@/types/models'
+import { PortfolioBlocks } from '~/types/models/models.js'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
 
@@ -57,7 +57,7 @@ import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAbout
 export default class PortfolioPage extends Vue {
   public curentCategory: string = 'implantaciya'
 
-  public portfolioBlocks: portfolioBlocks = {
+  public portfolioBlocks: PortfolioBlocks = {
     implantaciya: {
       title: 'Имплантация',
       blocks: [

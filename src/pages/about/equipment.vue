@@ -22,7 +22,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
-import { AboutContentBlock } from '@/types/models'
+import { AboutContentBlock } from '~/types/models/models.js'
 
 @Component({
   components: {

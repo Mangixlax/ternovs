@@ -125,7 +125,7 @@ button {
 
   &__counter {
     display: none;
-    
+
     .cutdown-bullet-active & {
       display: block;
     }
@@ -148,4 +148,14 @@ button {
 
 .cutdown-bullet-active {
   background: $color-white-100;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity .3s
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0
 }

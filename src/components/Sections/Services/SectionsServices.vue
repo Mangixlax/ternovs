@@ -8,9 +8,9 @@
       <div :class="$style['services__grid-row']">
         <div :class="$style['services__grid-row-container']">
           <sections-services-item
-            v-for="(item, index) in item.list"
+            v-for="(serviseItem, index) in item.list"
             :key="index"
-            :item="item"
+            :item="serviseItem"
           />
         </div>
         <div :class="$style['services__grid-row-slider']">
@@ -20,11 +20,11 @@
             :class="$style['slider']"
           >
             <swiper-slide
-              v-for="(item, index) in item.list"
+              v-for="(serviseItem, index) in item.list"
               :key="index"
               :class="$style['slider__slide']"
             >
-              <sections-services-item :item="item" />
+              <sections-services-item :item="serviseItem" />
             </swiper-slide>
             <div slot="pagination" :class="$style['slider__navigation']">
               <div
@@ -50,6 +50,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { SwiperOptions } from 'swiper'
+import { Service } from '@/types/models/servises'
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
 @Component({
@@ -58,7 +59,7 @@ import SectionsServicesItem from '@/components/Sections/Services/SectionsService
   },
 })
 export default class SectionsReviews extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
+  @Prop({ type: Object, default: () => {} }) item!: Service
 
   public swiperOption: SwiperOptions = {
     slidesPerView: 1.3,
