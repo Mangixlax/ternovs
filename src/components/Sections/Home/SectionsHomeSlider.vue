@@ -86,6 +86,7 @@ export default class SectionsHomeSlider extends Vue {
     loop: true,
     autoplay: {
       delay: 5700,
+      disableOnInteraction: false,
     },
     pagination: {
       el: '.swiper-pagination',
