@@ -8,7 +8,9 @@
           этическому и качественному уходу, мотивированному достижением их
           философии стоматологии.
         </p>
-        <ui-form-button>Записаться на примем</ui-form-button>
+        <ui-form-button @click="onShowCallback">
+          Записаться на прием
+        </ui-form-button>
       </div>
     </div>
     <sections-prices-content-block
@@ -118,6 +120,16 @@ export default class PricesPage extends Vue {
       ],
     },
   ]
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
+  }
 }
 </script>
 

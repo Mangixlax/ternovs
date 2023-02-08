@@ -32,7 +32,7 @@
             </span>
           </ui-form-group>
         </div>
-        <ui-form-button> Записаться на приём </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
       <div :class="$style['callback__grid-decore']">
         <img
@@ -122,8 +122,6 @@ export default class LayoutCallback extends Vue {
   public relax: boolean | object = false
 
   mounted() {
-    console.log(this.$refs.rellax)
-
     this.$nextTick(() => {
       this.relax = {
         speed: 2,

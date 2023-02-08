@@ -13,7 +13,9 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>Записаться на приём</ui-form-button>
+            <ui-form-button @click="onShowCallback">
+              Записаться на прием
+            </ui-form-button>
           </div>
         </swiper-slide>
         <swiper-slide :class="$style['slider__slide']">
@@ -27,7 +29,9 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>Записаться на приём</ui-form-button>
+            <ui-form-button @click="onShowCallback">
+              Записаться на прием
+            </ui-form-button>
           </div>
         </swiper-slide>
         <swiper-slide :class="$style['slider__slide']">
@@ -41,14 +45,16 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>Записаться на приём</ui-form-button>
+            <ui-form-button @click="onShowCallback">
+              Записаться на прием
+            </ui-form-button>
           </div>
         </swiper-slide>
         <div
           class="swiper-pagination"
           :class="$style['slider__pagination']"
           slot="pagination"
-        ></div>
+        />
       </swiper>
       <div :class="$style['slider__navigation']">
         <div
@@ -147,6 +153,16 @@ export default class SectionsHomeSlider extends Vue {
         return cbhtml
       },
     },
+  }
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
   }
 }
 </script>

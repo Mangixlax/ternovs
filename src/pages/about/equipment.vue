@@ -7,7 +7,9 @@
           Всё оборудование, которое используется в стоматологии, можно условно
           разделить на несколько видов.
         </p>
-        <ui-form-button>Записаться на примем</ui-form-button>
+        <ui-form-button @click="onShowCallback">
+          Записаться на прием
+        </ui-form-button>
       </div>
     </div>
     <sections-about-content-block
@@ -78,6 +80,16 @@ export default class EquipmentPage extends Vue {
       },
     },
   ]
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
+  }
 }
 </script>
 

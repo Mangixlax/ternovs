@@ -10,7 +10,9 @@
           Выбрав интересующие направление вы сможете ознакомиться как со списком
           услуги, так качество работы на всех этапах.
         </span>
-        <ui-form-button> Записаться на приём </ui-form-button>
+        <ui-form-button @click="onShowCallback">
+          Записаться на прием
+        </ui-form-button>
       </div>
       <div :class="$style['services__grid-decore']">
         <img
@@ -142,6 +144,16 @@ export default class SectionsHomeServices extends Vue {
       },
     },
   ]
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
+  }
 }
 </script>
 

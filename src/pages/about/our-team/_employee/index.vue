@@ -12,7 +12,9 @@
         <h1>{{ employeeById.name }}</h1>
         <div>{{ employeeById.expierence }}</div>
         <p>{{ employeeById.description }}</p>
-        <ui-form-button>Записаться на примем</ui-form-button>
+        <ui-form-button @click="onShowCallback">
+          Записаться на прием
+        </ui-form-button>
       </div>
     </div>
     <sections-about-our-team-accordion
@@ -54,6 +56,16 @@ export default class AboutOurTeamDetailPage extends Vue {
       .pop()
       .split('-')
       .pop()
+  }
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
   }
 }
 </script>

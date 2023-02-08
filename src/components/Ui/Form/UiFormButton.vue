@@ -71,6 +71,20 @@ export default class UiFormButton extends Vue {
 
   @Prop({ type: Boolean, default: false })
   disableActive!: boolean
+
+  @Prop({ type: String, default: '' }) action!: string
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'showPhone',
+        phone: this.companyPhone,
+        developer: this.complex.company,
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@
       :alt="`Сотрудник компании - ${item.name}`"
     />
     <h3>{{ item.name }}</h3>
-    <span>{{ item.position }}</span>  
+    <span>{{ item.position }}</span>
     <div :class="$style['our_team__item-link']">
       <span>Немного о враче</span>
       <svg-icon :name="'back-arrow'" />
@@ -29,10 +29,6 @@ import { Employee } from '@/types/models/employee'
 @Component
 export default class SectionsReviewsItem extends Vue {
   @Prop({ type: Object, default: () => {} }) item!: Employee
-
-  mounted() {
-    console.log(this.$vnode.key);
-  }
 }
 </script>
 

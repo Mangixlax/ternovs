@@ -26,7 +26,8 @@
     "vue-click-outside": "^1.1.0",
     "vue-rellax": "^0.2.0",
     "vue-the-mask": "^0.11.1",
-    "vuelidate": "^0.7.7"
+    "vuelidate": "^0.7.7",
+    "perfect-scrollbar": "^1.5.3"
   },
   "devDependencies": {
     "@nuxt/image": "0.7.1",

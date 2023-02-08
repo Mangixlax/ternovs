@@ -82,10 +82,11 @@ export default <NuxtConfig>{
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/axios',
-    '~plugins/vuelidate.js',
+    '~plugins/vuelidate.ts',
     '~plugins/slider-swiper.js',
     { src: '~directives/vue-click-outside.ts', mode: 'client' },
-    { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', mode: 'client' }
+    { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', mode: 'client' },
+    { src: '~plugins/modal/index.ts', mode: 'client' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
