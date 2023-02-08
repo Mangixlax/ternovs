@@ -3,7 +3,7 @@ export interface AboutContentBlock {
   subtitle?: string[]
   image?: {
     src: string
-    embed: string
+    caption: string
   }
   text?: {
     title?: string

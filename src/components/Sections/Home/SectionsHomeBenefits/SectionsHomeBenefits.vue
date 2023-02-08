@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['benefits']">
+  <section :class="$style['benefits']">
     <div :class="$style['benefits__grid']">
       <div :class="$style['benefits__grid-text']">
         <span> Стоматологическая клиника </span>
@@ -40,7 +40,7 @@
         <ui-form-button>Записаться на прием</ui-form-button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

@@ -1,8 +1,8 @@
 <template>
-  <div :class="$style['our_team']">
-    <div :class="$style['our_team__grid']">
-      <div :class="$style['our_team__grid-container']">
-        <div :class="$style['our_team__grid-container--text']">
+  <div :class="$style['about_content']">
+    <div :class="$style['about_content__grid']">
+      <div :class="$style['about_content__grid-container']">
+        <div :class="$style['about_content__grid-container--text']">
           <h2>{{ block.title }}</h2>
           <p v-for="(paragraph, index) in block.subtitle" :key="index">
             {{ paragraph }}
@@ -10,12 +10,12 @@
         </div>
         <img
           :src="$img(`/sections/about/photos/${block.image?.src}`)"
-          :alt="block.image?.embed"
+          :alt="block.image?.caption"
         />
-        <span> {{ block.image?.embed }} </span>
-        <div :class="$style['our_team__grid-container']">
+        <span> {{ block.image?.caption }} </span>
+        <div :class="$style['about_content__grid-container']">
           <div
-            :class="$style['our_team__grid-container--text']"
+            :class="$style['about_content__grid-container--text']"
             v-if="block.text"
           >
             <h2>{{ block.text?.title }}</h2>
@@ -40,7 +40,7 @@ export default class SectionsAboutOurTeam extends Vue {
 </script>
 
 <style lang="scss" module>
-.our_team {
+.about_content {
   &__grid {
     @include grid-container;
 

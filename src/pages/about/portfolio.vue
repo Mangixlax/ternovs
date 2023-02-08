@@ -69,7 +69,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'difference.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
         },
       ],
@@ -84,7 +84,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'airflow-prophylaxis-master.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
         },
       ],
@@ -99,7 +99,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'difference.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
           text: {
             subtitle: [
@@ -120,7 +120,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'airflow-prophylaxis-master.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
           text: {
             subtitle: [
@@ -141,7 +141,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'difference.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
           text: {
             subtitle: [
@@ -162,7 +162,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'airflow-prophylaxis-master.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
           text: {
             subtitle: [
@@ -183,7 +183,7 @@ export default class PortfolioPage extends Vue {
           ],
           image: {
             src: 'airflow-prophylaxis-master.jpg',
-            embed: 'Аппарат AirFlow Prophylaxis Master',
+            caption: 'Аппарат AirFlow Prophylaxis Master',
           },
           text: {
             subtitle: [

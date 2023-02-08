@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['reviews']">
+  <section :class="$style['reviews']">
     <div :class="$style['reviews__grid']">
       <div :class="$style['reviews__grid-container']">
         <h1>Отзывы пациентов</h1>
@@ -18,7 +18,7 @@
         <ui-form-button variant="gray">Показать больше</ui-form-button>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

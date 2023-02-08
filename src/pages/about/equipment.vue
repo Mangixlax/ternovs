@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { AboutContentBlock } from '~/types/models/models.js'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
-import { AboutContentBlock } from '~/types/models/models.js'
 
 @Component({
   components: {
@@ -39,7 +39,7 @@ export default class EquipmentPage extends Vue {
       ],
       image: {
         src: 'airflow-prophylaxis-master.jpg',
-        embed: 'Аппарат AirFlow Prophylaxis Master',
+        caption: 'Аппарат AirFlow Prophylaxis Master',
       },
       text: {
         subtitle: [
@@ -57,7 +57,7 @@ export default class EquipmentPage extends Vue {
       ],
       image: {
         src: 'x-smart.jpg',
-        embed: 'Автономный эндомотор X-smart, X-smart plus, Marita',
+        caption: 'Автономный эндомотор X-smart, X-smart plus, Marita',
       },
     },
     {
@@ -67,7 +67,7 @@ export default class EquipmentPage extends Vue {
       ],
       image: {
         src: 'vario-surg.jpg',
-        embed: 'Установка VARIO SURG',
+        caption: 'Установка VARIO SURG',
       },
       text: {
         title: 'Преимущества ультразвуковой системы',
