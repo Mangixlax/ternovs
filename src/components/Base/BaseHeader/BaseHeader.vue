@@ -12,7 +12,7 @@
         <nav>
           <ul>
             <base-header-nav-item
-              v-for="(item, index) in menu"
+              v-for="(item, index) in extendedMenu"
               :key="index"
               :item="item"
             />
@@ -43,9 +43,21 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Location } from 'vue-router/types/router'
 import Logo from '~/components/Logo.vue'
 import BaseHeaderNavItem from '~/components/Base/BaseHeader/BaseHeaderNavItem.vue'
 import BaseHeaderMobile from '~/components/Base/BaseHeader/BaseHeaderMobile.vue'
+
+interface menuItem {
+  label: string
+  route: Location
+  list?: menuItemLink[]
+}
+
+interface menuItemLink {
+  label: string,
+  route: Location
+}
 
 @Component({
   components: {
@@ -59,24 +71,11 @@ export default class BaseHeader extends Vue {
   public isMobileMenuOpen: boolean = false
   public scrollbarWidth: number = 15
 
-  public menu: object[] = [
+  public menu: menuItem[] = [
     {
       label: 'Услуги',
       route: { name: 'services' },
-      list: [
-        {
-          label: 'Ортопедия',
-          route: { name: 'services' },
-        },
-        {
-          label: 'Хирургия',
-          route: { name: 'services' },
-        },
-        {
-          label: 'Ортодонтия',
-          route: { name: 'services' },
-        },
-      ],
+      list: []
     },
     {
       label: 'Цены',
@@ -119,6 +118,29 @@ export default class BaseHeader extends Vue {
       window.innerWidth - document.scrollingElement!.clientWidth
   }
 
+  get servicesList() {
+    return this.$store.getters['services/getServicesList']
+  }
+
+  get servicesLinks() {
+    return this.$store.getters['services/getServicesList'].map((item: any) => {
+      return {
+        label: item.category.label,
+        route: {
+          name: 'services-category',
+          params: {
+            category: item.category.value
+          }
+        }
+      }
+    })
+  }
+
+  get extendedMenu() {
+    let extendedMenu = this.menu
+    extendedMenu[0].list = this.servicesLinks
+    return extendedMenu
+  }
   mounted() {
     window.addEventListener('resize', this.calculateScrollbarWidth)
     this.calculateScrollbarWidth()

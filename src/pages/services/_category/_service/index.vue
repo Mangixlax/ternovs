@@ -11,18 +11,6 @@
           улыбаться. Возможно, следующим счастливым человеком сможете стать
           именно Вы.
         </span>
-        <base-scroll-block>
-          <div :class="$style['services__grid-links']">
-            <nuxt-link :to="{ name: 'services-ortopediya' }"
-              >Ортопедия</nuxt-link
-            >
-            <nuxt-link :to="{ name: 'services-hirurgiya' }">Хирургия</nuxt-link>
-            <nuxt-link :to="{ name: 'services-terapiya' }">Терапия</nuxt-link>
-            <nuxt-link :to="{ name: 'services-ortodontiya' }">
-              Ортодонтия
-            </nuxt-link>
-          </div>
-        </base-scroll-block>
       </div>
     </div>
   </main>
