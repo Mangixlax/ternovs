@@ -13,46 +13,32 @@
         </span>
         <base-scroll-block>
           <div :class="$style['services__grid-links']">
-            <nuxt-link
-              :to="{
-                name: 'services-category',
-                params: { category: item.category.value },
-              }"
-              v-for="(item, index) in servicesList"
-              :key="index"
+            <nuxt-link :to="{ name: 'services-ortopediya' }"
+              >Ортопедия</nuxt-link
             >
-              {{ item.category.label }}
+            <nuxt-link :to="{ name: 'services-hirurgiya' }">Хирургия</nuxt-link>
+            <nuxt-link :to="{ name: 'services-terapiya' }">Терапия</nuxt-link>
+            <nuxt-link :to="{ name: 'services-ortodontiya' }">
+              Ортодонтия
             </nuxt-link>
           </div>
         </base-scroll-block>
       </div>
-    </div>
-    <div :class="$style['services__list']">
-      <sections-services
-        v-for="(item, index) in servicesList"
-        :key="index"
-        :item="item"
-      />
     </div>
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
+import { Location } from 'vue-router/types/router'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 
 @Component({
   components: {
-    SectionsServices,
     BaseScrollBlock,
   },
 })
-export default class ServicesPage extends Vue {
-  get servicesList() {
-    return this.$store.getters['services/getServicesList']
-  }
-}
+export default class ServicesPage extends Vue {}
 </script>
 
 <style lang="scss" module>

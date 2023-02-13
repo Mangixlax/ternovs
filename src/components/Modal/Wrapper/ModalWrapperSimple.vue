@@ -74,7 +74,6 @@ export default class ModalWrapperSimple extends Vue {
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 9px;
   background: $color-white-100;
   margin: 0 28px;
   max-height: calc(100vh - 64px);

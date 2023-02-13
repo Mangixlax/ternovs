@@ -2,37 +2,14 @@
   <main :class="$style['services']">
     <div :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
-        <h1>Услуги стоматологии</h1>
+        <h1>{{ serviceListByCategory.title }}</h1>
         <span>
-          Работа ведётся по четырём основным направлениям: ортопедия, хирургия,
-          терапия и ортодонтия. Новейшее оборудование и методики позволяют
-          добиться блестящего результата работы как в прямом, так и переносном
-          смысле. Тысяч довольных пациентов уже получили свою возможность снова
-          улыбаться. Возможно, следующим счастливым человеком сможете стать
-          именно Вы.
+          {{ serviceListByCategory.description }}
         </span>
-        <base-scroll-block>
-          <div :class="$style['services__grid-links']">
-            <nuxt-link
-              :to="{
-                name: 'services-category',
-                params: { category: item.category.value },
-              }"
-              v-for="(item, index) in servicesList"
-              :key="index"
-            >
-              {{ item.category.label }}
-            </nuxt-link>
-          </div>
-        </base-scroll-block>
       </div>
     </div>
     <div :class="$style['services__list']">
-      <sections-services
-        v-for="(item, index) in servicesList"
-        :key="index"
-        :item="item"
-      />
+      <sections-services :item="serviceListByCategory" />
     </div>
   </main>
 </template>
@@ -49,8 +26,10 @@ import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.v
   },
 })
 export default class ServicesPage extends Vue {
-  get servicesList() {
-    return this.$store.getters['services/getServicesList']
+  get serviceListByCategory() {
+    return this.$store.getters['services/getServiceListByCategory'](
+      this.$route.params.category
+    )
   }
 }
 </script>
