@@ -1,13 +1,5 @@
 <template>
   <main :class="$style['services']">
-    <div :class="$style['services__grid']">
-      <div :class="$style['services__grid-container']">
-        <h1>{{ serviceListByCategory.title }}</h1>
-        <span>
-          {{ serviceListByCategory.description }}
-        </span>
-      </div>
-    </div>
     <div :class="$style['services__list']">
       <sections-services :item="serviceListByCategory" />
     </div>

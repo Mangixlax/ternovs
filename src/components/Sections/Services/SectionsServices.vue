@@ -58,7 +58,7 @@ import SectionsServicesItem from '@/components/Sections/Services/SectionsService
     SectionsServicesItem,
   },
 })
-export default class SectionsReviews extends Vue {
+export default class SectionsServices extends Vue {
   @Prop({ type: Object, default: () => {} }) item!: Service
 
   public swiperOption: SwiperOptions = {
@@ -152,7 +152,8 @@ export default class SectionsReviews extends Vue {
         padding: 0 72px;
 
         &-container {
-          display: flex;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
         }
 
         &-slider {
@@ -173,10 +174,6 @@ export default class SectionsReviews extends Vue {
       &-row {
         grid-column: 1 / 13;
         padding: 0 72px;
-
-        &-container {
-          display: flex;
-        }
 
         &-slider {
           display: none;

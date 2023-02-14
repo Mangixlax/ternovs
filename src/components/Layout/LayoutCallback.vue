@@ -120,15 +120,6 @@ export default class LayoutCallback extends Vue {
   public dropdownControlSelected: DropdownItem | null = this.dropdownControls[0]
 
   public relax: boolean | object = false
-
-  mounted() {
-    this.$nextTick(() => {
-      this.relax = {
-        speed: 2,
-        center: true,
-      }
-    })
-  }
 }
 </script>
 

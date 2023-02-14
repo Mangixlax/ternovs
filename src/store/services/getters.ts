@@ -9,10 +9,21 @@ const getters: OurTeamGetterContext = {
     return state.services
   },
   getServiceListByCategory: (state) => (category: string) => {
-    return state.services.find((service) => service.category.value === category)
+    return state.services.find(
+      (serviceList) => serviceList.category.value === category
+    )
   },
-  // getServiceByParams: (state) => (params: number) => {
-  //   return state.employees.map
-  // },
+  getServiceByParams: (state) => (params: any) => {
+    const serviceList: any = state.services.find(
+      (serviceList) => serviceList.category.value === params.category
+    )
+
+    let service = serviceList.list.find(
+      (service: any) =>
+        JSON.stringify(service.route.params) === JSON.stringify(params)
+    )
+
+    return service
+  },
 }
 export default getters

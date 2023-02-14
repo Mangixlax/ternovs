@@ -2,31 +2,60 @@
   <main :class="$style['services']">
     <div :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
-        <h1>Услуги стоматологии</h1>
-        <span>
-          Работа ведётся по четырём основным направлениям: ортопедия, хирургия,
-          терапия и ортодонтия. Новейшее оборудование и методики позволяют
-          добиться блестящего результата работы как в прямом, так и переносном
-          смысле. Тысяч довольных пациентов уже получили свою возможность снова
-          улыбаться. Возможно, следующим счастливым человеком сможете стать
-          именно Вы.
+        <h1>{{ serviceByParams.title }}</h1>
+        <p>{{ serviceByParams.content.subtitle }}</p>
+        <div>
+          <ui-form-button @click="onShowCallback">
+            Записаться на прием
+          </ui-form-button>
+        </div>
+        <img
+          :src="
+            $img(
+              `/sections/services/detail/${serviceByParams.content.image.src}`
+            )
+          "
+          :alt="serviceByParams.content.image.caption"
+        />
+        <span :class="$style['services__grid-container']">
+          {{ serviceByParams.content.image.caption }}
         </span>
       </div>
     </div>
+    <sections-services-detail-description
+      :descriprion="serviceByParams.content.description"
+    />
   </main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Location } from 'vue-router/types/router'
-import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
+import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
+import SectionsServicesDetailDescription from '@/components/Sections/Services/Detail/SectionsServicesDetailDescription.vue'
 
 @Component({
   components: {
-    BaseScrollBlock,
+    UiFormButton,
+    SectionsServicesDetailDescription,
   },
 })
-export default class ServicesPage extends Vue {}
+export default class ServicesPage extends Vue {
+  get serviceByParams() {
+    return this.$store.getters['services/getServiceByParams'](
+      this.$route.params
+    )
+  }
+
+  public onShowCallback() {
+    this.$modal.show({
+      bind: {
+        name: 'Callback',
+      },
+      component: () =>
+        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
+    })
+  }
+}
 </script>
 
 <style lang="scss" module>
@@ -36,7 +65,6 @@ export default class ServicesPage extends Vue {}
 
   &__grid {
     @include grid-container;
-    padding: 0;
 
     &-container {
       grid-column: 1 / 5;
@@ -46,52 +74,34 @@ export default class ServicesPage extends Vue {}
         margin: 0;
         color: $color-gray-100;
         margin-bottom: 24px;
-        padding: 0 12px;
+      }
+
+      > p {
+        @include font-lead-regular-160;
+        display: block;
+        color: $color-gray-100;
+        margin-bottom: 24px;
+      }
+
+      > img {
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
+        margin-bottom: 24px;
       }
 
       > span {
         @include font-lead-regular-160;
-        display: block;
-        color: $color-gray-100;
-        padding: 0 12px;
+        color: $color-gray-64;
         margin-bottom: 24px;
-      }
-    }
-
-    &-links {
-      display: flex;
-      grid-gap: 8px;
-      padding-left: 12px;
-
-      > a {
-        @include font-p-medium-160;
-        text-decoration: none;
-        padding: 10px 20px 8px 20px;
-        background: $color-gray-4;
-        color: $color-gray-100;
-        border-radius: 30px;
       }
     }
   }
 
   @include media-breakpoint-up('md') {
     &__grid {
-      padding: 0 12px;
-
       &-container {
         grid-column: 1 / 9;
-
-        > h1 {
-          padding: 0;
-        }
-
-        > span {
-          padding: 0;
-        }
-      }
-
-      &-links {
-        padding-left: 0;
       }
     }
   }
@@ -101,7 +111,23 @@ export default class ServicesPage extends Vue {}
 
     &__grid {
       &-container {
-        grid-column: 2 / 9;
+        grid-column: 1 / 11;
+
+        > h1 {
+          padding: 0 192px 0 96px;
+        }
+
+        > p {
+          padding: 0 192px 0 96px;
+        }
+
+        > div {
+          padding: 0 192px 0 96px;
+        }
+
+        > span {
+          padding: 0 192px 0 96px;
+        }
       }
     }
   }
@@ -111,7 +137,7 @@ export default class ServicesPage extends Vue {}
 
     &__grid {
       &-container {
-        grid-column: 2 / 11;
+        grid-column: 1 / 13;
       }
     }
   }
