@@ -8,6 +8,48 @@
           понравилось обслуживание в нашей клинике или у вас есть пожелания к
           нашей работе, оставьте свой отзыв на независимых платформах.
         </span>
+        <div :class="$style['reviews__grid-row']">
+          <h2>Рейтинг на платформах</h2>
+          <div :class="$style['reviews__grid-row-container']">
+            <sections-reviews-platform-item
+              v-for="(item, index) in platforms"
+              :key="index"
+              :item="item"
+            />
+          </div>
+          <div :class="$style['reviews__grid-row-slider']">
+            <swiper
+              ref="mySwiper"
+              :options="swiperOption"
+              :class="$style['slider']"
+            >
+              <swiper-slide
+                v-for="(item, index) in platforms"
+                :key="index"
+                :class="$style['slider__slide']"
+              >
+                <sections-reviews-platform-item
+                  :item="item"
+                  :class="$style['slider__slide-item']"
+                />
+              </swiper-slide>
+              <div slot="pagination" :class="$style['slider__navigation']">
+                <div
+                  @click.prevent="$refs.mySwiper.swiperInstance.slidePrev()"
+                  :class="[$style['slider__navigation-prev']]"
+                >
+                  <svg-icon name="arrow-left"></svg-icon>
+                </div>
+                <div
+                  @click.prevent="$refs.mySwiper.swiperInstance.slideNext()"
+                  :class="[$style['slider__navigation-next']]"
+                >
+                  <svg-icon name="arrow-right"></svg-icon>
+                </div>
+              </div>
+            </swiper>
+          </div>
+        </div>
         <div :class="$style['reviews__grid-items']">
           <sections-reviews-item
             v-for="(item, index) in reviews"
@@ -23,33 +65,61 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { SwiperOptions } from 'swiper'
+import { Review, Platform } from '@/types/models/reviews'
 import SectionsReviewsItem from '@/components/Sections/Reviews/SectionsReviewsItem.vue'
+import SectionsReviewsPlatformItem from '@/components/Sections/Reviews/SectionsReviewsPlatformItem.vue'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
-
-interface review {
-  avatar: string
-  name: string
-  date: string
-  platform: {
-    logo: string
-    label: string
-    stars: string
-    link: string
-  }
-  title: string
-  text: string
-}
 
 @Component({
   components: {
     SectionsReviewsItem,
+    SectionsReviewsPlatformItem,
     UiFormButton,
   },
 })
 export default class SectionsReviews extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
+  get swiperOption(): SwiperOptions {
+    return {
+      slidesPerView: 'auto',
+      spaceBetween: 24,
+      loop: false,
+      autoHeight: true,
+      autoplay: false,
+      breakpoints: {
+        // when window width is >= 768
+        768: {
+          slidesPerView: 3,
+        },
+      },
+    }
+  }
 
-  public reviews: review[] = [
+  public platforms: Platform[] = [
+    {
+      image: 'yandex.png',
+      name: 'Yandex',
+      rating: ' 4.8',
+      description: 'Оценки и комментарии пользователей Яндекс сервисов.',
+      link: '#',
+    },
+    {
+      image: 'google.png',
+      name: 'Google',
+      rating: ' 5.0',
+      description: 'Оценки и комментарии пользователей в Google картах.',
+      link: '#',
+    },
+    {
+      image: 'zoon.png',
+      name: 'Zoon',
+      rating: ' 4.9',
+      description: 'Пользовательский рейтинг лучших услуг в России.',
+      link: '#',
+    },
+  ]
+
+  public reviews: Review[] = [
     {
       avatar: 'author-1',
       name: 'Елена',
@@ -142,6 +212,8 @@ export default class SectionsReviews extends Vue {
       > span {
         @include font-lead-regular-160;
         color: $color-gray-88;
+        margin-bottom: 56px;
+        display: block;
       }
 
       > button {
@@ -153,12 +225,41 @@ export default class SectionsReviews extends Vue {
       margin-top: 56px;
       margin-bottom: 16px;
     }
+
+    &-row {
+      margin-bottom: 56px;
+
+      > h2 {
+        @include font-h2-medium;
+        margin: 0;
+        margin-bottom: 32px;
+      }
+
+      &-container {
+        display: none;
+      }
+    }
   }
 
   @include media-breakpoint-up('md') {
     &__grid {
       &-container {
         grid-column: 1 / 9;
+      }
+
+      &-row {
+        > h2 {
+          margin-bottom: 48px;
+        }
+
+        &-container {
+          display: flex;
+          grid-gap: 24px;
+        }
+
+        &-slider {
+          display: none;
+        }
       }
     }
   }
@@ -194,12 +295,62 @@ export default class SectionsReviews extends Vue {
         > span {
           max-width: 744px;
           display: block;
+          margin-bottom: 96px;
         }
       }
 
       &-items {
         margin-top: 96px;
       }
+
+      &-row {
+        margin-bottom: 96px;
+
+        > h2 {
+          margin-bottom: 48px;
+        }
+
+        &-container {
+          display: flex;
+          grid-gap: 24px;
+        }
+
+        &-slider {
+          display: none;
+        }
+      }
+    }
+  }
+}
+.slider {
+  width: calc(100% + 24px);
+  position: relative;
+  left: -12px;
+
+  &__slide {
+    width: fit-content;
+
+    &-item:first-child {
+      padding-left: 12px;
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    padding-top: 14px;
+    padding-left: 12px;
+
+    &-prev {
+      padding: 8px 14px 8px 0;
+    }
+
+    &-next {
+      padding: 8px 0 8px 14px;
+    }
+
+    svg {
+      height: 30px;
+      width: 30px;
     }
   }
 }

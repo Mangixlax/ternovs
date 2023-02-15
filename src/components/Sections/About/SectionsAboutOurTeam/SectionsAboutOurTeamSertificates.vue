@@ -71,7 +71,7 @@ import { Employee } from '@/types/models/employee'
 export default class SectionsAboutOurTeamSertificates extends Vue {
   @Prop({ type: Object, default: () => {} }) employee!: Employee
 
-  get swiperOption() {
+  get swiperOption(): SwiperOptions {
     return {
       slidesPerView: 'auto',
       spaceBetween: 24,
@@ -95,7 +95,7 @@ export default class SectionsAboutOurTeamSertificates extends Vue {
     @include grid-container;
     padding: 0;
     grid-row-gap: 0;
-    
+
     &-container {
       grid-column: 1 / 5;
       grid-row: 1 / 2;
@@ -179,7 +179,7 @@ export default class SectionsAboutOurTeamSertificates extends Vue {
 
       &-row {
         grid-column: 2 / 12;
-    
+
         &-container {
           grid-template-columns: 1fr 1fr 1fr 1fr;
           grid-row-gap: 80px;

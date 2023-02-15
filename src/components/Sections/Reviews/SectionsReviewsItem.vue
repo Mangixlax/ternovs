@@ -43,10 +43,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Review } from '@/types/models/reviews'
 
 @Component
 export default class SectionsReviewsItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
+  @Prop({ type: Object, default: () => {} }) item!: Review
 }
 </script>
 
@@ -67,8 +68,6 @@ export default class SectionsReviewsItem extends Vue {
     margin-bottom: 10px;
     @include font-p-regular-130;
     color: $color-gray-100;
-    > span {
-    }
   }
 
   &-avatar {
