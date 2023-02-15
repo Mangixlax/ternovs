@@ -1,4 +1,4 @@
-import { AccordionItem } from '@/types/components'
+import { AccordionItem } from '@/types/components/components'
 
 export interface Employee {
   id: number

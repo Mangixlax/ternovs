@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { Jsonld } from 'nuxt-jsonld'
-import { AccordionItem } from '@/types/components'
+import { AccordionItem } from '@/types/components/components'
 import BaseAccordionItem from '@/components/Base/BaseAccordion/BaseAccordionItem.vue'
 import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
 

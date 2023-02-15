@@ -7,13 +7,13 @@
     @click="item.list?.length ? onToggle() : null"
   >
     <div :class="$style['dropdown__control']">
-      <div
-        :is="item.list?.length ? 'div' : 'nuxt-link'"
+      <nuxt-link
+        :active-class="$style['dropdown__control--active']"
         :to="item.route"
         :class="$style['dropdown__control-label']"
       >
         {{ item.label }}
-      </div>
+      </nuxt-link>
       <svg-icon name="dropdown-menu" v-if="item.list?.length" />
     </div>
     <div
@@ -23,7 +23,10 @@
     >
       <ul ref="list">
         <li v-for="(link, index) in item.list" :key="index">
-          <nuxt-link :to="link.route">
+          <nuxt-link
+            :to="link.route"
+            :active-class="$style['dropdown__control--active']"
+          >
             {{ link.label }}
           </nuxt-link>
         </li>
@@ -34,10 +37,11 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { MenuItem } from '@/types/components/header'
 
 @Component
 export default class BaseHeaderNavItemMobile extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: Object
+  @Prop({ type: Object, default: () => {} }) item!: MenuItem
   @Prop({ type: Boolean, default: false }) isOpen!: boolean
 
   public isShowList: boolean = false
@@ -83,9 +87,10 @@ export default class BaseHeaderNavItemMobile extends Vue {
 .dropdown {
   width: 100%;
   padding: 0 12px;
+  padding-bottom: 12px;
+  padding-top: 8px;
 
   & + & {
-    padding-top: 12px;
     border-top: 2px solid $color-primary-8;
   }
 
@@ -95,7 +100,7 @@ export default class BaseHeaderNavItemMobile extends Vue {
     justify-content: space-between;
 
     &-label {
-      @include font-p-medium-160;
+      @include font-h6-medium;
       padding-top: 6px;
       color: $color-gray-100;
       text-decoration: none;
@@ -111,6 +116,10 @@ export default class BaseHeaderNavItemMobile extends Vue {
       .open & {
         transform: rotate(180deg);
       }
+    }
+
+    &--active {
+      color: $color-gray-64 !important;
     }
   }
 

@@ -43,21 +43,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Location } from 'vue-router/types/router'
+import { MenuItem } from '@/types/components/header'
 import Logo from '~/components/Logo.vue'
 import BaseHeaderNavItem from '~/components/Base/BaseHeader/BaseHeaderNavItem.vue'
 import BaseHeaderMobile from '~/components/Base/BaseHeader/BaseHeaderMobile.vue'
-
-interface menuItem {
-  label: string
-  route: Location
-  list?: menuItemLink[]
-}
-
-interface menuItemLink {
-  label: string,
-  route: Location
-}
 
 @Component({
   components: {
@@ -71,11 +60,11 @@ export default class BaseHeader extends Vue {
   public isMobileMenuOpen: boolean = false
   public scrollbarWidth: number = 15
 
-  public menu: menuItem[] = [
+  public menu: MenuItem[] = [
     {
       label: 'Услуги',
       route: { name: 'services' },
-      list: []
+      list: [],
     },
     {
       label: 'Цены',
@@ -129,9 +118,9 @@ export default class BaseHeader extends Vue {
         route: {
           name: 'services-category',
           params: {
-            category: item.category.value
-          }
-        }
+            category: item.category.value,
+          },
+        },
       }
     })
   }

@@ -38,8 +38,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { MenuItem } from '@/types/components/header'
 import { getScrollbarWidth } from '@/lib/utils'
-import { Location } from 'vue-router/types/router'
 import BaseHeaderNavItemMobile from '@/components/Base/BaseHeader/BaseHeaderNavItemMobile.vue'
 
 @Component({
@@ -48,8 +48,8 @@ import BaseHeaderNavItemMobile from '@/components/Base/BaseHeader/BaseHeaderNavI
   },
 })
 export default class BaseHeaderMobile extends Vue {
-  @Prop({ type: Array, default: () => [] }) menu!: Array<object>
-  @Prop({ type: Boolean, default: false }) isMobileMenuOpen!: object
+  @Prop({ type: Array, default: () => [] }) menu!: MenuItem[]
+  @Prop({ type: Boolean, default: false }) isMobileMenuOpen!: boolean
 
   @Watch('isMobileMenuOpen')
   onChangeMenuIsOpen(isOpen: boolean) {
