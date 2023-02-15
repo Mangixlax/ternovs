@@ -7,10 +7,12 @@
     />
     <h3>{{ item.title }}</h3>
     <p>{{ item.description }}</p>
-    <nuxt-link :to="item.route">
+    <div :class="$style['services__item-link']">
       <span>Подробнее</span>
       <svg-icon name="back-arrow" />
-    </nuxt-link>
+    </div>
+
+    <nuxt-link :to="item.route"></nuxt-link>
   </div>
 </template>
 
@@ -29,6 +31,7 @@ export default class SectionsServicesItem extends Vue {
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   > img {
     height: 160px;
@@ -51,9 +54,8 @@ export default class SectionsServicesItem extends Vue {
     color: $color-gray-100;
   }
 
-  > a {
+  &-link {
     @include font-p-medium-160;
-    text-decoration: none;
     color: $color-gray-100;
     display: flex;
 
@@ -66,6 +68,11 @@ export default class SectionsServicesItem extends Vue {
       width: 30px;
       fill: $color-primary-100;
     }
+  }
+
+  > a {
+    position: absolute;
+    inset: 0;
   }
 
   @include media-breakpoint-up('lg') {
