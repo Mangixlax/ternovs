@@ -1,5 +1,7 @@
 <template>
-  <main></main>
+  <main>
+    journal category
+  </main>
 </template>
 
 <script lang="ts">

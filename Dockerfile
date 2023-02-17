@@ -1,4 +1,4 @@
-FROM node:14.18.1-alpine3.14
+FROM node:18.13-alpine3.16
 
 ARG USER=node
 ARG UID=1000
@@ -12,6 +12,8 @@ COPY ./src/docker/config/supervisord.conf /etc/supervisor/conf.d/supervisord.con
 
 COPY ./src /var/www/html/frontend
 
+RUN rm -rf /var/www/html/frontend/node_modules
+
 RUN chown -R ${UID}:${GID} /var/www/html/frontend \
     && chmod -R 775 /var/www/html/frontend \
     && chown -R ${UID}:${GID} /run
@@ -23,7 +25,6 @@ WORKDIR /var/www/html/frontend
 
 ENV HOST 0.0.0.0
 
-# RUN yarn && \
-    # yarn build
+ENV NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096'
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
