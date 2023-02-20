@@ -15,7 +15,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-terapii',
               service: 'lechenie-cariesa',
@@ -53,7 +53,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-terapii',
               service: 'pod-microscopom',
@@ -90,7 +90,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-terapii',
               service: 'restavraciya-zubov',
@@ -138,7 +138,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-gigiene',
               service: 'lechenie-desen',
@@ -175,7 +175,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-gigiene',
               service: 'otbelivanie-zubov',
@@ -212,7 +212,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-gigiene',
               service: 'gigiena-polosti-rta',
@@ -260,7 +260,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-ortodontii',
               service: 'ispravlenie-prikusa-elainerami',
@@ -297,7 +297,7 @@ const state = () => ({
           description:
             'Краткое описание категории услуги, можно на пару строк.',
           route: {
-            name: 'services-category-service',
+            name: 'uslugi-category-service',
             params: {
               category: 'po-ortodontii',
               service: 'ispravlenie-s-breket-sistemami',

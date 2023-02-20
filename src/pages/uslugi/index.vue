@@ -15,7 +15,7 @@
           <div :class="$style['services__grid-links']">
             <nuxt-link
               :to="{
-                name: 'services-category',
+                name: 'uslugi-category',
                 params: { category: item.category.value },
               }"
               v-for="(item, index) in servicesList"

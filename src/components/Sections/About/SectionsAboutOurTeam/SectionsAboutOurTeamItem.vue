@@ -12,7 +12,7 @@
     </div>
     <nuxt-link
       :to="{
-        name: 'about-our-team-employee',
+        name: 'doktora-employee',
         params: {
           employee: item.folder + '-' + (Number($vnode.key) + 1),
         },

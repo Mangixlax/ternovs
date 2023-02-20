@@ -99,20 +99,20 @@ export default defineComponent({
             {
               label: 'Наша команда',
               route: {
-                name: 'about-our-team',
+                name: 'doktora',
               },
             },
             {
               label: 'Наши работы',
               route: {
-                name: 'about-portfolio',
+                name: 'portfolio',
               },
             },
 
             {
               label: 'Оборудование',
               route: {
-                name: 'about-equipment',
+                name: 'oborudovanie-kliniki',
               },
             },
           ],
@@ -123,55 +123,55 @@ export default defineComponent({
             {
               label: 'Терапия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Гигиена',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Имплантация',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Хирургия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Ортодонтия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Отбеливание зубов',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Протезирование',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Обезболивание',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Цены на услуги',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
           ],
@@ -182,55 +182,55 @@ export default defineComponent({
             {
               label: 'Терапия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Гигиена',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Имплантация',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Хирургия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Ортодонтия',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Отбеливание зубов',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Протезирование',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Обезболивание',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
             {
               label: 'Цены на услуги',
               route: {
-                name: 'services',
+                name: 'uslugi',
               },
             },
           ],

@@ -9,7 +9,7 @@
           этическому и качественному уходу, мотивированному достижением их
           философии стоматологии.
         </p>
-        <nuxt-link :to="{ name: 'services' }">
+        <nuxt-link :to="{ name: 'o-kompanii' }">
           <span>О клинике</span>
           <svg-icon name="back-arrow" />
         </nuxt-link>
@@ -20,7 +20,7 @@
             5 звездочных <br />
             отзывов от наших пациентов
           </p>
-          <nuxt-link :to="{ name: 'reviews' }">
+          <nuxt-link :to="{ name: 'otzyvy' }">
             <svg-icon name="go-back" />
             <span>Читать отзывы</span>
           </nuxt-link>

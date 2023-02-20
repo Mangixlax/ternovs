@@ -47,7 +47,7 @@ export default defineComponent({
       )
     },
   },
-  methodts: {
+  methods: {
     onShowCallback() {
       this.$modal.show({
         bind: {

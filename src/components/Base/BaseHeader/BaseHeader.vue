@@ -68,38 +68,38 @@ export default defineComponent({
       return [
         {
           label: 'Услуги',
-          route: { name: 'services' },
+          route: { name: 'uslugi' },
           list: [],
         },
         {
           label: 'Цены',
-          route: { name: 'prices' },
+          route: { name: 'ceny-na-uslugi' },
         },
         {
           label: 'Отзывы',
-          route: { name: 'reviews' },
+          route: { name: 'otzyvy' },
         },
         {
           label: 'О клинике',
-          route: { name: 'about' },
+          route: { name: 'o-kompanii' },
           list: [
             {
               label: 'Комманда',
-              route: { name: 'about-our-team' },
+              route: { name: 'doktora' },
             },
             {
               label: 'Портфолио',
-              route: { name: 'about-portfolio' },
+              route: { name: 'portfolio' },
             },
             {
               label: 'Оборудование',
-              route: { name: 'about-equipment' },
+              route: { name: 'oborudovanie-kliniki' },
             },
           ],
         },
         {
           label: 'Контакты',
-          route: { name: 'contacts' },
+          route: { name: 'kontakty' },
         },
       ]
     },
@@ -112,7 +112,7 @@ export default defineComponent({
           return {
             label: item.category.label,
             route: {
-              name: 'services-category',
+              name: 'uslugi-category',
               params: {
                 category: item.category.value,
               },

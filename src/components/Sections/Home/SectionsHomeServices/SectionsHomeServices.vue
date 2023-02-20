@@ -94,7 +94,7 @@ export default defineComponent({
           title: 'Ортопедия',
           text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
           route: {
-            name: 'services',
+            name: 'uslugi',
           },
         },
         {
@@ -102,7 +102,7 @@ export default defineComponent({
           title: 'Терапия',
           text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
           route: {
-            name: 'services',
+            name: 'uslugi',
           },
         },
         {
@@ -110,7 +110,7 @@ export default defineComponent({
           title: 'Хирургия',
           text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
           route: {
-            name: 'services',
+            name: 'uslugi',
           },
         },
         {
@@ -118,7 +118,7 @@ export default defineComponent({
           title: 'Ортопедия',
           text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
           route: {
-            name: 'services',
+            name: 'uslugi',
           },
         },
       ],
