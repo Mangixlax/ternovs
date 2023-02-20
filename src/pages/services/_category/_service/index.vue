@@ -29,33 +29,38 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsServicesDetailDescription from '@/components/Sections/Services/Detail/SectionsServicesDetailDescription.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ServicesDetailPageDescription',
   components: {
     UiFormButton,
     SectionsServicesDetailDescription,
   },
+  computed: {
+    serviceByParams() {
+      return this.$store.getters['services/getServiceByParams'](
+        this.$route.params
+      )
+    },
+  },
+  methodts: {
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
+  },
 })
-export default class ServicesPage extends Vue {
-  get serviceByParams() {
-    return this.$store.getters['services/getServiceByParams'](
-      this.$route.params
-    )
-  }
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'Callback',
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
 </script>
 
 <style lang="scss" module>

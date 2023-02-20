@@ -37,43 +37,43 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { MenuItem } from '@/types/components/header'
+
 import { getScrollbarWidth } from '@/lib/utils'
+
 import BaseHeaderNavItemMobile from '@/components/Base/BaseHeader/BaseHeaderNavItemMobile.vue'
 
-@Component({
-  components: {
-    BaseHeaderNavItemMobile,
+export default defineComponent({
+  name: 'BaseHeaderMobile',
+  components: { BaseHeaderNavItemMobile },
+  props: {
+    menu: { type: Array as PropType<MenuItem[]>, default: () => [] },
+    isMobileMenuOpen: { type: Boolean, default: false },
+  },
+  watch: {
+    isMobileMenuOpen(isOpen: boolean) {
+      if (isOpen) {
+        document.body.setAttribute('menu-open', '')
+        document.body.style.setProperty(
+          '--modal-padding',
+          getScrollbarWidth() + 'px'
+        )
+      } else {
+        document.body.removeAttribute('menu-open')
+        document.body.style.setProperty('--modal-padding', '0')
+      }
+    },
+    $route() {
+      this.$emit('closeMobileMenu')
+    },
+  },
+  methods: {
+    closeMobileMenu() {
+      this.$emit('closeMobileMenu')
+    },
   },
 })
-export default class BaseHeaderMobile extends Vue {
-  @Prop({ type: Array, default: () => [] }) menu!: MenuItem[]
-  @Prop({ type: Boolean, default: false }) isMobileMenuOpen!: boolean
-
-  @Watch('isMobileMenuOpen')
-  onChangeMenuIsOpen(isOpen: boolean) {
-    if (isOpen) {
-      document.body.setAttribute('menu-open', '')
-      document.body.style.setProperty(
-        '--modal-padding',
-        getScrollbarWidth() + 'px'
-      )
-    } else {
-      document.body.removeAttribute('menu-open')
-      document.body.style.setProperty('--modal-padding', '0')
-    }
-  }
-
-  @Watch('$route')
-  onRouteChange() {
-    this.$emit('closeMobileMenu')
-  }
-
-  public closeMobileMenu() {
-    this.$emit('closeMobileMenu')
-  }
-}
 </script>
 
 <style lang="scss" module>

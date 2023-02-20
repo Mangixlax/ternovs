@@ -63,30 +63,33 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
 import { Employee } from '@/types/models/employee'
 
-@Component
-export default class SectionsAboutOurTeamSertificates extends Vue {
-  @Prop({ type: Object, default: () => {} }) employee!: Employee
-
-  get swiperOption(): SwiperOptions {
-    return {
-      slidesPerView: 'auto',
-      spaceBetween: 24,
-      loop: false,
-      autoHeight: true,
-      autoplay: false,
-      breakpoints: {
-        // when window width is >= 768
-        768: {
-          slidesPerView: 3,
+export default defineComponent({
+  name: 'SectionsAboutOurTeamSertificates',
+  props: {
+    employee: { type: Object as PropType<Employee>, default: () => {} },
+  },
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        loop: false,
+        autoHeight: true,
+        autoplay: false,
+        breakpoints: {
+          // when window width is >= 768
+          768: {
+            slidesPerView: 3,
+          },
         },
-      },
-    }
-  }
-}
+      }
+    },
+  },
+})
 </script>
 
 <style lang="scss" module>

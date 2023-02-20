@@ -75,40 +75,42 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 
-@Component({
+export default defineComponent({
+  name: 'SectionsHomeSlider',
   components: {
     UiFormButton,
   },
-})
-export default class SectionsHomeSlider extends Vue {
-  public swiperOption: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 24,
-    autoHeight: true,
-    loop: true,
-    autoplay: {
-      delay: 5700,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      type: 'custom',
-      bulletClass: 'cutdown-bullet',
-      bulletActiveClass: 'cutdown-bullet-active',
-      renderCustom(swiper, current, total) {
-        let cbhtml = ''
 
-        for (var i = 0; i < total; i++) {
-          let isActive = i == current - 1
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        autoHeight: true,
+        loop: true,
+        autoplay: {
+          delay: 5700,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          type: 'custom',
+          bulletClass: 'cutdown-bullet',
+          bulletActiveClass: 'cutdown-bullet-active',
+          renderCustom(swiper, current, total) {
+            let cbhtml = ''
 
-          cbhtml += `<span class="cutdown-bullet ${
-            isActive ? 'cutdown-bullet-active ' : ''
-          }">
+            for (var i = 0; i < total; i++) {
+              let isActive = i == current - 1
+
+              cbhtml += `<span class="cutdown-bullet ${
+                isActive ? 'cutdown-bullet-active ' : ''
+              }">
               <span class="cutdown-bullet__counter">
                 <span class="cutdown-bullet__count">${i + 1}</span>
                 <svg width="26" height="26">
@@ -148,23 +150,27 @@ export default class SectionsHomeSlider extends Vue {
 
               </span>
             </span>`
-        }
-
-        return cbhtml
-      },
+            }
+            return cbhtml
+          },
+        },
+      }
     },
-  }
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'Callback',
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
+  },
+  methods: {
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
+  },
+})
 </script>
 
 <style lang="scss" module>

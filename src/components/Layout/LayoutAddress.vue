@@ -33,13 +33,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 
-@Component({
+export default defineComponent({
+  name: 'LayoutAddress',
   components: { UiFormButton },
 })
-export default class LayoutAddress extends Vue {}
 </script>
 
 <style lang="scss" module>

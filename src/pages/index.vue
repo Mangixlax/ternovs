@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import SectionsHomeSlider from '@/components/Sections/Home/SectionsHomeSlider.vue'
 import LayoutAddress from '@/components/Layout/LayoutAddress.vue'
 import SectionsHomeAbout from '@/components/Sections/Home/SectionsHomeAbout.vue'
@@ -18,7 +19,8 @@ import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefit
 import SectionsHomeReviews from '@/components/Sections/Home/SectionsHomeReviews/SectionsHomeReviews.vue'
 import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServices.vue'
 
-@Component({
+export default defineComponent({
+  name: 'IndexPage',
   components: {
     SectionsHomeSlider,
     LayoutAddress,
@@ -28,7 +30,6 @@ import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeService
     SectionsHomeServices,
   },
 })
-export default class IndexPage extends Vue {}
 </script>
 
 <style lang="scss" module></style>

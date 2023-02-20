@@ -30,64 +30,61 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { fastLink } from '~/types/components/footer'
 
-@Component({
+export default defineComponent({
+  name: 'BaseFastLinks',
   model: {
     prop: 'active',
     event: 'update',
   },
-})
-export default class BaseFastLinks extends Vue {
-  @Prop({ type: String })
-  public title!: string
-
-  @Prop({ type: Array })
-  public list!: Array<object>
-
-  @Prop({ type: Boolean, default: false })
-  public active!: boolean
-
-  public show: boolean = this.active
-
-  public contentHeight: string = '0px'
-
-  onClick() {
-    if (this.show) {
-      this.hideAccordion()
-    } else {
-      this.showAccordion()
+  props: {
+    title: { type: String, default: '' },
+    list: { type: Array as PropType<fastLink[]>, default: () => [] },
+    active: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      show: <boolean>this.active,
+      contentHeight: <string>'0px',
     }
+  },
+  methods: {
+    onClick() {
+      if (this.show) {
+        this.hideAccordion()
+      } else {
+        this.showAccordion()
+      }
 
-    if (this.$parent?.$children.length) {
-      for (const $child of this.$parent.$children) {
-        if (
-          ($child as any)._name.includes('BaseFastLinks') &&
-          (this as any)._uid !== ($child as any)._uid
-        ) {
-          ;($child as this).hideAccordion()
+      if (this.$parent?.$children.length) {
+        for (const $child of this.$parent.$children) {
+          if (
+            ($child as any)._name.includes('BaseFastLinks') &&
+            (this as any)._uid !== ($child as any)._uid
+          ) {
+            ;$child.hideAccordion()
+          }
         }
       }
-    }
-  }
-
-  hideAccordion() {
-    this.contentHeight = '0px'
-    this.show = false
-  }
-
-  showAccordion() {
-    this.contentHeight =
-      (this.$refs.linkContainer as Element).clientHeight + 'px'
-    this.show = true
-  }
-
+    },
+    hideAccordion() {
+      this.contentHeight = '0px'
+      this.show = false
+    },
+    showAccordion() {
+      this.contentHeight =
+        (this.$refs.linkContainer as Element).clientHeight + 'px'
+      this.show = true
+    },
+  },
   mounted() {
     if (this.active) {
       this.showAccordion()
     }
-  }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>

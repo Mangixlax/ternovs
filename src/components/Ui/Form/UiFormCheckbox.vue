@@ -12,33 +12,36 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component({
+export default defineComponent({
+  name: 'UiFormCheckbox',
   model: {
     prop: 'value',
     event: 'input',
   },
+  props: {
+    value: { type: [String, Boolean], default: true },
+    checked: { type: Boolean, default: false },
+    valid: { type: Boolean, default: false },
+  },
+  computed: {
+    checkboxIcon() {
+      if (this.checked) {
+        return 'form/checkbox-checked'
+      } else if (!this.valid) {
+        return 'form/checkbox-error'
+      } else if (!this.checked) {
+        return 'form/checkbox'
+      }
+    },
+  },
+  methods: {
+    onInput(value: string) {
+      this.$emit('input', value)
+    },
+  },
 })
-export default class UiFormCheckbox extends Vue {
-  @Prop({ type: [String, Boolean], default: true }) value!: boolean | string
-  @Prop({ type: Boolean, default: false }) checked!: boolean
-  @Prop({ type: Boolean, default: false }) valid!: boolean
-
-  public onInput(value: string) {
-    this.$emit('input', value)
-  }
-
-  get checkboxIcon() {
-    if (this.checked) {
-      return 'form/checkbox-checked'
-    } else if (!this.valid) {
-      return 'form/checkbox-error'
-    } else if (!this.checked) {
-      return 'form/checkbox'
-    }
-  }
-}
 </script>
 
 <style lang="scss" module>

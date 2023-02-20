@@ -29,45 +29,44 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeamAccordion from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamAccordion.vue'
 import SectionsAboutOurTeamSertificates from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamSertificates.vue'
 
-@Component({
+export default defineComponent({
+  name: 'AbouAboutOurTeamDetailPagetOurTeamPage',
   components: {
     UiFormButton,
     SectionsAboutOurTeamAccordion,
     SectionsAboutOurTeamSertificates,
   },
+  computed: {
+    employeeById(): Employee {
+      return this.$store.getters['employees/getEmployeeById'](
+        this.employeeIdByRoute - 1
+      )
+    },
+    employeeIdByRoute(): number {
+      return (this as any).$route.path.split('/').slice(1, -1).pop().split('-').pop()
+    },
+  },
+  methods: {
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
+  },
 })
-export default class AboutOurTeamDetailPage extends Vue {
-  get employeeById(): Employee {
-    return this.$store.getters['employees/getEmployeeById'](
-      this.employeeIdByRoute - 1
-    )
-  }
-
-  get employeeIdByRoute(): any {
-    return (this as any).$route.path
-      .split('/')
-      .slice(1, -1)
-      .pop()
-      .split('-')
-      .pop()
-  }
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'Callback',
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
 </script>
 
 <style lang="scss" module>

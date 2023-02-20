@@ -35,32 +35,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import PerfectScrollbar from '~/components/Common/PerfectScrollbar.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ModalWrapperSimple',
   components: {
     PerfectScrollbar,
     UiFormButton,
   },
+  props: {
+    fullSize: { type: Boolean, default: false },
+    name: { type: String, default: '' },
+  },
+  watch: {
+    $route() {
+      this.$modal.hideAll()
+    },
+  },
+  methods: {
+    closeAllModals() {
+      this.$modal.hideAll()
+    },
+  },
 })
-export default class ModalWrapperSimple extends Vue {
-  @Prop({ type: Boolean, default: false })
-  fullSize!: boolean
-
-  @Prop({ type: String, default: '' })
-  name!: string
-
-  public closeAllModals() {
-    this.$modal.hideAll()
-  }
-
-  @Watch('$route')
-  onRouteChanged() {
-    this.$modal.hideAll()
-  }
-}
 </script>
 
 <style lang="scss" module>

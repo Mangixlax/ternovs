@@ -7,23 +7,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ServicesDetailPage',
   components: {
     SectionsServices,
     BaseScrollBlock,
   },
+  computed: {
+    serviceListByCategory() {
+      return this.$store.getters['services/getServiceListByCategory'](
+        this.$route.params.category
+      )
+    },
+  },
 })
-export default class ServicesPage extends Vue {
-  get serviceListByCategory() {
-    return this.$store.getters['services/getServiceListByCategory'](
-      this.$route.params.category
-    )
-  }
-}
 </script>
 
 <style lang="scss" module>

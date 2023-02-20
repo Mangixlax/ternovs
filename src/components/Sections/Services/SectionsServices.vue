@@ -48,33 +48,38 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
 import { Service } from '@/types/models/servises'
+
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
-@Component({
+export default defineComponent({
+  name: 'SectionsServices',
   components: {
     SectionsServicesItem,
   },
-})
-export default class SectionsServices extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: Service
-
-  public swiperOption: SwiperOptions = {
-    slidesPerView: 1.3,
-    spaceBetween: 24,
-    loop: false,
-    autoHeight: true,
-    autoplay: false,
-    breakpoints: {
-      // when window width is >= 768
-      768: {
-        slidesPerView: 3,
-      },
+  props: {
+    item: { type: Object as PropType<Service>, default: () => {} },
+  },
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 1.3,
+        spaceBetween: 24,
+        loop: false,
+        autoHeight: true,
+        autoplay: false,
+        breakpoints: {
+          // when window width is >= 768
+          768: {
+            slidesPerView: 3,
+          },
+        },
+      }
     },
-  }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>

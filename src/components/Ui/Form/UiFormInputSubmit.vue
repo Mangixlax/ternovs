@@ -14,22 +14,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component({
+export default defineComponent({
+  name: 'UiFormInputSubmit',
   model: {
     prop: 'value',
     event: 'input',
   },
+  props: {
+    value: { type: String, default: '' },
+    tag: { type: String, default: 'input' },
+  },
+  methods: {
+    onInput(value: string) {
+      this.$emit('input', value)
+    },
+  },
 })
-export default class UiFormInputSubmit extends Vue {
-  @Prop({ type: String, default: '' }) value!: string
-  @Prop({ type: String, default: 'input' }) tag!: string
-
-  public onInput(value: string) {
-    this.$emit('input', value)
-  }
-}
 </script>
 
 <style lang="scss" module>

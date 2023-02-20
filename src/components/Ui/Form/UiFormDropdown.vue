@@ -33,49 +33,44 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { DropdownItem, DropdownListValue } from '~/types/components/ui'
 
-interface DropdownItem {
-  label?: string
-  value?: string
-}
-
-interface DropdownListValue {
-  [key: string]: string
-}
-
-@Component({
+export default defineComponent({
+  name: 'UiFormDropdown',
   model: {
     prop: 'value',
     event: 'input',
   },
+  props: {
+    controls: { type: Array as PropType<DropdownItem[]>, default: () => [] },
+    label: { type: String, default: '' },
+    value: { type: Object as PropType<DropdownListValue>, default: () => ({}) },
+  },
+  data() {
+    return {
+      opened: <boolean>false,
+      localValue: <DropdownItem>this.value || this.controls[0],
+    }
+  },
+  watch: {
+    localValue(newValue: DropdownItem) {
+      this.$emit('input', newValue)
+    },
+  },
+  methods: {
+    onClickOutside() {
+      this.opened = false
+    },
+    onSelectListItem(value: DropdownItem) {
+      this.localValue = value
+      this.opened = false
+    },
+    isSelectedItem(item: DropdownItem): boolean {
+      return this.localValue.label === item?.label
+    },
+  },
 })
-export default class UiFormDropdown extends Vue {
-  @Prop({ type: Array, default: () => [] }) controls!: DropdownItem[]
-  @Prop({ type: String, default: '' }) label!: string
-  @Prop({ type: Object, default: () => ({}) }) value!: DropdownListValue
-
-  public localValue: DropdownItem = this.value || this.controls[0]
-  public opened: boolean = false
-
-  @Watch('localValue')
-  onChangeLocalValue(newValue: DropdownListValue) {
-    this.$emit('input', newValue)
-  }
-
-  public onClickOutside() {
-    this.opened = false
-  }
-
-  public onSelectListItem(value: DropdownItem) {
-    this.localValue = value
-    this.opened = false
-  }
-
-  public isSelectedItem(item: DropdownItem): boolean {
-    return this.localValue.label === item?.label
-  }
-}
 </script>
 
 <style lang="scss" module>

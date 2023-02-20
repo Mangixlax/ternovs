@@ -23,13 +23,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
 
-@Component
-export default class SectionsReviewsItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: Employee
-}
+export default defineComponent({
+  name: 'SectionsReviewsItem',
+  props: {
+    item: { type: Object as PropType<Employee>, default: () => {} },
+  },
+})
 </script>
 
 <style lang="scss" module>

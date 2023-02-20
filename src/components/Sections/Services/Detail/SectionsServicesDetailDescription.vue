@@ -25,19 +25,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { ServiceItemContentDescription } from '@/types/models/servises'
+
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
-@Component({
+export default defineComponent({
+  name: 'SectionsServicesDetailDescription',
   components: {
     SectionsServicesItem,
   },
+  props: {
+    descriprion: {
+      type: Object as PropType<ServiceItemContentDescription>,
+      default: () => {},
+    },
+  },
 })
-export default class SectionsServicesDetailDescription extends Vue {
-  @Prop({ type: Object, default: () => {} })
-  descriprion!: ServiceItemContentDescription
-}
 </script>
 
 <style lang="scss" module>

@@ -38,54 +38,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { CreateElement, VNode } from 'vue'
-import { DefaultProps, RenderContext } from 'vue/types/options'
-import { Location } from 'vue-router/types/router'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class UiFormButton extends Vue {
-  @Prop({ type: String, default: 'button' })
-  tag!: string
-
-  @Prop({ type: String, default: 'sm' })
-  variant!: string
-
-  @Prop({ type: [String, Array], default: '' })
-  textClasses!: string | string[]
-
-  @Prop({ type: Boolean, default: false })
-  border!: boolean
-
-  @Prop({ type: Boolean, default: false })
-  disabled!: boolean
-
-  @Prop({ type: Boolean, default: false })
-  fullSize!: boolean
-
-  @Prop({ type: Boolean, default: false })
-  withBlink!: boolean
-
-  @Prop({ type: Boolean, default: false })
-  disableHover!: boolean
-
-  @Prop({ type: Boolean, default: false })
-  disableActive!: boolean
-
-  @Prop({ type: String, default: '' }) action!: string
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'showPhone',
-        phone: this.companyPhone,
-        developer: this.complex.company,
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
+export default defineComponent({
+  name: 'UiFormButton',
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
+  props: {
+    tag: { type: String, default: 'button' },
+    variant: { type: String, default: 'sm' },
+    textClasses: { type: [String, Array], default: '' },
+    border: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    fullSize: { type: Boolean, default: false },
+    withBlink: { type: Boolean, default: false },
+    disableHover: { type: Boolean, default: false },
+    disableActive: { type: Boolean, default: false },
+    action: { type: String, default: '' },
+  },
+})
 </script>
 
 <style lang="scss" module>

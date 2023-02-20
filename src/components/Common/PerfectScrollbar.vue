@@ -13,23 +13,28 @@
     @ps-x-reach-start="scrollHandle"
     @ps-x-reach-end="scrollHandle"
   >
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+
 import PerfectScrollbar from 'perfect-scrollbar'
 
-export default {
+export default defineComponent({
   name: 'PerfectScrollbar',
   props: {
     settings: {
+      type: Object as PropType<any>,
       default: null,
     },
+
     switcher: {
       type: Boolean,
       default: true,
     },
+
     tag: {
       type: String,
       default: 'div',
@@ -37,18 +42,20 @@ export default {
   },
   data() {
     return {
-      ps: null,
+      ps: null as any,
     }
   },
   methods: {
-    scrollHandle(evt) {
+    scrollHandle(evt: any) {
       this.$emit(evt.type, evt)
     },
+
     update() {
       if (this.ps) {
         this.ps.update()
       }
     },
+
     __init() {
       if (this.switcher) {
         if (!this._ps_inited) {
@@ -59,6 +66,7 @@ export default {
         }
       }
     },
+
     __uninit() {
       if (this.ps) {
         this.ps.destroy()
@@ -68,7 +76,7 @@ export default {
     },
   },
   watch: {
-    switcher(val) {
+    switcher(val: any) {
       if (val && !this._ps_inited) {
         this.__init()
       }
@@ -76,13 +84,17 @@ export default {
         this.__uninit()
       }
     },
+
     settings: {
       deep: true,
       handler() {
+        // @ts-ignore
         this.__uninit()
+        // @ts-ignore
         this.__init()
       },
     },
+
     $route() {
       this.update()
     },
@@ -105,7 +117,7 @@ export default {
   beforeDestroy() {
     this.__uninit()
   },
-}
+})
 </script>
 
 <style lang="scss">

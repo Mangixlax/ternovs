@@ -17,11 +17,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class Logo extends Vue {}
+export default defineComponent({
+  name: 'Logo',
+})
 </script>
 
 <style lang="scss" module>
@@ -31,7 +31,7 @@ export default class Logo extends Vue {}
   &__link {
     display: flex;
     align-items: center;
-    
+
     &-emblem {
       width: 62px;
       height: 42px;

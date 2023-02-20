@@ -29,54 +29,59 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
-@Component
-export default class BaseAccordionItem extends Vue {
-  @Prop({ type: String, default: '' }) title!: string
-  @Prop({ type: Boolean, default: false }) active!: boolean
-
-  public show = this.active
-  public myHeight = '0px'
-
-  onClick() {
-    if (this.show) {
-      this.hideAccordion()
-    } else {
-      this.showAccordion()
+export default defineComponent({
+  name: 'BaseAccordionItem',
+  props: {
+    title: { type: String, default: '' },
+    active: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      show: this.active,
+      myHeight: '0px',
     }
+  },
+  methods: {
+    onClick() {
+      if (this.show) {
+        this.hideAccordion()
+      } else {
+        this.showAccordion()
+      }
 
-    // @TODO Поправить тип данных или переработать компонент без использования $parent/$children
-    const $parent = this.$parent as any
+      // @TODO Поправить тип данных или переработать компонент без использования $parent/$children
+      const $parent = this.$parent as any
 
-    if ($parent.$children.length) {
-      for (const $child of $parent.$children) {
-        if (
-          $child._name.includes('AccordionItem') &&
-          this._uid !== $child._uid
-        ) {
-          $child.hideAccordion()
+      if ($parent.$children.length) {
+        for (const $child of $parent.$children) {
+          if (
+            $child._name.includes('AccordionItem') &&
+            this._uid !== $child._uid
+          ) {
+            $child.hideAccordion()
+          }
         }
       }
-    }
-  }
+    },
 
-  hideAccordion() {
-    this.myHeight = '0px'
-    this.show = false
-  }
+    hideAccordion() {
+      this.myHeight = '0px'
+      this.show = false
+    },
 
-  showAccordion() {
-    this.myHeight = (this.$refs as any).textContainer.clientHeight + 'px'
-    this.show = true
-  }
-
+    showAccordion() {
+      this.myHeight = (this.$refs as any).textContainer.clientHeight + 'px'
+      this.show = true
+    },
+  },
   mounted() {
     if (this.active) {
       this.showAccordion()
     }
-  }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>

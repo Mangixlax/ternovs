@@ -19,28 +19,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { MenuItem } from '@/types/components/header'
 
-@Component
-export default class BaseHeaderNavItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: MenuItem
-  public isHoverOnItem: boolean = false
-  public isShowDropdown: boolean = false
-
-  @Watch('$route')
-  onRouteChange() {
-    this.isShowDropdown = false
-  }
-
-  public onMouseEnter() {
-    this.isHoverOnItem = true
-  }
-
-  public onMouseLeave() {
-    this.isHoverOnItem = false
-  }
-}
+export default defineComponent({
+  name: 'BaseHeaderNavItem',
+  props: {
+    item: { type: Object as PropType<MenuItem>, default: () => {} },
+  },
+  data() {
+    return {
+      isHoverOnItem: <boolean>false,
+      isShowDropdown: <boolean>false,
+    }
+  },
+  watch: {
+    $route() {
+      this.isShowDropdown = false
+    },
+  },
+  methods: {
+    onMouseEnter() {
+      this.isHoverOnItem = true
+    },
+    onMouseLeave() {
+      this.isHoverOnItem = false
+    },
+  },
+})
 </script>
 
 <style lang="scss" module>

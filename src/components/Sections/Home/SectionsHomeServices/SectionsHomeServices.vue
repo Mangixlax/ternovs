@@ -73,88 +73,88 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Location } from 'vue-router/types/router'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
+import { HomeServiceItem } from '@/types/models/home'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsHomeServicesItem from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServicesItem.vue'
 
-interface service {
-  icon: string
-  title: string
-  text: string
-  route: Location
-}
-
-@Component({
+export default defineComponent({
+  name: 'SectionsHomeServices',
   components: {
     UiFormButton,
-    Swiper,
-    SwiperSlide,
     SectionsHomeServicesItem,
   },
+  data() {
+    return {
+      services: <HomeServiceItem[]>[
+        {
+          icon: 'tooth-cracked',
+          title: 'Ортопедия',
+          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
+          route: {
+            name: 'services',
+          },
+        },
+        {
+          icon: 'tooth-caries',
+          title: 'Терапия',
+          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
+          route: {
+            name: 'services',
+          },
+        },
+        {
+          icon: 'dental-implant',
+          title: 'Хирургия',
+          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
+          route: {
+            name: 'services',
+          },
+        },
+        {
+          icon: 'dental-crown',
+          title: 'Ортопедия',
+          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
+          route: {
+            name: 'services',
+          },
+        },
+      ],
+    }
+  },
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 1.3,
+        spaceBetween: 24,
+        loop: false,
+        autoHeight: true,
+        autoplay: false,
+        breakpoints: {
+          // when window width is >= 768
+          768: {
+            slidesPerView: 3.3,
+          },
+        },
+      }
+    },
+  },
+  methods: {
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
+  },
 })
-export default class SectionsHomeServices extends Vue {
-  public swiperOption: SwiperOptions = {
-    slidesPerView: 1.3,
-    spaceBetween: 24,
-    loop: false,
-    autoHeight: true,
-    autoplay: false,
-    breakpoints: {
-      // when window width is >= 768
-      768: {
-        slidesPerView: 3.3,
-      },
-    },
-  }
-
-  public services: service[] = [
-    {
-      icon: 'tooth-cracked',
-      title: 'Ортопедия',
-      text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-      route: {
-        name: 'services',
-      },
-    },
-    {
-      icon: 'tooth-caries',
-      title: 'Терапия',
-      text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-      route: {
-        name: 'services',
-      },
-    },
-    {
-      icon: 'dental-implant',
-      title: 'Хирургия',
-      text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-      route: {
-        name: 'services',
-      },
-    },
-    {
-      icon: 'dental-crown',
-      title: 'Ортопедия',
-      text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-      route: {
-        name: 'services',
-      },
-    },
-  ]
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'Callback',
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
 </script>
 
 <style lang="scss" module>

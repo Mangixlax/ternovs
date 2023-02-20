@@ -78,173 +78,167 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { fastLinks } from '@/types/components/footer'
+
 import BaseFastLinks from '@/components/Base/BaseFastLinks/BaseFastLinks.vue'
 import UiFormInputSubmit from '@/components/Ui/Form/UiFormInputSubmit.vue'
-import { Location } from 'vue-router/types/router'
 
-interface fastLinks {
-  title: string
-  links: fastLink[]
-}
-
-interface fastLink {
-  label: string
-  route: Location
-}
-
-@Component({
+export default defineComponent({
+  name: 'BaseFooter',
   components: {
     BaseFastLinks,
     UiFormInputSubmit,
   },
-})
-export default class BaseFooter extends Vue {
-  public fastLinks: fastLinks[] = [
-    {
-      title: 'О клинике',
-      links: [
+  computed: {
+    fastLinks(): fastLinks[] {
+      return [
         {
-          label: 'Наша команда',
-          route: {
-            name: 'about-our-team',
-          },
-        },
-        {
-          label: 'Наши работы',
-          route: {
-            name: 'about-portfolio',
-          },
-        },
+          title: 'О клинике',
+          links: [
+            {
+              label: 'Наша команда',
+              route: {
+                name: 'about-our-team',
+              },
+            },
+            {
+              label: 'Наши работы',
+              route: {
+                name: 'about-portfolio',
+              },
+            },
 
-        {
-          label: 'Оборудование',
-          route: {
-            name: 'about-equipment',
-          },
+            {
+              label: 'Оборудование',
+              route: {
+                name: 'about-equipment',
+              },
+            },
+          ],
         },
-      ],
+        {
+          title: 'Наши услуги',
+          links: [
+            {
+              label: 'Терапия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Гигиена',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Имплантация',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Хирургия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Ортодонтия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Отбеливание зубов',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Протезирование',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Обезболивание',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Цены на услуги',
+              route: {
+                name: 'services',
+              },
+            },
+          ],
+        },
+        {
+          title: 'В журнале',
+          links: [
+            {
+              label: 'Терапия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Гигиена',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Имплантация',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Хирургия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Ортодонтия',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Отбеливание зубов',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Протезирование',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Обезболивание',
+              route: {
+                name: 'services',
+              },
+            },
+            {
+              label: 'Цены на услуги',
+              route: {
+                name: 'services',
+              },
+            },
+          ],
+        },
+      ]
     },
-    {
-      title: 'Наши услуги',
-      links: [
-        {
-          label: 'Терапия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Гигиена',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Имплантация',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Хирургия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Ортодонтия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Отбеливание зубов',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Протезирование',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Обезболивание',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Цены на услуги',
-          route: {
-            name: 'services',
-          },
-        },
-      ],
-    },
-    {
-      title: 'В журнале',
-      links: [
-        {
-          label: 'Терапия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Гигиена',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Имплантация',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Хирургия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Ортодонтия',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Отбеливание зубов',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Протезирование',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Обезболивание',
-          route: {
-            name: 'services',
-          },
-        },
-        {
-          label: 'Цены на услуги',
-          route: {
-            name: 'services',
-          },
-        },
-      ],
-    },
-  ]
-}
+  },
+})
 </script>
 
 <style lang="scss" module>

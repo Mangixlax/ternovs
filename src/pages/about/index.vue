@@ -20,19 +20,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefits.vue'
 import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServices.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
 
-@Component({
+export default defineComponent({
+  name: 'AboutPage',
   components: {
     SectionsHomeBenefits,
     SectionsHomeServices,
     SectionsAboutOurTeam,
   },
 })
-export default class AboutPage extends Vue {}
 </script>
 
 <style lang="scss" module>

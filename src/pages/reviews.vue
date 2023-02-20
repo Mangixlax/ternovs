@@ -5,15 +5,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import SectionsReviews from '@/components/Sections/Reviews/SectionsReviews.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ReviewsPage',
   components: {
     SectionsReviews,
   },
 })
-export default class ReviewsPage extends Vue {}
 </script>
 
 <style lang="scss" module></style>

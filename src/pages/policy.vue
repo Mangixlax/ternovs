@@ -3,10 +3,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class PolicyPage extends Vue {}
+export default defineComponent({
+  name: 'PolicyPage',
+})
 </script>
 
 <style lang="scss" module></style>

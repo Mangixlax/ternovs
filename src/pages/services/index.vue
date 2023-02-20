@@ -38,21 +38,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ServicesPage',
   components: {
     SectionsServices,
     BaseScrollBlock,
   },
+  computed: {
+    servicesList() {
+      return this.$store.getters['services/getServicesList']
+    },
+  },
 })
-export default class ServicesPage extends Vue {
-  get servicesList() {
-    return this.$store.getters['services/getServicesList']
-  }
-}
 </script>
 
 <style lang="scss" module>

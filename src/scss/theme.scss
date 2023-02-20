@@ -140,14 +140,18 @@ button {
 
   svg {
     position: absolute;
-    overflow: overlay;
     top: 0;
     left: 0;
+    overflow: initial;
   }
 }
 
 .cutdown-bullet-active {
   background: $color-white-100;
+
+  .cutdown-bullet__point {
+    display: none;
+  }
 }
 
 .page-enter-active,

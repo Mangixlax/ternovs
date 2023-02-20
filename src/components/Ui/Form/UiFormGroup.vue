@@ -13,13 +13,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class UiFormGroup extends Vue {
-  @Prop({ type: String, default: 'div' }) tag!: string
-  @Prop({ type: String, default: 'vertical' }) variant!: string
-}
+export default defineComponent({
+  name: 'UiFormGroup',
+  props: {
+    variant: { type: String, default: 'vertical' },
+    tag: { type: String, default: 'input' },
+  },
+})
 </script>
 
 <style lang="scss" module>

@@ -47,10 +47,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class SectionsHomeAbout extends Vue {}
+export default defineComponent({
+  name: 'SectionsHomeAbout',
+})
 </script>
 
 <style lang="scss" module>

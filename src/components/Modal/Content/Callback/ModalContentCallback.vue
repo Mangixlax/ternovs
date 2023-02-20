@@ -31,16 +31,20 @@
           </span>
         </ui-form-group>
       </div>
-      <ui-form-button @click="onSubmit" :loading="isLoading"> Записаться на прием </ui-form-button>
+      <ui-form-button @click="onSubmit" :loading="isLoading">
+        Записаться на прием
+      </ui-form-button>
     </div>
   </modal-wrapper-simple>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import { mask } from 'vue-the-mask'
 import { validationMixin } from 'vuelidate'
-import { email, required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength } from 'vuelidate/lib/validators'
+
 import ModalWrapperSimple from '@/components/Modal/Wrapper/ModalWrapperSimple.vue'
 import UiFormGroup from '@/components/Ui/Form/UiFormGroup.vue'
 import UiFormInput from '@/components/Ui/Form/UiFormInput.vue'
@@ -58,8 +62,8 @@ interface Form {
   visit: string
   agree_collect_data: boolean | string
 }
-
-@Component({
+export default defineComponent({
+  name: 'ModalContentCallback',
   components: {
     UiFormGroup,
     UiFormInput,
@@ -82,75 +86,78 @@ interface Form {
       },
     },
   },
+
+  props: {
+    name: { type: String, required: true },
+  },
   inheritAttrs: false,
-})
-export default class ModalContentCallback extends Vue {
-  @Prop({ type: String, required: true })
-  name!: string
-
-  public isLoading: boolean = false
-  
-  public form: Form = {
-    phone: '',
-    visit: '',
-    agree_collect_data: true,
-  }
-
-  public dropdownControls: DropdownItem[] = [
-    {
-      label: 'Первичный',
-      value: '1',
-    },
-    {
-      label: 'Вторичный',
-      value: '2',
-    },
-  ]
-
-  public dropdownControlSelected: DropdownItem | null = this.dropdownControls[0]
-
-  get isValidForm() {
-    return this.$v.$invalid && !this.isAgree
-  }
-
-  public async onSubmit() {
-    
-    if (this.isLoading || !this.isValidForm) return
-
-    this.isLoading = true
-
-    this.$axios
-      .$post('')
-      .then(() => {
-        this.showSuccessModal()
-        this.isLoading = false
-      })
-      .catch(() => {
-        this.showSuccessModal()
-        this.isLoading = false
-      })
-  }
-
-  public showSuccessModal() {
-    this.$modal.show({
-      bind: {
-        name: 'CallbackSuccess',
-        dateTime: this.callbackDateTimeValues,
-        phone: this.callbackPhone,
+  data() {
+    return {
+      isLoading: <boolean>false,
+      form: <Form>{
+        phone: '',
+        visit: '',
+        agree_collect_data: true,
       },
-      on: {
-        'before-open': () => {
-          // Hide this modal before opening a new modal
-          this.$modal.hide(this.name)
+      dropdownControls: <DropdownItem[]>[
+        {
+          label: 'Первичный',
+          value: '1',
         },
+        {
+          label: 'Вторичный',
+          value: '2',
+        },
+      ],
+      dropdownControlSelected: <DropdownItem>{
+        label: 'Первичный',
+        value: '1',
       },
-      component: () =>
-        import(
-          '~/components/Modal/Content/Callback/ModalContentCallbackSuccess.vue'
-        ),
-    })
-  }
-}
+    }
+  },
+  computed: {
+    isValidForm(): boolean {
+      return this.$v.$invalid && !this.form.agree_collect_data
+    },
+  },
+  methods: {
+    onSubmit() {
+      if (this.isLoading || !this.isValidForm) return
+
+      this.isLoading = true
+
+      this.$axios
+        .$post('')
+        .then(() => {
+          this.showSuccessModal()
+          this.isLoading = false
+        })
+        .catch(() => {
+          this.showSuccessModal()
+          this.isLoading = false
+        })
+    },
+    showSuccessModal() {
+      this.$modal.show({
+        bind: {
+          name: 'CallbackSuccess',
+          dateTime: this.callbackDateTimeValues,
+          phone: this.callbackPhone,
+        },
+        on: {
+          'before-open': () => {
+            // Hide this modal before opening a new modal
+            this.$modal.hide(this.name)
+          },
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallbackSuccess.vue'
+          ),
+      })
+    },
+  },
+})
 </script>
 
 <style lang="scss" module>

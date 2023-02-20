@@ -14,24 +14,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component({
+export default defineComponent({
+  name: 'BaseAccordionTabs',
   model: {
     prop: 'active',
     event: 'change',
   },
+  props: {
+    controls: { type: Array, default: () => [] },
+    active: { type: Number, default: 0 },
+  },
+  data() {
+    return {
+      show: this.active,
+    }
+  },
+  methods: {
+    onClick(index: number) {
+      this.$emit('change', index)
+    },
+  },
 })
-export default class BaseAccordionTabs extends Vue {
-  @Prop({ type: Array, default: () => [] }) controls!: object[]
-  @Prop({ type: Number, default: 0 }) active!: number
-
-  public show = this.active
-
-  onClick(index: number) {
-    this.$emit('change', index)
-  }
-}
 </script>
 
 <style lang="scss" module>

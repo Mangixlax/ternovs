@@ -33,32 +33,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import CommonTimerText from '~/components/Common/CommonTimerText.vue'
 import ModalWrapperSimple from '~/components/Modal/Wrapper/ModalWrapperSimple.vue'
 
-@Component({
+export default defineComponent({
+  name: 'ModalContentCallbackSuccess',
   components: {
     ModalWrapperSimple,
     CommonTimerText,
     UiFormButton,
   },
+  props: {
+    name: { type: String, required: true },
+    dateTime: { type: Object, default: () => ({}) },
+  },
+  methods: {
+    onClose() {
+      this.$modal.hide(this.name)
+    },
+  },
 })
-export default class ModalContentCallbackSuccess extends Vue {
-  @Prop({ type: String, required: true })
-  name!: string
-
-  @Prop({ type: Object, default: () => ({}) })
-  dateTime!: any
-
-  @Prop({ type: String, default: '' })
-  phone!: string
-
-  public onClose() {
-    this.$modal.hide(this.name)
-  }
-}
 </script>
 
 <style lang="scss" module>

@@ -10,14 +10,17 @@
       @mouseleave="mouseUpOnBody"
       v-bind="$attrs"
     >
-      <slot></slot>
+      <slot />
     </div>
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import { scrollLeft } from '@/lib/utils'
-export default {
+
+export default defineComponent({
   name: 'BaseScrollBlock',
   components: {},
   props: {
@@ -25,18 +28,22 @@ export default {
       type: Boolean,
       default: false,
     },
+
     hasPadding: {
       type: Boolean,
       default: false,
     },
+
     verticalPadding: {
       type: Boolean,
       default: true,
     },
+
     gapItem: {
       type: [Number, String],
       default: 0,
     },
+
     isMobile: {
       type: Boolean,
       default: false,
@@ -53,14 +60,14 @@ export default {
       disableRightBtn: false,
       scrollIsDisabled: false,
       positionWrap: null,
-      allowClickTimer: null,
+      allowClickTimer: null as ReturnType<typeof setTimeout> | null,
       allowClick: true,
       scrollingTimer: null,
       lastScrollAt: Date.now(),
     }
   },
   computed: {
-    classes() {
+    classes(): any {
       return [
         this.$style['scroll-block'],
         this.verticalPadding && this.$style['vertical-padding'],
@@ -70,6 +77,10 @@ export default {
           this.$style['can-grabbing'],
       ]
     },
+
+    refScroll(): HTMLElement {
+      return this.$refs.scroll as HTMLElement
+    },
   },
   methods: {
     /**
@@ -77,31 +88,34 @@ export default {
      * @param {Array|Element|Vue} el - DOM элемент
      * @param {Boolean} centered - центрировать позицию скролла
      */
-    scrollToItem(el, centered = false) {
+    scrollToItem(el: any, centered: boolean = false) {
       const target = Array.isArray(el) ? el[el.length - 1] : el.$el || el
 
       let calcPosition = target.offsetLeft
 
-      if (centered === true) {
-        calcPosition +=
-          target.clientWidth / 2 - this.$refs.scroll.clientWidth / 2
+      if (centered) {
+        calcPosition += target.clientWidth / 2 - this.refScroll.clientWidth / 2
       }
 
       scrollLeft(this.$refs.scroll, calcPosition, 300)
     },
+
     checkWidthBlock() {
       this.widthBlock =
-        this.$refs.scroll.querySelector('[data-item]').offsetWidth
+        this.refScroll.querySelector<HTMLElement>('[data-item]')?.offsetWidth ||
+        0
     },
-    positionCursorDrag(event) {
+
+    positionCursorDrag(event: any) {
+      // TODO: TBD
       event.preventDefault()
       if (!this.mouseDownOnBlock || !this.$refs.scroll) return
 
-      const x = event.pageX - this.$refs.scroll.offsetLeft
+      const x = event.pageX - this.refScroll.offsetLeft
       const walk = (x - this.startX) * 1.2
 
       if (this.$refs.scroll) {
-        this.$refs.scroll.scrollLeft = this.scrollLeft - walk
+        this.refScroll.scrollLeft = this.scrollLeft - walk
       }
 
       this.checkArrowsOnDisabled()
@@ -114,18 +128,22 @@ export default {
 
       this.lastScrollAt = Date.now()
     },
-    mouseDownOnBody(event) {
+
+    mouseDownOnBody(event: any) {
+      // TODO: TBD
       if (!this.$refs.scroll) return
       this.mouseDownOnBlock = true
-      this.startX = event.pageX - this.$refs.scroll.offsetLeft
-      this.scrollLeft = this.$refs.scroll.scrollLeft
+      this.startX = event.pageX - this.refScroll.offsetLeft
+      this.scrollLeft = this.refScroll.scrollLeft
     },
+
     mouseUpOnBody() {
       if (!this.$refs.scroll) return
       this.mouseDownOnBlock = false
       // Разрешаем клики
       this.setClickState(true)
     },
+
     async rightClick() {
       if (this.scrollIsDisabled || !this.$refs.scroll) return
       this.scrollIsDisabled = true
@@ -133,14 +151,15 @@ export default {
 
       await scrollLeft(
         this.$refs.scroll,
-        this.widthBlock + this.gapItem + this.$refs.scroll.scrollLeft,
+        this.widthBlock + Number(this.gapItem) + this.refScroll.scrollLeft,
         300
       )
 
       this.checkArrowsOnDisabled()
-      this.scrollLeft = this.$refs.scroll.scrollLeft
+      this.scrollLeft = this.refScroll.scrollLeft
       this.scrollIsDisabled = false
     },
+
     async leftClick() {
       if (this.scrollIsDisabled || !this.$refs.scroll) return
       this.scrollIsDisabled = true
@@ -148,34 +167,37 @@ export default {
 
       await scrollLeft(
         this.$refs.scroll,
-        this.$refs.scroll.scrollLeft - this.widthBlock - this.gapItem,
+        this.refScroll.scrollLeft - this.widthBlock - Number(this.gapItem),
         300
       )
 
       this.checkArrowsOnDisabled()
       this.scrollIsDisabled = false
     },
+
     checkArrowsOnDisabled() {
       if (this.$refs.scroll) {
-        this.disableLeftBtn = this.$refs.scroll.scrollLeft === 0
+        this.disableLeftBtn = this.refScroll.scrollLeft === 0
         this.disableRightBtn =
-          this.$refs.scroll.scrollWidth ===
-          this.$refs.scroll.scrollLeft + this.$refs.scroll.offsetWidth
+          this.refScroll.scrollWidth ===
+          this.refScroll.scrollLeft + this.refScroll.offsetWidth
       }
     },
+
     /**
      * Метод для запрета и разрешения кликов по блокам
      * @param {Boolean} value - true разрешить, false запретить
      * @param {Number} delay - задержка, с которой будет установлен параметр
      */
-    setClickState(value, delay = 100) {
-      clearTimeout(this.allowClickTimer)
+    setClickState(value: boolean, delay = 100) {
+      this.allowClickTimer && clearTimeout(this.allowClickTimer as NodeJS.Timeout)
       this.allowClickTimer = null
       setTimeout(() => {
         this.allowClick = value
       }, delay)
     },
   },
+
   async mounted() {
     // Ждем обновления DOM
     await this.$nextTick()
@@ -184,12 +206,13 @@ export default {
       this.checkArrowsOnDisabled()
     }
   },
+
   updated() {
     if (this.$refs.scroll) {
       this.checkArrowsOnDisabled()
     }
   },
-}
+})
 </script>
 
 <style lang="scss" module>

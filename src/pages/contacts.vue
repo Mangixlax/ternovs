@@ -18,10 +18,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-@Component
-export default class ContactsPage extends Vue {}
+export default defineComponent({
+  name: 'ContactsPage',
+})
 </script>
 
 <style lang="scss" module>

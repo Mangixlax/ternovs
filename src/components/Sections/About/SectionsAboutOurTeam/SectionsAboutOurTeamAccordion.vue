@@ -17,17 +17,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { EmployeeAccordion } from '@/types/models/employee'
+
 import BaseAccordions from '@/components/Base/BaseAccordion/BaseAccordions.vue'
 import BaseAccordionTabs from '@/components/Base/BaseAccordion/BaseAccordionTabs.vue'
 
-@Component({
+export default defineComponent({
+  name: 'SectionsAboutOurTeamAccordion',
   components: { BaseAccordions, BaseAccordionTabs },
+  props: {
+    accordion: {
+      type: Object as PropType<EmployeeAccordion>,
+      default: () => {},
+    },
+  },
 })
-export default class SectionsAboutOurTeamAccordion extends Vue {
-  @Prop({ type: Object, default: () => {} }) accordion!: EmployeeAccordion
-}
 </script>
 
 <style lang="scss" module>

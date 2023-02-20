@@ -25,13 +25,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { PricesContentBlock } from '~/types/models/prices.js'
 
-@Component
-export default class SectionsPricesContentBlock extends Vue {
-  @Prop({ type: Object, default: () => {} }) block!: PricesContentBlock
-}
+export default defineComponent({
+  name: 'SectionsPricesContentBlock',
+  props: {
+    block: { type: Object as PropType<PricesContentBlock>, default: () => {} },
+  },
+})
 </script>
 
 <style lang="scss" module>

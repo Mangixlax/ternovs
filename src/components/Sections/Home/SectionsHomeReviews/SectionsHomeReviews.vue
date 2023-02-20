@@ -65,47 +65,49 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
+import { HomeReviewItem } from '@/types/models/home'
+
 import SectionsHomeReviewsItem from '@/components/Sections/Home/SectionsHomeReviews/SectionsHomeReviewsItem.vue'
 
-interface review {
-  text: string
-  name: string
-}
-
-@Component({
-  components: { SectionsHomeReviewsItem, Swiper, SwiperSlide },
+export default defineComponent({
+  name: 'SectionsHomeReviews',
+  components: { SectionsHomeReviewsItem },
+  data() {
+    return {
+      reviews: <HomeReviewItem[]>[
+        {
+          text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
+          name: 'Дмитрий В.',
+        },
+        {
+          text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
+          name: 'Дмитрий В.',
+        },
+        {
+          text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
+          name: 'Дмитрий В.',
+        },
+        {
+          text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
+          name: 'Дмитрий В.',
+        },
+      ],
+    }
+  },
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 1.3,
+        spaceBetween: 24,
+        loop: false,
+        autoHeight: true,
+        autoplay: false,
+      }
+    },
+  },
 })
-export default class SectionsHomeReviews extends Vue {
-  public swiperOption: SwiperOptions = {
-    slidesPerView: 1.3,
-    spaceBetween: 24,
-    loop: false,
-    autoHeight: true,
-    autoplay: false,
-  }
-
-  public reviews: review[] = [
-    {
-      text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
-      name: 'Дмитрий В.',
-    },
-    {
-      text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
-      name: 'Дмитрий В.',
-    },
-    {
-      text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
-      name: 'Дмитрий В.',
-    },
-    {
-      text: 'Знакомство с коллективом клиники произошло 5 лет тому назад. За эти годы я, моя семья, друзья и знакомые посещаем только эту клинику.',
-      name: 'Дмитрий В.',
-    },
-  ]
-}
 </script>
 
 <style lang="scss" module>

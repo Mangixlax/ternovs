@@ -26,18 +26,17 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'nuxt-property-decorator'
-import { ComponentOptions } from 'vue/types/options'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 /**
  * @TODO Find in typescript a possible for setting highlighting a methods in html code
  */
-export default <ComponentOptions<Vue>>{
+export default defineComponent({
   methods: {
     slice(index: number) {
       this.api.dynamicModals.splice(index, 1)
       this.$nextTick(() => {
-        ;(this.$root as Vue).$emit('modal:closed', this.api)
+        this.$root.$emit('modal:closed', this.api)
       })
     },
     beforeOpen(e: any, modal: any, index: number) {
@@ -47,12 +46,12 @@ export default <ComponentOptions<Vue>>{
           this.slice(index)
           modal.reject('show')
         }
-        ;(this.$root as Vue).$emit('modal:opened', this.api)
+        this.$root.$emit('modal:opened', this.api)
       })
     },
     isString(val: any) {
       return typeof val === 'string'
     },
   },
-}
+})
 </script>

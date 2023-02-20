@@ -20,17 +20,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
 
-@Component({
+export default defineComponent({
+  name: 'AboutOurTeamPage',
   components: {
     UiFormButton,
     SectionsAboutOurTeam,
   },
 })
-export default class AboutOurTeamPage extends Vue {}
 </script>
 
 <style lang="scss" module>

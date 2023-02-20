@@ -7,12 +7,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+import { HomeReviewItem } from '@/types/models/home'
 
-@Component
-export default class SectionsHomeReviewsItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: object
-}
+export default defineComponent({
+  name: 'SectionsHomeReviewsItem',
+  props: {
+    item: { type: Object as PropType<HomeReviewItem>, default: () => {} },
+  },
+})
 </script>
 
 <style lang="scss" module>

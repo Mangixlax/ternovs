@@ -46,70 +46,72 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Location } from 'vue-router/types/router'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
+import { HomeBenefitsItem } from '@/types/models/home'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsHomeBenefitsItem from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefitsItem.vue'
 
-interface benefits {
-  icon: string
-  title: string
-}
-
-@Component({
+export default defineComponent({
+  name: 'SectionsHomeBenefits',
   components: {
     UiFormButton,
-    Swiper,
-    SwiperSlide,
     SectionsHomeBenefitsItem,
   },
+  data() {
+    return {
+      benefits: <HomeBenefitsItem[]>[
+        {
+          icon: 'welding-tool',
+          title: 'Новейшее<br/>оборудование',
+        },
+        {
+          icon: 'bill',
+          title: 'Честные и только<br/>прозрачные цены',
+        },
+        {
+          icon: 'medical-doctor',
+          title: 'Индивидуальный<br/>подход к каждому',
+        },
+        {
+          icon: 'facebook-like',
+          title: 'Чистота, комфорт<br/>и безопасность',
+        },
+      ],
+    }
+  },
+  computed: {
+    swiperOption(): SwiperOptions {
+      return {
+        slidesPerView: 1.3,
+        spaceBetween: 24,
+        loop: false,
+        autoHeight: true,
+        autoplay: false,
+        breakpoints: {
+          // when window width is >= 250
+          768: {
+            slidesPerView: 3.3,
+          },
+        },
+      }
+    },
+  },
+  methods: {
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
+  },
 })
-export default class SectionsHomeAbout extends Vue {
-  public swiperOption: SwiperOptions = {
-    slidesPerView: 1.3,
-    spaceBetween: 24,
-    loop: false,
-    autoHeight: true,
-    autoplay: false,
-    breakpoints: {
-      // when window width is >= 250
-      768: {
-        slidesPerView: 3.3,
-      },
-    },
-  }
-
-  public benefits: benefits[] = [
-    {
-      icon: 'welding-tool',
-      title: 'Новейшее<br/>оборудование',
-    },
-    {
-      icon: 'bill',
-      title: 'Честные и только<br/>прозрачные цены',
-    },
-    {
-      icon: 'medical-doctor',
-      title: 'Индивидуальный<br/>подход к каждому',
-    },
-    {
-      icon: 'facebook-like',
-      title: 'Чистота, комфорт<br/>и безопасность',
-    },
-  ]
-
-  public onShowCallback() {
-    this.$modal.show({
-      bind: {
-        name: 'Callback',
-      },
-      component: () =>
-        import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
-    })
-  }
-}
 </script>
 
 <style lang="scss" module>

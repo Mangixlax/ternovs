@@ -26,20 +26,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
 import SectionsAboutOurTeamItem from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamItem.vue'
 
-@Component({
+export default defineComponent({
+  name: 'SectionsAboutOurTeam',
   components: {
     SectionsAboutOurTeamItem,
   },
+  computed: {
+    employeesList(): Employee[] {
+      return this.$store.getters['employees/getEmployeesList']
+    },
+  },
 })
-export default class SectionsAboutOurTeam extends Vue {
-  get employeesList(): Employee[] {
-    return this.$store.getters['employees/getEmployeesList']
-  }
-}
 </script>
 
 <style lang="scss" module>

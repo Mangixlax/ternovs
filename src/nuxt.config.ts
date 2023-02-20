@@ -93,6 +93,11 @@ export default <NuxtConfig>{
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+
+    // https://composition-api.nuxtjs.org/getting-started/setup
+    '@nuxtjs/composition-api/module',
+
+    // https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
   ],
 

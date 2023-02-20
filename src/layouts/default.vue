@@ -9,13 +9,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
+
 import BaseHeader from '@/components/Base/BaseHeader/BaseHeader.vue'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 import LayoutAccordion from '@/components/Layout/LayoutAccordion.vue'
 import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
 
-@Component({
+export default defineComponent({
+  name: 'DefaultLayout',
   components: {
     BaseHeader,
     LayoutCallback,
@@ -23,7 +25,6 @@ import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
     BaseFooter,
   },
 })
-export default class DefaultLayout extends Vue {}
 </script>
 
 <style lang="scss" module></style>

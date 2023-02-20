@@ -36,51 +36,53 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { MenuItem } from '@/types/components/header'
 
-@Component
-export default class BaseHeaderNavItemMobile extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: MenuItem
-  @Prop({ type: Boolean, default: false }) isOpen!: boolean
-
-  public isShowList: boolean = false
-  public isOverFlow: boolean = false
-  public listHeight: string = '0px'
-
-  onToggle() {
-    if (!this.isShowList) {
-      this.open()
-    } else {
-      this.close()
+export default defineComponent({
+  name: 'BaseHeaderNavItemMobile',
+  props: {
+    item: { type: Object as PropType<MenuItem>, default: () => {} },
+    isOpen: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      isShowList: <boolean>false,
+      isOverFlow: <boolean>false,
+      listHeight: <string>'0px',
     }
-  }
-
-  open() {
-    this.listHeight = (this as any).$refs.list.clientHeight + 'px'
-    this.isShowList = true
-  }
-
-  close() {
-    this.listHeight = '0px'
-    this.isShowList = false
-  }
-
-  public calculateDropdownHeight() {
-    this.listHeight = (this as any).$refs.list.clientHeight + 'px'
-  }
-
+  },
+  methods: {
+    onToggle() {
+      if (!this.isShowList) {
+        this.open()
+      } else {
+        this.close()
+      }
+    },
+    open() {
+      this.listHeight = (this as any).$refs.list.clientHeight + 'px'
+      this.isShowList = true
+    },
+    close() {
+      this.listHeight = '0px'
+      this.isShowList = false
+    },
+    calculateDropdownHeight() {
+      this.listHeight = (this as any).$refs.list.clientHeight + 'px'
+    },
+  },
   mounted() {
     if (this.isOpen) {
       this.open()
     }
     window.addEventListener('resize', this.calculateDropdownHeight)
-  }
+  },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.calculateDropdownHeight)
-  }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>
@@ -150,7 +152,7 @@ export default class BaseHeaderNavItemMobile extends Vue {
 
     > ul {
       list-style: none;
-      padding-top: 8px;
+      padding-top: 16px;
 
       > li {
         a {

@@ -45,7 +45,6 @@
           alt="diamond"
           :class="$style['callback__grid-diamond']"
           ref="rellax"
-          v-rellax="relax"
         />
       </div>
     </div>
@@ -53,11 +52,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
+
 import { validationMixin } from 'vuelidate'
-import { email, required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength } from 'vuelidate/lib/validators'
 import { mask } from 'vue-the-mask'
-import VueRellax from 'vue-rellax'
+
 import UiFormGroup from '@/components/Ui/Form/UiFormGroup.vue'
 import UiFormInput from '@/components/Ui/Form/UiFormInput.vue'
 import UiFormDropdown from '@/components/Ui/Form/UiFormDropdown.vue'
@@ -75,9 +75,9 @@ interface Form {
   agree_collect_data: boolean | string
 }
 
-@Component({
+export default defineComponent({
+  name: 'LayoutCallback',
   components: {
-    VueRellax,
     UiFormGroup,
     UiFormInput,
     UiFormDropdown,
@@ -98,29 +98,30 @@ interface Form {
       },
     },
   },
+  data() {
+    return {
+      form: <Form>{
+        phone: '',
+        visit: '',
+        agree_collect_data: true,
+      },
+      dropdownControls: <DropdownItem[]>[
+        {
+          label: 'Первичный',
+          value: '1',
+        },
+        {
+          label: 'Вторичный',
+          value: '2',
+        },
+      ],
+      dropdownControlSelected: <DropdownItem>{
+        label: 'Первичный',
+        value: '1',
+      },
+    }
+  },
 })
-export default class LayoutCallback extends Vue {
-  public form: Form = {
-    phone: '',
-    visit: '',
-    agree_collect_data: true,
-  }
-
-  public dropdownControls: DropdownItem[] = [
-    {
-      label: 'Первичный',
-      value: '1',
-    },
-    {
-      label: 'Вторичный',
-      value: '2',
-    },
-  ]
-
-  public dropdownControlSelected: DropdownItem | null = this.dropdownControls[0]
-
-  public relax: boolean | object = false
-}
 </script>
 
 <style lang="scss" module>

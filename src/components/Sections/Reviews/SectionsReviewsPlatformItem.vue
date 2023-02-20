@@ -18,13 +18,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { Platform } from '@/types/models/reviews'
 
-@Component
-export default class SectionsReviewsPlatformItem extends Vue {
-  @Prop({ type: Object, default: () => {} }) item!: Platform
-}
+export default defineComponent({
+  name: 'SectionsReviewsPlatformItem',
+  props: {
+    item: { type: Object as PropType<Platform>, default: () => {} },
+  },
+})
 </script>
 
 <style lang="scss" module>

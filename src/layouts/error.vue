@@ -1,5 +1,6 @@
 <template>
   <div :class="$style['container']">
+    <logo :class="$style['logo']"></logo>
     <h1 :class="$style['h1']">{{ error.statusCode }}</h1>
     <div v-if="error.statusCode === 404" :class="$style['text']">
       <p>
@@ -41,7 +42,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@nuxtjs/composition-api'
+import Logo from '@/components/Logo.vue'
 
 type Error = {
   statusCode: number
@@ -58,10 +60,12 @@ type ErrorTexts = {
   default: ErrorText
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ErrorPage',
   middleware: ['robots_detector'],
-  components: {},
+  components: {
+    Logo,
+  },
   layout: 'empty',
   props: {
     error: {

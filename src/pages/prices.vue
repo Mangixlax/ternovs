@@ -22,19 +22,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { PricesContentBlock } from '~/types/models/prices.js'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsPricesContentBlock from '~/components/Sections/Prices/SectionsPricesContentBlock.vue'
 
-@Component({
+export default defineComponent({
+  name: 'PricesPage',
   components: {
     UiFormButton,
-    SectionsPricesContentBlock,
+    SectionsPricesContentBlock
   },
-})
-export default class PricesPage extends Vue {
-  public pricesBlocks: PricesContentBlock[] = [
+  data() {
+    return {
+      pricesBlocks: <PricesContentBlock[]> [
     {
       title: 'Лечение осложненного кариеса',
       description:
@@ -120,8 +121,10 @@ export default class PricesPage extends Vue {
       ],
     },
   ]
-
-  public onShowCallback() {
+    }
+  },
+  methods: {
+    onShowCallback() {
     this.$modal.show({
       bind: {
         name: 'Callback',
@@ -130,7 +133,8 @@ export default class PricesPage extends Vue {
         import('~/components/Modal/Content/Callback/ModalContentCallback.vue'),
     })
   }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>

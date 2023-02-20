@@ -42,103 +42,106 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { MenuItem } from '@/types/components/header'
+
 import Logo from '~/components/Logo.vue'
 import BaseHeaderNavItem from '~/components/Base/BaseHeader/BaseHeaderNavItem.vue'
 import BaseHeaderMobile from '~/components/Base/BaseHeader/BaseHeaderMobile.vue'
 
-@Component({
+export default defineComponent({
+  name: 'BaseHeader',
   components: {
     Logo,
     BaseHeaderNavItem,
     BaseHeaderMobile,
   },
-})
-export default class BaseHeader extends Vue {
-  public isShowOverlay: boolean = false
-  public isMobileMenuOpen: boolean = false
-  public scrollbarWidth: number = 15
-
-  public menu: MenuItem[] = [
-    {
-      label: 'Услуги',
-      route: { name: 'services' },
-      list: [],
-    },
-    {
-      label: 'Цены',
-      route: { name: 'prices' },
-    },
-    {
-      label: 'Отзывы',
-      route: { name: 'reviews' },
-    },
-    {
-      label: 'О клинике',
-      route: { name: 'about' },
-      list: [
+  data() {
+    return {
+      isShowOverlay: <boolean>false,
+      isMobileMenuOpen: <boolean>false,
+      scrollbarWidth: <number>15,
+    }
+  },
+  computed: {
+    menu(): MenuItem[] {
+      return [
         {
-          label: 'Комманда',
-          route: { name: 'about-our-team' },
+          label: 'Услуги',
+          route: { name: 'services' },
+          list: [],
         },
         {
-          label: 'Портфолио',
-          route: { name: 'about-portfolio' },
+          label: 'Цены',
+          route: { name: 'prices' },
         },
         {
-          label: 'Оборудование',
-          route: { name: 'about-equipment' },
+          label: 'Отзывы',
+          route: { name: 'reviews' },
         },
-      ],
-    },
-    {
-      label: 'Контакты',
-      route: { name: 'contacts' },
-    },
-    {
-      label: 'Журнал',
-      route: { name: 'journal' },
-    },
-  ]
-
-  public calculateScrollbarWidth() {
-    this.scrollbarWidth =
-      window.innerWidth - document.scrollingElement!.clientWidth
-  }
-
-  get servicesList() {
-    return this.$store.getters['services/getServicesList']
-  }
-
-  get servicesLinks() {
-    return this.$store.getters['services/getServicesList'].map((item: any) => {
-      return {
-        label: item.category.label,
-        route: {
-          name: 'services-category',
-          params: {
-            category: item.category.value,
-          },
+        {
+          label: 'О клинике',
+          route: { name: 'about' },
+          list: [
+            {
+              label: 'Комманда',
+              route: { name: 'about-our-team' },
+            },
+            {
+              label: 'Портфолио',
+              route: { name: 'about-portfolio' },
+            },
+            {
+              label: 'Оборудование',
+              route: { name: 'about-equipment' },
+            },
+          ],
         },
-      }
-    })
-  }
-
-  get extendedMenu() {
-    let extendedMenu = this.menu
-    extendedMenu[0].list = this.servicesLinks
-    return extendedMenu
-  }
+        {
+          label: 'Контакты',
+          route: { name: 'contacts' },
+        },
+      ]
+    },
+    servicesList() {
+      return this.$store.getters['services/getServicesList']
+    },
+    servicesLinks() {
+      return this.$store.getters['services/getServicesList'].map(
+        (item: any) => {
+          return {
+            label: item.category.label,
+            route: {
+              name: 'services-category',
+              params: {
+                category: item.category.value,
+              },
+            },
+          }
+        }
+      )
+    },
+    extendedMenu() {
+      let extendedMenu = this.menu
+      extendedMenu[0].list = this.servicesLinks
+      return extendedMenu
+    },
+  },
+  methods: {
+    calculateScrollbarWidth() {
+      this.scrollbarWidth =
+        window.innerWidth - document.scrollingElement!.clientWidth
+    },
+  },
   mounted() {
     window.addEventListener('resize', this.calculateScrollbarWidth)
     this.calculateScrollbarWidth()
-  }
+  },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.calculateScrollbarWidth)
-  }
-}
+  },
+})
 </script>
 
 <style lang="scss" module>
