@@ -48,3 +48,17 @@ export const scrollLeft = (element, to, duration) => {
     animateScroll()
   })
 }
+
+export const getSiteUrl = (href = '', withSlash = false) => {
+  let url = href
+
+  if (href.indexOf(process.env.BASE_URL) === -1) {
+    url = `${process.env.BASE_URL}${href}`
+  }
+
+  if (url.substr(-1) === '/') {
+    url = url.substr(0, url.length - 1)
+  }
+
+  return withSlash ? (url.endsWith('/') ? url : url + '/') : url
+}

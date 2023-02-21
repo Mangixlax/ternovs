@@ -101,6 +101,10 @@ export default defineComponent({
           label: 'Контакты',
           route: { name: 'kontakty' },
         },
+        {
+          label: 'Журнал',
+          route: { name: 'zhurnal-category' },
+        },
       ]
     },
     servicesList() {

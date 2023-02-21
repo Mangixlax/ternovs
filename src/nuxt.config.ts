@@ -84,6 +84,7 @@ export default <NuxtConfig>{
     '~plugins/axios',
     '~plugins/vuelidate.ts',
     '~plugins/slider-swiper.js',
+    '~api/RepositoryPlugin.ts',
     { src: '~directives/vue-click-outside.ts', mode: 'client' },
     { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', mode: 'client' },
     { src: '~plugins/modal/index.ts', mode: 'client' },

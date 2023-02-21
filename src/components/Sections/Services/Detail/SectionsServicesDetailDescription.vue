@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { ServiceItemContentDescription } from '@/types/models/servises'
+import { ServiceItemContentDescription } from '~/types/models/Servises.js'
 
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
