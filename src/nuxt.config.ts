@@ -1,8 +1,6 @@
-import webpack from 'webpack'
 import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRender } from '@nuxt/types/config/render'
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
-import { NuxtRouteConfig } from '@nuxt/types/config/router'
 
 const isDev = process.env.NODE_ENV === 'development'
 const time = new Date().valueOf()
@@ -53,10 +51,6 @@ export default <NuxtConfig>{
         content: 'yes',
         hid: 'apple-mobile-web-app-capable',
       },
-      {
-        name: 'dmca-site-verification',
-        content: 'amc2UXZNN2I2VVlPWkI2WEZ3c2QvbGlMQS9TdXhaZWNTcmJ2R3BGS1oybz01',
-      },
     ],
     link: [
       { rel: 'dns-prefetch', href: '//fonts.gstatic.com' },
@@ -67,13 +61,7 @@ export default <NuxtConfig>{
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
       },
     ],
-    script: [
-      {
-        type: 'text/javascript',
-        async: true,
-        src: 'https://app.avodata.ru/px/pixel.js?token=88008c32371a962d391ce491fb9ab82f',
-      },
-    ],
+    script: [],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
