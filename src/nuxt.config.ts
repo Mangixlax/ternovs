@@ -174,6 +174,18 @@ export default <NuxtConfig>{
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.BASE_URL || 'http://nginx:8080',
+    proxy: process.env.USE_PRODUCTION_API,
+  },
+
+  proxy: {
+    '/api-dev': {
+      target: process.env.API_URL_FIXED,
+      pathRewrite: { '^/api-dev/': '/api/' },
+    },
+  },
+
+  publicRuntimeConfig: {
+    productionApi: process.env.USE_PRODUCTION_API,
   },
 
   svgSprite: {
