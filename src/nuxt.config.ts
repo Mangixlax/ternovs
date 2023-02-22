@@ -21,6 +21,7 @@ export default <NuxtConfig>{
   env: {
     BASE_URL: process.env.BASE_URL,
     APP_ENV: process.env.APP_ENV,
+    CDN_PATH: process.env.CDN_PATH,
   },
 
   head: {
@@ -88,6 +89,9 @@ export default <NuxtConfig>{
 
     // https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
+
+    // https://github.com/nuxt-community/dayjs-module,
+    '@nuxtjs/dayjs',
   ],
 
   /**
@@ -108,9 +112,18 @@ export default <NuxtConfig>{
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    // https://github.com/nuxt-community/svg-sprite-module
     '@nuxtjs/svg-sprite',
+
+    // https://github.com/nuxt/image
     '@nuxt/image',
+
+    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+
+    // https://github.com/rigor789/vue-scrollto
+    'vue-scrollto/nuxt',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -182,9 +195,20 @@ export default <NuxtConfig>{
 
   image: {
     dir: 'assets/images',
-    domains: [process.env.BASE_URL],
+    domains: [process.env.BASE_URL, process.env.CDN_PATH],
+    alias: {
+      s1: process.env.BASE_URL,
+      st3: [process.env.CDN_PATH, process.env.APP_ENV, 'app/public'].join('/'),
+    },
   },
 
+  dayjs: {
+    locales: ['ru'],
+    defaultLocale: 'ru',
+    defaultTimeZone: 'Europe/Moscow',
+    plugins: ['utc', 'timezone'],
+  },
+  
   /*
    ** Build configuration
    ** See https://go.nuxtjs.dev/config-build

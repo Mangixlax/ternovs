@@ -17,32 +17,59 @@ export default defineComponent({
       'section',
       {
         class: {
-          [this.$style['journal__content-main']]: true,
+          [this.$style['journal']]: true,
         },
       },
       [
-        this.$slots.header,
         this.$createElement(
-          'ul',
+          'div',
           {
             class: {
-              [this.$style['journal__content-grid']]: true,
-              [this.$style['journal__content-grid--loading']]: this.isLoading,
+              [this.$style['journal__grid']]: true,
             },
           },
           [
-            (this.postsList as any).map((card: any, index: number) => {
-              return [
-                this.$slots[`item:${index}:prepend`],
-                this.$createElement('journal-card', {
-                  props: { card: card },
+            this.$createElement(
+              'div',
+              {
+                class: {
+                  [this.$style['journal__grid-slot']]: true,
+                },
+              },
+              [this.$slots.header]
+            ),
+            this.$createElement(
+              'ul',
+              {
+                class: {
+                  [this.$style['journal__grid-container']]: true,
+                  [this.$style['journal__grid-container--loading']]:
+                    this.isLoading,
+                },
+              },
+              [
+                (this.postsList as any).map((card: any, index: number) => {
+                  return [
+                    this.$slots[`item:${index}:prepend`],
+                    this.$createElement('journal-card', {
+                      props: { card: card },
+                    }),
+                    this.$slots[`item:${index}:append`],
+                  ]
                 }),
-                this.$slots[`item:${index}:append`],
               ]
-            }),
+            ),
+            this.$createElement(
+              'div',
+              {
+                class: {
+                  [this.$style['journal__grid-slot']]: true,
+                },
+              },
+              [this.$slots.footer]
+            ),
           ]
         ),
-        this.$slots.footer,
       ]
     )
   },
@@ -50,36 +77,92 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
-.journal__content {
-  &-main {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.journal {
+  width: 100%;
+  padding: 48px 0;
+
+  &__grid {
+    @include grid-container;
+
+    &-container {
+      display: grid;
+      opacity: 1;
+      grid-template-columns: 1fr;
+      grid-gap: 24px;
+      grid-column: 1 / 5;
+      z-index: 4;
+
+      &--loading {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+
+    &-slot {
+      width: 100%;
+      grid-column: 1 / 5;
+
+      > h2 {
+        @include font-h2-medium;
+        margin: 0;
+        margin-bottom: 24px;
+        color: $color-gray-100;
+      }
+
+      > p {
+        @include font-lead-regular-160;
+        margin: 0;
+        color: $color-gray-100;
+      }
+    }
   }
 
-  &-grid {
-    display: grid;
-    opacity: 1;
-    grid-template-columns: 264px 264px 264px;
-    grid-gap: 24px;
-    grid-auto-rows: 355px;
-    width: 100%;
-    z-index: 4;
-    margin-right: auto;
-    padding-right: 24px;
-
-    @media (max-width: 1200px) {
-      grid-template-columns: 1fr 1fr;
-      padding-right: initial;
+  @include media-breakpoint-up('md') {
+    &__grid {
+      &-container {
+        grid-template-columns: 1fr 1fr;
+        grid-column: 1 / 9;
+      }
+      &-slot {
+        width: 100%;
+        grid-column: 1 / 9;
+      }
     }
+  }
 
-    @media (max-width: 760px) {
-      grid-template-columns: 1fr;
+  @include media-breakpoint-up('lg') {
+    &__grid {
+      &-container {
+        grid-template-columns: 1fr 1fr;
+        grid-column: 1 / 11;
+        grid-gap: 0;
+        padding: 0 72px;
+      }
+      &-slot {
+        width: 100%;
+        grid-column: 1 / 11;
+      }
     }
+  }
 
-    &--loading {
-      opacity: 0.5;
-      pointer-events: none;
+  @include media-breakpoint-up('xl') {
+    padding: 36px 0 72px;
+
+    &__grid {
+      &-container {
+        grid-template-columns: 1fr 1fr;
+        grid-column: 1 / 13;
+        grid-gap: 0;
+        padding: 0 72px;
+      }
+      &-slot {
+        width: 100%;
+        grid-column: 2 / 12;
+
+        > h2 {
+          margin-bottom: 32px;
+        }
+      }
     }
   }
 }

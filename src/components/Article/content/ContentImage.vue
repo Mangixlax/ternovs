@@ -54,8 +54,7 @@ export default defineComponent({
 <style lang="scss" module>
 .figure {
   margin: 18px 0;
-  padding: 8px 0 4px 0;
-
+  
   & > p {
     margin: 0;
   }
@@ -66,15 +65,24 @@ export default defineComponent({
   }
 
   span {
-    @include font-p-regular-160;
+    @include font-p-medium-160;
+    color: $color-gray-100;
   }
 }
 .img {
   width: 100%;
-  border-radius: 18px;
+  border-radius: 16px;
 
   &.with-caption {
-    margin-bottom: 10px;
+    margin-bottom: 24px;
+  }
+}
+
+@include media-breakpoint-up('lg') {
+  .figure {
+    > span {
+      padding: 0 96px;
+    }
   }
 }
 </style>

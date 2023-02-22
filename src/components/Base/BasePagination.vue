@@ -11,7 +11,7 @@
         ]"
         title="Перейти на предыдущую страницу"
       >
-        <svg-icon name="arrow-right" />Предыдущая страница
+        <svg-icon name="back-arrow" /><span>Предыдущая страница</span>
       </a>
       <a
         :href="generatePaginateHref(1)"
@@ -67,7 +67,7 @@
         ]"
         title="Перейти на следующую страницу"
       >
-        Следующая страница<svg-icon name="arrow-right" />
+        <span>Следующая страница</span><svg-icon name="back-arrow" />
       </a>
     </div>
   </div>
@@ -223,23 +223,28 @@ export default defineComponent({
   align-items: center;
 
   &__item {
-    padding: 6px 9px;
-    border-radius: 6px;
+    padding: 6px 10px 2px 10px;
     background-color: transparent;
     color: $color-gray-100;
-    @include font-p-regular-160;
+    @include font-p-medium-160;
     text-decoration: none;
+    border-radius: 8px;
     margin-right: 4px;
     display: flex;
     align-items: center;
 
+    &:hover {
+      background-color: $color-gray-6;
+    }
+    
     &:last-child {
       margin-right: 0;
     }
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 30px;
+      height: 30px;
+      fill: $color-primary-100;
     }
 
     &:not(&--current):not(&--divider):hover {
@@ -257,13 +262,14 @@ export default defineComponent({
 
     &--to-last-page,
     &--to-first-page {
-      border-radius: 9px;
-      outline: 1px solid $color-gray-8;
+      padding: 2px 6px 2px 10px;
+
+      span {
+        margin-top: 4px;
+      }
     }
 
     &--to-first-page {
-      padding: 10px 10px 10px 14px;
-
       svg {
         margin-right: 6px;
         transform: rotate(180deg);
@@ -271,8 +277,6 @@ export default defineComponent({
     }
 
     &--to-last-page {
-      padding: 10px 14px 10px 10px;
-
       svg {
         margin-left: 6px;
       }

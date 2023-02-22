@@ -18,11 +18,12 @@
         <journal-statistic
           :published-at="card.published_at"
           :views-count="card.views_count"
+          :category="card.category.title"
         />
       </div>
       <nuxt-link
         :to="{
-          name: 'journal-category-article',
+          name: 'zhurnal-category-article',
           params: {
             category: card.category.slug,
             article: card.slug,
@@ -65,12 +66,16 @@ export default defineComponent({
         return this.$img(`st3/` + filePath + '/' + this.card.poster.filename, {
           format: 'webp',
           height: 250,
-          width: 250,
+          width: 450,
         })
       }
 
       return ''
     },
+  },
+  mounted() {
+    console.log(this.card);
+    
   },
 })
 </script>
@@ -86,13 +91,14 @@ export default defineComponent({
   border-collapse: separate;
   z-index: 0;
   overflow: hidden;
-  background: $color-gray-4;
 
   &__image {
     object-fit: cover;
     background-color: $color-gray-8;
-    height: 196px;
+    height: 250px;
     width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
 
     &--loaded {
       background-color: transparent;
@@ -100,21 +106,13 @@ export default defineComponent({
   }
 
   &__container {
-    padding: 0 20px;
     display: flex;
-  }
-
-  &__author {
-    margin-bottom: 12px;
-  }
-
-  &__tags {
-    margin-bottom: 12px;
+    flex-direction: column;
   }
 
   &__title {
-    @include font-p-regular-160;
-    margin: 12px 0;
+    @include font-h6-medium;
+    margin-bottom: 6px;
   }
 
   &__link {
@@ -125,9 +123,13 @@ export default defineComponent({
     left: 0;
     cursor: pointer;
     z-index: 3;
+  }
 
-    &:hover ~ .journal-card__title {
-      color: $color-primary-100;
+  @include media-breakpoint-up('lg') {
+    padding: 24px 24px 20px 24px;
+
+    &:hover {
+      background-color: $color-gray-4;
     }
   }
 }

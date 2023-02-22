@@ -36,10 +36,8 @@ export default defineComponent({
 .h4,
 .h5,
 .h6 {
-  color: $color-gray-88;
-  margin-top: 18px;
-  margin-bottom: 18px;
-  padding-top: 16px;
+  color: $color-gray-100;
+  margin: 24px 0;
 }
 
 .h1 {
@@ -47,22 +45,34 @@ export default defineComponent({
 }
 
 .h2 {
-  @include font-h2-regular;
+  @include font-h2-medium;
 }
 
 .h3 {
-  @include font-h3-regular;
+  @include font-h3-medium;
 }
 
 .h4 {
-  @include font-h4-regular;
+  @include font-h4-medium;
 }
 
 .h5 {
-  @include font-h5-regular;
+  @include font-h5-medium;
 }
 
 .h6 {
- @include font-h6-regular;
+  @include font-h6-medium;
+}
+
+@include media-breakpoint-up('lg') {
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    padding: 0 96px;
+    margin: 32px 0;
+  }
 }
 </style>

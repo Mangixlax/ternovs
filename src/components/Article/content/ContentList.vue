@@ -54,9 +54,9 @@ export default defineComponent({
 .ol {
   margin: 18px 0;
   padding: 0 24px;
-
+  color: $color-gray-100;
   .li {
-    @include font-p-regular-160;
+    @include font-lead-regular-160;
 
     mark {
       background: $color-error-24;
@@ -89,5 +89,12 @@ export default defineComponent({
 
 .ol {
   list-style-type: decimal;
+}
+
+@include media-breakpoint-up('lg') {
+  .ul,
+  .ol {
+    padding: 0 116px;
+  }
 }
 </style>

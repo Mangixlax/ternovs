@@ -1,41 +1,105 @@
 <template>
-  <base-scroll-block>
-    <ul :class="$style['nav']">
-      <li :class="[$style['nav__item']]">
-        <nuxt-link
-          :class="{
-            [$style['nav__item-link']]: true,
-            [$style['nav__item-link--active']]: getActiveLink('journal'),
-          }"
-          :to="{ name: 'journal-category' }"
-          title="Все"
+  <div :class="$style['navigation']">
+    <div :class="$style['navigation__grid']">
+      <div :class="$style['navigation__grid-container']">
+        <h1>Журнал о стоматологии</h1>
+        <p>
+          Главная цель нашего журнала — ликвидировать стоматологическую
+          безграмотность среди обычных пациентов. Мы хотим, чтобы все узнали о
+          новых приемах и технологиях в стоматологии и о том, что врачей не
+          нужно бояться. Расскажем, какие именно процедуры ждут в каждой
+          конкретной ситуации, сколько они должны занимать времени и как оценить
+          компетентность стоматолога.
+        </p>
+        <div
+          :class="[
+            $style['navigation__grid-nav'],
+            $style['navigation__grid-nav--mobile'],
+          ]"
         >
-          Все
-        </nuxt-link>
-      </li>
-      <li
-        :class="[$style['nav__item']]"
-        v-for="(item, index) in categoriesList"
-        :key="index"
-      >
-        <nuxt-link
-          :class="{
-            [$style['nav__item-link']]: true,
-            [$style['nav__item-link--active']]: getActiveLink(item.slug),
-          }"
-          :to="{
-            name: 'journal-category',
-            params: {
-              category: item.slug,
-            },
-          }"
-          :title="item.title"
+          <base-scroll-block>
+            <ul>
+              <li>
+                <nuxt-link
+                  :class="{
+                    [$style['link']]: true,
+                    [$style['link--active']]: getActiveLink('zhurnal'),
+                  }"
+                  :to="{ name: 'zhurnal' }"
+                  title="Все"
+                >
+                  Все
+                </nuxt-link>
+              </li>
+              <li
+                :class="[$style['nav__item']]"
+                v-for="(item, index) in categoriesList"
+                :key="index"
+              >
+                <nuxt-link
+                  :class="{
+                    [$style['link']]: true,
+                    [$style['link--active']]: getActiveLink(item.slug),
+                  }"
+                  :to="{
+                    name: 'zhurnal',
+                    params: {
+                      category: item.slug,
+                    },
+                  }"
+                  :title="item.title"
+                >
+                  {{ item.title }}
+                </nuxt-link>
+              </li>
+            </ul>
+          </base-scroll-block>
+        </div>
+        <div
+          :class="[
+            $style['navigation__grid-nav'],
+            $style['navigation__grid-nav--desktop'],
+          ]"
         >
-          {{ item.title }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </base-scroll-block>
+          <ul>
+            <li>
+              <nuxt-link
+                :class="{
+                  [$style['link']]: true,
+                  [$style['link--active']]: getActiveLink('zhurnal'),
+                }"
+                :to="{ name: 'zhurnal' }"
+                title="Все"
+              >
+                Все
+              </nuxt-link>
+            </li>
+            <li
+              :class="[$style['nav__item']]"
+              v-for="(item, index) in categoriesList"
+              :key="index"
+            >
+              <nuxt-link
+                :class="{
+                  [$style['link']]: true,
+                  [$style['link--active']]: getActiveLink(item.slug),
+                }"
+                :to="{
+                  name: 'zhurnal-category',
+                  params: {
+                    category: item.slug,
+                  },
+                }"
+                :title="item.title"
+              >
+                {{ item.title }}
+              </nuxt-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -62,35 +126,132 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
-.nav {
-  list-style: none;
-  display: flex;
-  @include container;
+.navigation {
+  width: 100%;
+  padding: 80px 0 40px;
 
-  &__item {
-    display: flex;
+  &__grid {
+    @include grid-container;
 
-    &:not(:last-child) {
-      margin-right: 16px;
+    &-container {
+      grid-column: 1 / 5;
+
+      > h1 {
+        @include font-h1-medium;
+        margin: 0;
+        margin-bottom: 24px;
+        color: $color-gray-100;
+      }
+
+      > p {
+        @include font-lead-regular-160;
+        margin: 0;
+        margin-bottom: 24px;
+        color: $color-gray-100;
+      }
     }
 
-    &-link {
-      padding: 4px 2px 22px 2px;
-      @include font-p-regular-160;
-      cursor: pointer;
-      color: $color-gray-56;
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
+    &-nav {
+      ul {
+        list-style: none;
+        display: flex;
 
-      &--active {
-        border-bottom: 2px solid $color-primary-100;
-        color: $color-gray-88;
+        > li {
+          display: flex;
+
+          &:not(:last-child) {
+            margin-right: 16px;
+          }
+
+          .link {
+            padding: 12px 20px 7px 20px;
+            @include font-p-medium-160;
+            cursor: pointer;
+            color: $color-gray-100;
+            text-decoration: none;
+            border-radius: 100px;
+            background: $color-gray-6;
+            white-space: nowrap;
+
+            &--active {
+              color: $color-primary-100;
+            }
+          }
+        }
+      }
+
+      &--mobile {
+        width: calc(100% + 24px);
+        position: relative;
+        left: -12px;
+
+        ul {
+          li:first-child {
+            padding-left: 12px;
+          }
+        }
+      }
+
+      &--desktop {
+        display: none;
+
+        ul {
+          flex-wrap: wrap;
+          grid-row-gap: 24px;
+        }
       }
     }
   }
 
-  @media (max-width: 768px) {
-    padding: 0 16px;
+  @include media-breakpoint-up('md') {
+    &__grid {
+      &-container {
+        grid-column: 1 / 9;
+      }
+
+      &-nav {
+        &--mobile {
+          display: none;
+        }
+
+        &--desktop {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up('lg') {
+    padding: 96px 0 48px;
+
+    &__grid {
+      &-container {
+        grid-column: 1 / 11;
+
+        > p {
+          padding-right: 192px;
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up('xl') {
+    padding: 144px 0 72px;
+
+    &__grid {
+      &-container {
+        grid-column: 2 / 13;
+        
+        > h1 {
+          margin-bottom: 32px;
+        }
+
+        > p {
+          padding-right: 192px;
+          margin-bottom: 32px;
+        }
+      }
+    }
   }
 }
 </style>

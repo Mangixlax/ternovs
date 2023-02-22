@@ -15,12 +15,12 @@ export default function ({ $axios, $route, $config }: NuxtApp) {
   })
 
   // Sending the visit path to the server to get SEO data about the visited page
-  $axios.onRequest((config: AxiosRequestConfig) => {
-    // Set the Path-Visited parameter if it is not set
-    if (Object.keys(config.headers.common).indexOf('Path-Visited') === -1) {
-      config.headers.common['Path-Visited'] = $route.path
-    }
-  })
+  // $axios.onRequest((config: AxiosRequestConfig) => {
+  //   // Set the Path-Visited parameter if it is not set
+  //   if (Object.keys(config.headers.common).indexOf('Path-Visited') === -1) {
+  //     config.headers.common['Path-Visited'] = $route.path
+  //   }
+  // })
 
   if (process.client) {
     $axios.interceptors.response.use(

@@ -5,15 +5,16 @@
       [$style['journal-statistic--white']]: isWhite,
     }"
   >
+    <span> {{ category }}</span>
     <time :class="$style['journal-statistic__date']" :datetime="dateTime">
       {{ getPublishedDate }}
     </time>
     <div :class="$style['journal-statistic__view']">
       <svg-icon
-        name="journal/view"
+        name="journal/vision-edit"
         :class="$style['journal-statistic__view-icon']"
       />
-      {{ viewsCount }}
+      <span>{{ viewsCount }}</span>
     </div>
     <!--    <div :class="$style['journal-statistic__comment']">-->
     <!--      <svg-icon-->
@@ -41,6 +42,7 @@ export default defineComponent({
     publishedAt: { type: Number, default: null },
     viewsCount: { type: Number, default: 0 },
     isWhite: { type: Boolean, default: false },
+    category: { type: String, default: '' },
   },
   computed: {
     getPublishedDate(): string {
@@ -48,9 +50,9 @@ export default defineComponent({
       const currentYear = new Date().getFullYear()
 
       if (currentYear == this.$dayjs(publishDate).format('YYYY')) {
-        return this.$dayjs(publishDate).format('MM.DD')
+        return this.$dayjs(publishDate).format('D MMMM')
       } else {
-        return this.$dayjs(publishDate).format('YYYY.MM.DD')
+        return this.$dayjs(publishDate).format('D MMMM YYYY')
       }
     },
 
@@ -67,12 +69,28 @@ export default defineComponent({
 .journal-statistic {
   width: 100%;
   display: flex;
-  @include font-p-regular-160;
-  color: $color-gray-40;
+  @include font-small-medium;
   align-items: center;
 
+  span, time {
+    margin-top: 3px;
+    color: $color-gray-100;
+  }
+
+  time {
+    margin-left: 8px;
+    margin-right: 8px;
+
+    &::before {
+      content: '·';
+      color: $color-gray-40;
+      margin-right: 7px;
+    }
+  }
+
   &__date {
-    margin-right: 14px;
+    margin-right: 8px;
+    color: $color-gray-100;
   }
 
   &__view {
@@ -80,11 +98,16 @@ export default defineComponent({
     margin-right: 14px;
     align-items: center;
 
+    > span {
+      margin-top: 3px;
+      color: $color-gray-64;
+    }
+
     &-icon {
       margin-right: 4px;
       fill: $color-gray-40;
-      height: 18px;
-      width: 18px;
+      height: 25px;
+      width: 25px;
     }
   }
 

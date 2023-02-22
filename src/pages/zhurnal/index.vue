@@ -1,8 +1,9 @@
 <template>
   <main :class="$style['journal']">
-    <journal-list :posts-list="postsList" :is-loading="isLoading"  ref="journalList">
+    <journal-navigation :categories-list="categoriesList" />
+    <journal-list :posts-list="postsList" :is-loading="isLoading" ref="journalList">
       <template #header>
-        <h2>{{ category.title }}</h2>
+        <h2>Актуальное в журнале</h2>
         <p>
           Ежедневно в нашу клинику обращаются десятки новых пациентов, но
           вопросы, которые они задают - одни и те же. Масштабы заблуждений в
@@ -33,8 +34,6 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { Context } from '@nuxt/types'
-import { Location, Dictionary } from 'vue-router/types/router'
 
 import { getSiteUrl } from '~/lib/utils'
 import metaGenerator from '~/lib/meta'
@@ -103,7 +102,7 @@ export default defineComponent({
     }
   },
   methods: {
-    onScrollToTop(offset = 0) {
+    onScrollToTop(offset = 580) {
       if (this.$refs.journalList) {
         this.$scrollTo(this.$refs.journalList, 500, { offset })
       }

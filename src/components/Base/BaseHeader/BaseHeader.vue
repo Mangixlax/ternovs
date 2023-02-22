@@ -103,7 +103,7 @@ export default defineComponent({
         },
         {
           label: 'Журнал',
-          route: { name: 'zhurnal-category' },
+          route: { name: 'zhurnal' },
         },
       ]
     },

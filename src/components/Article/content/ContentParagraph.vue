@@ -28,10 +28,9 @@ export default defineComponent({
 
 <style lang="scss" module>
 .p {
-  @include font-p-regular-160;
-  margin-top: 18px;
-  margin-bottom: 18px;
-  color: $color-gray-88;
+  @include font-lead-regular-160;
+  color: $color-gray-100;
+  margin: 24px 0;
 
   &:first-child {
     margin-top: 0;
@@ -45,11 +44,12 @@ export default defineComponent({
 
   b,
   strong {
-    @include font-p-regular-160;
+    @include font-lead-medium-160;
   }
 
   a {
     color: $color-primary-88;
+    text-decoration: none;
   }
 }
 
@@ -92,6 +92,13 @@ export default defineComponent({
     cursor: pointer;
     color: $color-primary-80;
     text-decoration: none;
+  }
+}
+
+@include media-breakpoint-up('lg') {
+  .p {
+    padding: 0 96px;
+    margin: 32px 0;
   }
 }
 </style>
