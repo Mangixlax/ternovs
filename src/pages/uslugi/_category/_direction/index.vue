@@ -50,7 +50,6 @@ export default defineComponent({
     const directionResponse = await ctx.$repositories.services.getDirection(
       ctx.params.direction
     )
-    console.log(directionResponse, '@#123123')
 
     return {
       direction: directionResponse,
