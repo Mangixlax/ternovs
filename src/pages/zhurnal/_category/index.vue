@@ -1,6 +1,10 @@
 <template>
   <main :class="$style['journal']">
-    <journal-list :posts-list="postsList" :is-loading="isLoading"  ref="journalList">
+    <journal-list
+      :posts-list="postsList"
+      :is-loading="isLoading"
+      ref="journalList"
+    >
       <template #header>
         <h2>{{ category.title }}</h2>
         <p>
@@ -33,8 +37,6 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { Context } from '@nuxt/types'
-import { Location, Dictionary } from 'vue-router/types/router'
 
 import { getSiteUrl } from '~/lib/utils'
 import metaGenerator from '~/lib/meta'
@@ -108,7 +110,7 @@ export default defineComponent({
         this.$scrollTo(this.$refs.journalList, 500, { offset })
       }
     },
-  }
+  },
 })
 </script>
 

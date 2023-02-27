@@ -1,28 +1,40 @@
 import { Location } from 'vue-router/types/router'
 
 export interface Service {
-  category: {
-    label: string
-    value: string
-  }
-  title: string
-  description: string
-  list: ServiceItem[]
+  slug: string
+  name: string
+  short_name: string
+  excerpt: string
+  directions: [
+    {
+      name: string
+      slug: string
+      short_excerpt: string
+      image: {
+        title: string
+        description: string
+        filename: string
+        extra: {
+          width: number
+          height: number
+        }
+      }
+    }
+  ]
 }
 
 export interface ServiceItem {
-  image: string
-  title: string
-  description: string
-  route: Location
-  content: {
+  name: string
+  slug: string
+  short_excerpt: string
+  image: {
     title: string
-    subtitle: string
-    image: {
-      src: string
-      caption: string
+    description: string
+    filename: string
+    extra: {
+      width: number
+      height:number
     }
-    description: ServiceItemContentDescription
   }
 }
 

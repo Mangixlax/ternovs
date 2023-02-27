@@ -2,15 +2,16 @@
   <div :class="$style['services']">
     <div :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
-        <h1>{{ item.title }}</h1>
-        <span>{{ item.description }}</span>
+        <h1>{{ item.name }}</h1>
+        <span>{{ item.excerpt }}</span>
       </div>
       <div :class="$style['services__grid-row']">
         <div :class="$style['services__grid-row-container']">
           <sections-services-item
-            v-for="(serviseItem, index) in item.list"
+            v-for="(serviseItem, index) in item.directions"
             :key="index"
             :item="serviseItem"
+            :category-slug="item.slug"
           />
         </div>
         <div :class="$style['services__grid-row-slider']">
@@ -20,11 +21,14 @@
             :class="$style['slider']"
           >
             <swiper-slide
-              v-for="(serviseItem, index) in item.list"
+              v-for="(serviseItem, index) in item.directions"
               :key="index"
               :class="$style['slider__slide']"
             >
-              <sections-services-item :item="serviseItem" />
+              <sections-services-item
+                :item="serviseItem"
+                :category-slug="item.slug"
+              />
             </swiper-slide>
             <div slot="pagination" :class="$style['slider__navigation']">
               <div

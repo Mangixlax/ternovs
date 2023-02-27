@@ -62,3 +62,15 @@ export const getSiteUrl = (href = '', withSlash = false) => {
 
   return withSlash ? (url.endsWith('/') ? url : url + '/') : url
 }
+
+export const formatNumber = (value) => {
+  if ('undefined' === typeof value) return ''
+  let newValue = ''
+  value = (value + '').replace(/ /g, '')
+  if (4 > value.length) return value
+  let firstSplitIndex = value.length - 3
+  for (; 0 < firstSplitIndex; firstSplitIndex -= 3)
+    newValue = value.substr(firstSplitIndex, 3) + ' ' + newValue
+  newValue = value.substr(0, 3 + firstSplitIndex) + ' ' + newValue
+  return newValue.trim()
+}

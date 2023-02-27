@@ -1,11 +1,10 @@
-
 import { Context } from '@nuxt/types'
 import { Location, Dictionary } from 'vue-router/types/router'
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   async asyncData(ctx: Context) {
-    const postsListResponse = await ctx.$repositories.media.getPostsList({
+    const postsListResponse = await ctx.$repositories.journal.getPostsList({
       query: {
         search: {
           category_slug: ctx.route.params.category,
@@ -40,7 +39,7 @@ export default defineComponent({
       this.isLoading = true
       this.onScrollToTop()
 
-      const postsListResponse = await this.$repositories.media.getPostsList({
+      const postsListResponse = await this.$repositories.journal.getPostsList({
         query: {
           search: {
             category_slug: this.$route.params.category,
@@ -77,4 +76,4 @@ export default defineComponent({
       }
     },
   },
-});
+})

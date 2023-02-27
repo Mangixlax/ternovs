@@ -30,22 +30,15 @@ export default defineComponent({
     hasImage(): boolean {
       return Object.keys(this.block.data.file || {}).length > 0
     },
-    image(): string {
-      if (this.hasImage) {
-        try {
-          const filePath = this.block.data.file.url
-            .match(/.{1,3}/g)
-            .slice(0, 3)
-            .join('/')
+    image(): any {
+      const filePath = this.block.data.file.url
+        .match(/.{1,3}/g)
+        .slice(0, 3)
+        .join('/')
 
-          // @TODO Добавить размер картинки
-          return this.$img(`st3/` + filePath + '/' + this.block.data.file.url, {
-            format: 'webp',
-          })
-        } catch (e) {}
-      }
-
-      return ''
+      return this.$img(`s3/` + filePath + '/' + this.block.data.file.url, {
+        format: 'webp',
+      })
     },
   },
 })
@@ -54,7 +47,7 @@ export default defineComponent({
 <style lang="scss" module>
 .figure {
   margin: 18px 0;
-  
+
   & > p {
     margin: 0;
   }
@@ -72,6 +65,8 @@ export default defineComponent({
 .img {
   width: 100%;
   border-radius: 16px;
+  height: 600px;
+  object-fit: cover;
 
   &.with-caption {
     margin-bottom: 24px;

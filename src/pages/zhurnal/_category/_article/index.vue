@@ -26,8 +26,6 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
-import { Location } from 'vue-router/types/router'
-import { IBlock } from '~/types/models/journal'
 import metaGenerator from '~/lib/meta'
 import { getSiteUrl } from '~/lib/utils'
 
@@ -43,68 +41,55 @@ export default defineComponent({
     ArticleNavigation,
   },
   async asyncData(ctx: Context) {
-    const article = await ctx.$repositories.media.getPost(
-      ctx.params.article.split('-').pop() as string
+    const article: any = await ctx.$repositories.journal.getPost(
+      ctx.params.article
     )
 
-    /**
-     * Return 404 error if:
-     * 1. Article is not found
-     * 2. Category slug in article is not equal with category in route params
-     */
-    if (!article || article?.category?.slug !== ctx.route.params.category) {
+    if (!article) {
       ctx.error({ statusCode: 404 })
+    }
+
+    if (ctx.params.category != article?.category?.slug) {
+      return ctx.redirect(301, {
+        name: 'zhurnal-category-article',
+        params: { category: article.category.slug, article: article.slug },
+      })
     }
 
     return {
       article,
     }
   },
-  computed: {
-    // TODO: TBD
-    getHeadings() {
-      return ((this as any).article?.content || [])
-        .map((block: IBlock, index: number): IBlock & { index: number } => {
-          return { ...block, index }
-        })
-        .filter((block: IBlock) => block.type === 'header')
-        .map((block: any) => {
-          return { text: block.data.text, index: block.index }
-        })
-    },
-  },
-  created() {
-    this.$store.commit('setBreadcrumbs', [
-      {
-        name: 'Журнал',
-        route: {
-          name: 'journal-category',
-        },
-      },
-      {
-        name: (this as any).article?.category?.title,
-        route: {
-          name: 'journal-category',
-          params: { category: (this as any).article?.category?.slug },
-        },
-      },
-      {
-        name: (this as any).article.title,
-        route: {
-          name: 'journal-category-article',
-          params: {
-            category: (this as any).article?.category?.slug,
-            article: (this as any).article.slug,
-          },
-        },
-      },
-    ])
-  },
+  // created() {
+  //   this.$store.commit('setBreadcrumbs', [
+  //     {
+  //       name: 'Журнал',
+  //       route: {
+  //         name: 'journal-category',
+  //       },
+  //     },
+  //     {
+  //       name: (this as any).article?.category?.title,
+  //       route: {
+  //         name: 'journal-category',
+  //         params: { category: (this as any).article?.category?.slug },
+  //       },
+  //     },
+  //     {
+  //       name: (this as any).article.title,
+  //       route: {
+  //         name: 'journal-category-article',
+  //         params: {
+  //           category: (this as any).article?.category?.slug,
+  //           article: (this as any).article.slug,
+  //         },
+  //       },
+  //     },
+  //   ])
+  // },
   mounted() {
-    console.log(this.article);
-    
     if (this.article?.id) {
-      this.$repositories.media.incrementPostViews(this.article.id)
+      this.$repositories.journal.incrementPostViews(this.article.id)
     }
   },
   head() {

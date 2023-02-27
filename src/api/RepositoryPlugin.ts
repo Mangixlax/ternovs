@@ -1,8 +1,9 @@
 import { Context, Plugin, Inject } from '@nuxt/types/app'
-import MediaRepository from '~/api/repositories/MediaRepository'
-
+import JournalRepository from '~/api/repositories/JournalRepository'
+import ServicesRepository from '~/api/repositories/ServicesRepository'
 interface IRepositoryList {
-  media: MediaRepository
+  journal: JournalRepository
+  services: ServicesRepository
 }
 
 declare module 'vue/types/vue' {
@@ -32,7 +33,8 @@ declare module 'vuex/types/index' {
 
 const RepositoryPlugin: Plugin = (context: Context, inject: Inject) => {
   inject('repositories', {
-    media: new MediaRepository(context.$axios),
+    journal: new JournalRepository(context.$axios),
+    services: new ServicesRepository(context.$axios),
   })
 }
 

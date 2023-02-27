@@ -2,17 +2,24 @@
   <div :class="$style['services__item']">
     <img
       alt="Изображение услуги"
-      :src="$img(`/sections/services/${item.image}.png`)"
+      :src="image"
       :class="$style['services__item-avatar-author']"
     />
-    <h3>{{ item.title }}</h3>
-    <p>{{ item.description }}</p>
+    <h3>{{ item.name }}</h3>
+    <p>{{ item.short_excerpt }}</p>
     <div :class="$style['services__item-link']">
       <span>Подробнее</span>
       <svg-icon name="back-arrow" />
     </div>
-
-    <nuxt-link :to="item.route"></nuxt-link>
+    <nuxt-link
+      :to="{
+        name: 'uslugi-category-direction',
+        params: {
+          category: categorySlug,
+          direction: item.slug,
+        },
+      }"
+    />
   </div>
 </template>
 
@@ -24,6 +31,23 @@ export default defineComponent({
   name: 'SectionsServicesItem',
   props: {
     item: { type: Object as PropType<ServiceItem>, default: () => {} },
+    categorySlug: { type: String, default: '' },
+  },
+  computed: {
+    image(): any {
+      if (this.item.image) {
+        const filePath = (this as any).item.image.filename
+          .match(/.{1,3}/g)
+          .slice(0, 3)
+          .join('/')
+
+        return this.$img(`s3/` + filePath + '/' + this.item.image.filename, {
+          format: 'webp',
+        })
+      } else {
+        return ''
+      }
+    },
   },
 })
 </script>
@@ -40,6 +64,7 @@ export default defineComponent({
     width: 160px;
     border-radius: 50%;
     margin-bottom: 32px;
+    object-fit: cover;
   }
 
   > h3 {

@@ -107,23 +107,18 @@ export default defineComponent({
         },
       ]
     },
-    servicesList() {
-      return this.$store.getters['services/getServicesList']
-    },
     servicesLinks() {
-      return this.$store.getters['services/getServicesList'].map(
-        (item: any) => {
-          return {
-            label: item.category.label,
-            route: {
-              name: 'uslugi-category',
-              params: {
-                category: item.category.value,
-              },
+      return this.$store.getters['getCategoriesList'].map((item: any) => {
+        return {
+          label: item.short_name,
+          route: {
+            name: 'uslugi-category',
+            params: {
+              category: item.slug,
             },
-          }
+          },
         }
-      )
+      })
     },
     extendedMenu() {
       let extendedMenu = this.menu

@@ -2,13 +2,16 @@
   <section :class="$style['prices']">
     <div :class="$style['prices__grid']">
       <div :class="$style['prices__grid-container']">
-        <h2>{{ block.title }}</h2>
-        <p>{{ block.description }}</p>
+        <h2 v-if="title">{{ title }}</h2>
+        <p v-if="description">{{ description }}</p>
         <ul :class="$style['prices__grid-list']">
-          <li v-for="(item, index) in block.list">
+          <li v-for="(item, index) in block" @click="onShowCallback">
             <div :class="$style['prices__grid-list_text']">
-              {{ item.title }}
-              <span> {{ item.price }}</span>
+              {{ item.name }}
+              <span>
+                Цена от {{ getFormatNumber(item.price_min) }} ₽ до
+                {{ getFormatNumber(item.price_max) }} ₽ за услугу</span
+              >
             </div>
             <div :class="$style['prices__grid-list_svg']">
               <svg-icon name="external-link" />
@@ -26,12 +29,31 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { PricesContentBlock } from '~/types/models/prices.js'
+import { PriceListItem } from '~/types/models/prices.js'
+import { formatNumber } from '~/lib/utils'
 
 export default defineComponent({
   name: 'SectionsPricesContentBlock',
   props: {
-    block: { type: Object as PropType<PricesContentBlock>, default: () => {} },
+    title: { type: String, default: '' },
+    description: { type: String, default: '' },
+    block: { type: Array as PropType<PriceListItem[]>, default: () => [] },
+  },
+  methods: {
+    getFormatNumber(value: number): string {
+      return formatNumber(value)
+    },
+    onShowCallback() {
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
   },
 })
 </script>
@@ -82,9 +104,25 @@ export default defineComponent({
         flex-direction: column;
         color: $color-gray-100;
         grid-gap: 6px;
+        border-top: 2px solid transparent;
+        cursor: pointer;
 
         & + li {
           border-top: 2px solid $color-gray-4;
+        }
+
+        &:hover {
+          border-radius: 16px;
+          background-color: $color-gray-4;
+          border-top: 2px solid transparent;
+
+          & + li {
+            border-top: 2px solid transparent;
+          }
+
+          svg {
+            fill: $color-primary-100;
+          }
         }
       }
 
@@ -158,7 +196,12 @@ export default defineComponent({
       &-container {
         grid-column: 2 / 10;
 
+        > h2 {
+          padding: 0 24px;
+        }
+
         > p {
+          padding: 0 24px;
           padding-right: 120px;
           margin-bottom: 32px;
         }
@@ -166,7 +209,7 @@ export default defineComponent({
 
       &-list {
         > li {
-          padding: 20px 0;
+          padding: 20px 24px;
         }
 
         &_svg {
@@ -184,7 +227,8 @@ export default defineComponent({
   @include media-breakpoint-up('xl') {
     &__grid {
       &-container {
-        grid-column: 2 / 12;
+        grid-column: 1 / 13;
+        padding: 0 72px;
 
         > p {
           padding-right: 192px;

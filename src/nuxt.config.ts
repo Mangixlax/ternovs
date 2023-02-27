@@ -197,8 +197,8 @@ export default <NuxtConfig>{
     dir: 'assets/images',
     domains: [process.env.BASE_URL, process.env.CDN_PATH],
     alias: {
-      s1: process.env.BASE_URL,
-      st3: [process.env.CDN_PATH, process.env.APP_ENV, 'app/public'].join('/'),
+      s3: [process.env.CDN_PATH, process.env.APP_ENV, 'app/public'].join('/'),
+      media: [process.env.CDN_PATH, process.env.APP_ENV, 'media'].join('/'),
     },
   },
 
@@ -208,7 +208,7 @@ export default <NuxtConfig>{
     defaultTimeZone: 'Europe/Moscow',
     plugins: ['utc', 'timezone'],
   },
-  
+
   /*
    ** Build configuration
    ** See https://go.nuxtjs.dev/config-build

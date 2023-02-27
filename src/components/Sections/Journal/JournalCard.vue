@@ -6,7 +6,7 @@
           [$style['journal-card__image']]: true,
           [$style['journal-card__image--loaded']]: isLoaded,
         }"
-        :src="poster"
+        :src="image"
         loading="lazy"
         decoding="async"
         @load="isLoaded = true"
@@ -56,26 +56,16 @@ export default defineComponent({
     }
   },
   computed: {
-    poster(): string {
-      if (this.card.poster) {
-        const filePath = this.card.poster.filename
-          .match(/.{1,3}/g)
-          ?.slice(0, 3)
-          .join('/')
+    image(): any {
+      const filePath = (this as any).card.poster.filename
+        .match(/.{1,3}/g)
+        .slice(0, 3)
+        .join('/')
 
-        return this.$img(`st3/` + filePath + '/' + this.card.poster.filename, {
-          format: 'webp',
-          height: 250,
-          width: 450,
-        })
-      }
-
-      return ''
+      return this.$img(`s3/` + filePath + '/' + this.card.poster.filename, {
+        format: 'webp',
+      })
     },
-  },
-  mounted() {
-    console.log(this.card);
-    
   },
 })
 </script>
