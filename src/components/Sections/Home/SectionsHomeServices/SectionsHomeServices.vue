@@ -161,14 +161,14 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
 
-      h2 {
+      > h2 {
         @include font-h2-medium;
         color: $color-gray-100;
         margin: 0;
         margin-bottom: 24px;
       }
 
-      span {
+      > span {
         @include font-lead-regular-160;
         color: $color-gray-100;
         margin-bottom: 24px;
@@ -301,6 +301,7 @@ export default defineComponent({
     &-next {
       padding: 8px 0 8px 14px;
     }
+    
     svg {
       height: 30px;
       width: 30px;
