@@ -13,7 +13,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button @click="onShowCallback">
+            <ui-form-button>
               Записаться на прием
             </ui-form-button>
           </div>
@@ -29,7 +29,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button @click="onShowCallback">
+            <ui-form-button>
               Записаться на прием
             </ui-form-button>
           </div>
@@ -45,7 +45,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button @click="onShowCallback">
+            <ui-form-button>
               Записаться на прием
             </ui-form-button>
           </div>
@@ -155,19 +155,6 @@ export default defineComponent({
           },
         },
       }
-    },
-  },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
     },
   },
 })

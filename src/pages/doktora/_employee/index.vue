@@ -12,7 +12,7 @@
         <h1>{{ employeeById.name }}</h1>
         <div>{{ employeeById.expierence }}</div>
         <p>{{ employeeById.description }}</p>
-        <ui-form-button @click="onShowCallback">
+        <ui-form-button>
           Записаться на прием
         </ui-form-button>
       </div>
@@ -54,19 +54,6 @@ export default defineComponent({
     }
 
     return { employeeById: employee as Employee }
-  },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
   },
   created() {
     this.$store.commit('setBreadCrumbs', [

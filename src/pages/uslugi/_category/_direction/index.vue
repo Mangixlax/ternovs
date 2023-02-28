@@ -5,7 +5,7 @@
         <h1>{{ direction.title }}</h1>
         <p>{{ direction.excerpt }}</p>
         <div>
-          <ui-form-button @click="onShowCallback">
+          <ui-form-button>
             Записаться на прием
           </ui-form-button>
         </div>
@@ -56,19 +56,7 @@ export default defineComponent({
       isLoading: false as boolean,
     }
   },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
-  },
+  
   created() {
     this.$store.commit('setBreadCrumbs', [
       {

@@ -2,18 +2,9 @@
   <span
     :class="[
       $style['loader'],
-      ...(Array.isArray(data.class) ? data.class : [data.class]),
     ]"
   >
-    <span
-      :class="$style['loader_snippet']"
-      :style="$options.methods.sizesStyles(props.size)"
-    >
-      <span :style="$options.methods.bgStyles(props.size, props.color)"></span>
-      <span :style="$options.methods.bgStyles(props.size, props.color)"></span>
-      <span :style="$options.methods.bgStyles(props.size, props.color)"></span>
-      <span :style="$options.methods.bgStyles(props.size, props.color)"></span>
-    </span>
+    <svg-icon name="loader"/>
   </span>
 </template>
 
@@ -24,31 +15,6 @@ export default defineComponent({
   // @ts-ignore
   name: 'Loader',
   functional: true,
-  props: {
-    color: {
-      type: String,
-      default: 'rgba(25, 31, 46, 0.3)',
-    },
-    size: {
-      type: String,
-      default: '60px',
-    },
-  },
-  methods: {
-    sizesStyles(size: string) {
-      return {
-        width: size,
-        height: size,
-      }
-    },
-    bgStyles(size: string, color: string) {
-      return {
-        ...this.sizesStyles(size),
-        margin: `-${parseInt(size, 10) / 2}px 0 0 -${parseInt(size, 10) / 2}px`,
-        'background-color': color,
-      }
-    },
-  },
 })
 </script>
 
@@ -61,61 +27,25 @@ export default defineComponent({
   top: 0;
   z-index: 3;
   pointer-events: none;
-  min-height: 30px;
-  min-width: 30px;
-}
+  min-height: 24px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.loader_snippet {
-  display: block;
-  height: 60px;
-  width: 60px;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.loader_snippet span {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  z-index: -1;
-  left: 50%;
-  top: 50%;
-  opacity: 0;
-  margin: -30px 0 0 -30px;
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-  -webkit-animation: ripple 1.8s infinite;
-  animation: ripple 1.9s infinite;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.loader_snippet span:nth-child(2) {
-  animation-delay: 0.3s;
-  -webkit-animation-delay: 0.3s;
-}
-
-.loader_snippet span:nth-child(3) {
-  animation-delay: 0.6s;
-  -webkit-animation-delay: 0.6s;
-}
-
-.loader_snippet span:nth-child(4) {
-  animation-delay: 0.6s;
-  -webkit-animation-delay: 0.6s;
-}
-
-@keyframes ripple {
-  0% {
-    opacity: 1;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+  svg {
+    height: 24px;
+    width: 24px;
+    animation: rotation 1s ease-in-out infinite;
   }
 
-  to {
-    opacity: 0;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 </style>

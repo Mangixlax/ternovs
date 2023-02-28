@@ -10,7 +10,7 @@
           Выбрав интересующие направление вы сможете ознакомиться как со списком
           услуги, так качество работы на всех этапах.
         </span>
-        <ui-form-button @click="onShowCallback">
+        <ui-form-button>
           Записаться на прием
         </ui-form-button>
       </div>
@@ -139,19 +139,6 @@ export default defineComponent({
           },
         },
       }
-    },
-  },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
     },
   },
 })

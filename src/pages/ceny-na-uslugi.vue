@@ -8,7 +8,7 @@
           этическому и качественному уходу, мотивированному достижением их
           философии стоматологии.
         </p>
-        <ui-form-button @click="onShowCallback">
+        <ui-form-button>
           Записаться на прием
         </ui-form-button>
       </div>
@@ -45,19 +45,6 @@ export default defineComponent({
       directionList: directionListResponse.data as PricesContentBlock[],
       isLoading: false as boolean,
     }
-  },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
