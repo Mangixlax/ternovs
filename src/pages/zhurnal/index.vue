@@ -107,7 +107,23 @@ export default defineComponent({
         this.$scrollTo(this.$refs.journalList, 500, { offset })
       }
     },
-  }
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Журнал',
+        route: {
+          name: 'zhurnal',
+        },
+      },
+    ])
+  },
 })
 </script>
 

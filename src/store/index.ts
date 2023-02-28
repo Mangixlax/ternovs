@@ -9,6 +9,7 @@ interface RootActionContext extends ActionContext<RootState, RootState> {}
 export const state = () => ({
   categoriesList: [],
   isBot: false,
+  breadCrumbs: []
 })
 /**
  * Getters
@@ -17,6 +18,9 @@ export const getters: GetterTree<RootState, RootState> = {
   getCategoriesList(state: RootState): any {
     return state.categoriesList
   },
+  getBreadCrumbs(state: RootState) {
+    return state.breadCrumbs
+  }
 }
 
 /**
@@ -26,6 +30,9 @@ export const mutations: MutationTree<RootState> = {
   setCategoriesList(state: RootState, value: any) {
     state.categoriesList = value.data
   },
+  setBreadCrumbs(state: RootState, list = []) {
+    state.breadCrumbs = list
+  }
 }
 
 /**
@@ -39,7 +46,6 @@ export const actions: ActionTree<RootState, RootState> = {
   },
   fetchCategoriesList({
     commit,
-    dispatch,
   }: RootActionContext): Promise<any | null> {
     return new Promise((resolve) => {
       this.$repositories.services

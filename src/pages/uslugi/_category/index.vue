@@ -25,6 +25,31 @@ export default defineComponent({
       isLoading: false as boolean,
     }
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Услуги',
+        route: {
+          name: 'uslugi',
+        },
+      },
+      {
+        name: this.category.name,
+        route: {
+          name: 'uslugi-category',
+          params: {
+            category: this.category.slug
+          }
+        },
+      },
+    ])
+  },
 })
 </script>
 

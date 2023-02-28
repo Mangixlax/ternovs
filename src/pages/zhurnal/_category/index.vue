@@ -111,6 +111,31 @@ export default defineComponent({
       }
     },
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Журнал',
+        route: {
+          name: 'zhurnal',
+        },
+      },
+      {
+        name: this.category.title,
+        route: {
+          name: 'zhurnal-category',
+          params: {
+            category: this.category.slug
+          }
+        },
+      },
+    ])
+  },
 })
 </script>
 

@@ -22,6 +22,22 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ContactsPage',
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Контакты',
+        route: {
+          name: 'contacts',
+        },
+      },
+    ])
+  },
 })
 </script>
 

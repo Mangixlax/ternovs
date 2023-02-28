@@ -97,6 +97,22 @@ export default defineComponent({
       })
     },
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Оборудование клиники',
+        route: {
+          name: 'oborudovanie-kliniki',
+        },
+      },
+    ])
+  },
 })
 </script>
 

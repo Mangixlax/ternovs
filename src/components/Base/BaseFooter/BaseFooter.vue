@@ -1,5 +1,6 @@
 <template>
   <footer :class="$style['footer']">
+    <common-bread-crumbs />
     <div :class="$style['footer__row']">
       <base-fast-links
         :title="item.title"
@@ -81,12 +82,14 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { fastLinks } from '@/types/components/footer'
 
+import CommonBreadCrumbs from '@/components/Common/CommonBreadCrumbs.vue'
 import BaseFastLinks from '@/components/Base/BaseFastLinks/BaseFastLinks.vue'
 import UiFormInputSubmit from '@/components/Ui/Form/UiFormInputSubmit.vue'
 
 export default defineComponent({
   name: 'BaseFooter',
   components: {
+    CommonBreadCrumbs,
     BaseFastLinks,
     UiFormInputSubmit,
   },
@@ -309,7 +312,6 @@ export default defineComponent({
     &-agreement {
       @include font-small-regular;
       color: $color-gray-64;
-      vertical-align: middle;
       margin-top: 16px;
       display: block;
       max-width: 360px;

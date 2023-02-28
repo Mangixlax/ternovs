@@ -7,6 +7,22 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'PolicyPage',
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Политика конфиденциальности',
+        route: {
+          name: 'policy',
+        },
+      },
+    ])
+  },
 })
 </script>
 

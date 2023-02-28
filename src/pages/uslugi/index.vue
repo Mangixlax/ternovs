@@ -59,6 +59,22 @@ export default defineComponent({
       isLoading: false as boolean,
     }
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Услуги',
+        route: {
+          name: 'uslugi',
+        },
+      },
+    ])
+  },
 })
 </script>
 

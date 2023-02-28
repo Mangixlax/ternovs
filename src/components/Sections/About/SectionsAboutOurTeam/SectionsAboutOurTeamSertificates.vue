@@ -13,7 +13,7 @@
             v-for="(item, index) in employee.sertificates?.list"
             :src="
               $img(
-                `/sections/about/employees/${employee.folder}/sertificates/${item}`
+                `/sections/about/employees/${employee.slug}/sertificates/${item}`
               )
             "
             :alt="`Сертификат сотрудника - ${employee.name}`"
@@ -34,7 +34,7 @@
               <img
                 :src="
                   $img(
-                    `/sections/about/employees/${employee.folder}/sertificates/${item}`
+                    `/sections/about/employees/${employee.slug}/sertificates/${item}`
                   )
                 "
                 :alt="`Сертификат сотрудника - ${employee.name}`"

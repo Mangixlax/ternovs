@@ -33,6 +33,22 @@ export default defineComponent({
     SectionsHomeServices,
     SectionsAboutOurTeam,
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'О компании',
+        route: {
+          name: 'o-kompanii',
+        },
+      },
+    ])
+  },
 })
 </script>
 

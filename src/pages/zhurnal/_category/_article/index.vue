@@ -60,33 +60,41 @@ export default defineComponent({
       article,
     }
   },
-  // created() {
-  //   this.$store.commit('setBreadcrumbs', [
-  //     {
-  //       name: 'Журнал',
-  //       route: {
-  //         name: 'journal-category',
-  //       },
-  //     },
-  //     {
-  //       name: (this as any).article?.category?.title,
-  //       route: {
-  //         name: 'journal-category',
-  //         params: { category: (this as any).article?.category?.slug },
-  //       },
-  //     },
-  //     {
-  //       name: (this as any).article.title,
-  //       route: {
-  //         name: 'journal-category-article',
-  //         params: {
-  //           category: (this as any).article?.category?.slug,
-  //           article: (this as any).article.slug,
-  //         },
-  //       },
-  //     },
-  //   ])
-  // },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Журнал',
+        route: {
+          name: 'zhurnal',
+        },
+      },
+      {
+        name: this.article.category.title,
+        route: {
+          name: 'zhurnal-category',
+          params: {
+            category: this.article.category.slug
+          }
+        },
+      },
+      {
+        name: this.article.title,
+        route: {
+          name: 'zhurnal-category-article',
+          params: {
+            category: this.article.category.slug,
+            article: this.article.slug
+          }
+        },
+      },
+    ])
+  },
   mounted() {
     if (this.article?.id) {
       this.$repositories.journal.incrementPostViews(this.article.id)

@@ -14,6 +14,22 @@ export default defineComponent({
   components: {
     SectionsReviews,
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Отзывы',
+        route: {
+          name: 'otzyvy',
+        },
+      },
+    ])
+  },
 })
 </script>
 
