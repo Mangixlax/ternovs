@@ -13,9 +13,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>
-              Записаться на прием
-            </ui-form-button>
+            <ui-form-button>Записаться на прием</ui-form-button>
           </div>
         </swiper-slide>
         <swiper-slide :class="$style['slider__slide']">
@@ -29,9 +27,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>
-              Записаться на прием
-            </ui-form-button>
+            <ui-form-button>Записаться на прием</ui-form-button>
           </div>
         </swiper-slide>
         <swiper-slide :class="$style['slider__slide']">
@@ -45,9 +41,7 @@
             <span :class="$style['home_slider__slider-description']">
               Надоело стесняться и не улыбаться? Вы точно по адресу!
             </span>
-            <ui-form-button>
-              Записаться на прием
-            </ui-form-button>
+            <ui-form-button>Записаться на прием</ui-form-button>
           </div>
         </swiper-slide>
         <div
@@ -121,7 +115,7 @@ export default defineComponent({
                     r="13"
                     fill="none"
                     stroke="#F5F6FB"
-                    stroke-width="2"
+                    stroke-width="2.5"
                     stroke-dasharray="500"
                   />
                   <circle

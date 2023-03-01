@@ -26,7 +26,14 @@
             <svg-icon name="map-pin"> </svg-icon>
           </span>
         </nuxt-link>
-        <ui-form-button variant="gray">Маршрут в Яндекс.Картах</ui-form-button>
+        <ui-form-button
+          variant="gray"
+          tag="a"
+          href="https://yandex.ru/maps/213/moscow/?ll=37.617700%2C55.755863&z=10"
+          target="_blank"
+        >
+          Маршрут в Яндекс.Картах
+        </ui-form-button>
       </div>
     </div>
   </section>
@@ -87,7 +94,7 @@ export default defineComponent({
         }
       }
 
-      a {
+      a:first-of-type {
         @include font-h3-medium;
         text-decoration: none;
         display: block;

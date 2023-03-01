@@ -115,11 +115,12 @@ button {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   &__count {
     position: absolute;
-    top: 10%;
-    left: 53%;
+    top: 12%;
+    left: 55%;
     transform: translateX(-50%);
   }
 
@@ -143,6 +144,8 @@ button {
     top: 0;
     left: 0;
     overflow: initial;
+    height: 26px;
+    width: 26px;
   }
 }
 

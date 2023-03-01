@@ -67,27 +67,25 @@ export default defineComponent({
   },
   data() {
     return {
-      isLoading: this.loading
+      isLoading: this.loading,
     }
   },
   methods: {
     handleClick() {
-      if (this.$listeners.click) {
+      if (this.$listeners.click || this.tag == 'nuxt-link' || this.tag == 'a') {
         return
       } else {
         this.onShowCallback()
       }
     },
     onShowCallback() {
+      this.isLoading = true
       this.$modal.show({
         bind: {
           name: 'Callback',
         },
         on: {
           'before-open': () => {
-            this.isLoading = true
-          },
-          'before-close': () => {
             this.isLoading = false
           },
         },
@@ -114,7 +112,7 @@ export default defineComponent({
   background-color: $color-primary-100;
   min-height: 42px;
   position: relative;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-in;
   touch-action: manipulation;
   color: $color-white-100;
   text-decoration: none;
@@ -148,7 +146,7 @@ export default defineComponent({
 
   &:active:not(&--disable-active):not(:disabled) {
     transition: none;
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
 
   &:active:not(&--disable-active)::before {

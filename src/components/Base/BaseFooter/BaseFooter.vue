@@ -93,9 +93,9 @@ export default defineComponent({
     BaseFastLinks,
     UiFormInputSubmit,
   },
-  computed: {
-    fastLinks(): fastLinks[] {
-      return [
+  data() {
+    return {
+      fastLinks: [
         {
           title: 'О клинике',
           links: [
@@ -111,7 +111,6 @@ export default defineComponent({
                 name: 'portfolio',
               },
             },
-
             {
               label: 'Оборудование',
               route: {
@@ -122,124 +121,52 @@ export default defineComponent({
         },
         {
           title: 'Наши услуги',
-          links: [
-            {
-              label: 'Терапия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Гигиена',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Имплантация',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Хирургия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Ортодонтия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Отбеливание зубов',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Протезирование',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Обезболивание',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Цены на услуги',
-              route: {
-                name: 'uslugi',
-              },
-            },
-          ],
+          links: [],
         },
         {
           title: 'В журнале',
-          links: [
-            {
-              label: 'Терапия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Гигиена',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Имплантация',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Хирургия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Ортодонтия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Отбеливание зубов',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Протезирование',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Обезболивание',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Цены на услуги',
-              route: {
-                name: 'uslugi',
-              },
-            },
-          ],
+          links: [],
         },
-      ]
+      ],
+    }
+  },
+  computed: {
+    servicesLinks() {
+      return this.$store.getters['getCategoriesList'].map((item: any) => {
+        return {
+          label: item.short_name,
+          route: {
+            name: 'uslugi-category',
+            params: {
+              category: item.slug,
+            },
+          },
+        }
+      })
     },
+    journalLinks() {
+      return this.$store.getters['getJournalCategoriesList'].map(
+        (item: any) => {
+          console.log(item)
+
+          return {
+            label: item.title,
+            route: {
+              name: 'zhurnal-category',
+              params: {
+                category: item.slug,
+              },
+            },
+          }
+        }
+      )
+    },
+  },
+  mounted() {
+    this.fastLinks[1].links = this.servicesLinks
+    this.fastLinks[2].links = this.journalLinks
+
+    console.log(this.fastLinks[2].links)
   },
 })
 </script>
