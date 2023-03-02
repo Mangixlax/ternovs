@@ -79,8 +79,8 @@ export default defineComponent({
         route: {
           name: 'zhurnal-category',
           params: {
-            category: this.article.category.slug
-          }
+            category: this.article.category.slug,
+          },
         },
       },
       {
@@ -89,15 +89,15 @@ export default defineComponent({
           name: 'zhurnal-category-article',
           params: {
             category: this.article.category.slug,
-            article: this.article.slug
-          }
+            article: this.article.slug,
+          },
         },
       },
     ])
   },
   mounted() {
-    if (this.article?.id) {
-      this.$repositories.journal.incrementPostViews(this.article.id)
+    if (this.article?.slug) {
+      this.$repositories.journal.incrementPostViews(this.article.slug)
     }
   },
   head() {

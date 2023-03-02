@@ -147,8 +147,6 @@ export default defineComponent({
     journalLinks() {
       return this.$store.getters['getJournalCategoriesList'].map(
         (item: any) => {
-          console.log(item)
-
           return {
             label: item.title,
             route: {
@@ -165,8 +163,6 @@ export default defineComponent({
   mounted() {
     this.fastLinks[1].links = this.servicesLinks
     this.fastLinks[2].links = this.journalLinks
-
-    console.log(this.fastLinks[2].links)
   },
 })
 </script>

@@ -32,10 +32,10 @@ export const getters: GetterTree<RootState, RootState> = {
  */
 export const mutations: MutationTree<RootState> = {
   setCategoriesList(state: RootState, value: any) {
-    state.categoriesList = value.data
+    state.categoriesList = value.catalog.categories
   },
   setJournalCategoriesList(state: RootState, value: any) {
-    state.journalCategoriesList = value.data
+    state.journalCategoriesList = value.journal.categories
   },
   setBreadCrumbs(state: RootState, list = []) {
     state.breadCrumbs = list
@@ -46,34 +46,16 @@ export const mutations: MutationTree<RootState> = {
  * Actions
  */
 export const actions: ActionTree<RootState, RootState> = {
-  nuxtServerInit({ state, dispatch }: RootActionContext, { req }) {
-    if (!state.isBot) {
-      return Promise.all([
-        dispatch('fetchCategoriesList'),
-        dispatch('fetchJournalCategoriesList'),
-      ])
-    }
+  nuxtServerInit({ dispatch }: RootActionContext) {
+    return Promise.all([dispatch('fetchMainData')])
   },
-  fetchCategoriesList({ commit }: RootActionContext): Promise<any | null> {
+  fetchMainData({ commit }: RootActionContext): Promise<any | null> {
     return new Promise((resolve) => {
-      this.$repositories.services
-        .getCategoriesList()
+      this.$axios
+        .$get('/api/v1/main')
         .then(async (data: any) => {
           // @TODO TBD
           commit('setCategoriesList', data)
-          resolve(data)
-        })
-        .catch(() => resolve(null))
-    })
-  },
-  fetchJournalCategoriesList({
-    commit,
-  }: RootActionContext): Promise<any | null> {
-    return new Promise((resolve) => {
-      this.$repositories.journal
-        .getCategoriesList()
-        .then(async (data: any) => {
-          // @TODO TBD
           commit('setJournalCategoriesList', data)
           resolve(data)
         })

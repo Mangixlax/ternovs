@@ -34,6 +34,36 @@
         :item="item"
       />
     </div>
+    <journal-list
+      :posts-list="postList"
+      :is-loading="isLoading"
+      ref="journalList"
+    >
+      <template #header>
+        <h2>Другие наши услуги</h2>
+        <p>
+          Ежедневно в нашу клинику обращаются десятки новых пациентов, но
+          вопросы, которые они задают - одни и те же. Масштабы заблуждений в
+          области стоматологии поражают воображение: многие боятся врачей,
+          кто-то не доверяет им, а другие - агрессивны и недоверчивы по
+          отношению к медицине в целом. При этом практически все пациенты читают
+          разные форумы в интернете и занимаются самолечением. Мы решили, что с
+          этим нужно бороться.
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal',
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
   </main>
 </template>
 
@@ -43,23 +73,36 @@ import { Context } from '@nuxt/types'
 
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 
 export default defineComponent({
   name: 'ServicesPage',
   components: {
     SectionsServices,
     BaseScrollBlock,
+    JournalList,
+    UiFormButton,
   },
   async asyncData(ctx: Context) {
-    const categoriesListResponse =
-      await ctx.$repositories.services.getCategoriesList()
+    let [categoriesListResponse, postListResponse] = await Promise.all([
+      ctx.$repositories.services.getCategoriesList(),
+      ctx.$repositories.journal.getPostsList({
+        query: {
+          per_page: 1000,
+        },
+      }),
+    ])
 
     return {
-      categoriesList: categoriesListResponse.data || ([] as any),
+      categoriesList: categoriesListResponse.data,
+      postList: postListResponse.data.slice(-10),
       isLoading: false as boolean,
     }
   },
   created() {
+    console.log()
+
     this.$store.commit('setBreadCrumbs', [
       {
         name: 'Главная',
