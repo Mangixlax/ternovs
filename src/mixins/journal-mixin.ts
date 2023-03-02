@@ -17,12 +17,13 @@ export default defineComponent({
     if (!postsListResponse.category && ctx.route.params.category) {
       ctx.error({ statusCode: 404 })
     }
-
+    
     // TODO: TBD
     return {
       category: postsListResponse.category as any,
       categoriesList: postsListResponse.categories || ([] as any),
       postsList: postsListResponse.data || ([] as any),
+      postsListResponse: postsListResponse,
       page: postsListResponse.page as any,
       pagination: {
         total: postsListResponse.total,

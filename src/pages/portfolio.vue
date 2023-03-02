@@ -46,6 +46,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { PortfolioBlocks } from '~/types/models/models.js'
 
+import { getHead } from '~/lib/utils'
+
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
 
@@ -54,6 +56,13 @@ export default defineComponent({
   components: {
     BaseScrollBlock,
     SectionsAboutContentBlock,
+  },
+  head() {
+    return getHead({
+      title: `Портфолио работ стоматологии Терновых | Ternovs.ru`,
+      description: `В этом разделе вы найдете примеры наших работ и увидите результаты лечения наших пациентов. Ознакомьтесь с нашим портфолио и убедитесь в качестве наших услуг.`,
+      route: this.$route,
+    })
   },
   data() {
     return {

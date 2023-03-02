@@ -12,6 +12,8 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
+import { getHead } from '~/lib/utils'
+
 import SectionsHomeSlider from '@/components/Sections/Home/SectionsHomeSlider.vue'
 import LayoutAddress from '@/components/Layout/LayoutAddress.vue'
 import SectionsHomeAbout from '@/components/Sections/Home/SectionsHomeAbout.vue'
@@ -28,6 +30,13 @@ export default defineComponent({
     SectionsHomeBenefits,
     SectionsHomeReviews,
     SectionsHomeServices,
+  },
+  head() {
+    return getHead({
+      title: `Авторская стоматология Терновс. Лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `Стоматология терновс является одной из луших в своей сфере. Мы поможем вашей улыбке сиять и радовать Вас`,
+      route: this.$route,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [

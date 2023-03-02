@@ -39,6 +39,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
@@ -55,10 +57,20 @@ export default defineComponent({
       ctx.params.category
     )
 
+    console.log(categoryResponse)
+
     return {
       category: categoryResponse,
       isLoading: false as boolean,
     }
+  },
+  head() {
+    return getHead({
+      title: `Услуги клиники Терновс в категории ${this.category.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `${this.category.excerpt}`,
+      route: this.$route,
+      seo: this.category.page,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
@@ -84,9 +96,6 @@ export default defineComponent({
         },
       },
     ])
-  },
-  mounted() {
-    console.log(this.category)
   },
 })
 </script>

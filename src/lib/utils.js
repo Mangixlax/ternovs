@@ -1,3 +1,5 @@
+import metaGenerator from '~/lib/meta'
+
 export const getScrollbarWidth = () => {
   const outer = document.createElement('div')
   outer.style.visibility = 'hidden'
@@ -73,4 +75,42 @@ export const formatNumber = (value) => {
     newValue = value.substr(firstSplitIndex, 3) + ' ' + newValue
   newValue = value.substr(0, 3 + firstSplitIndex) + ' ' + newValue
   return newValue.trim()
+}
+
+export const getHead = (options) => {
+
+  const { title, description, route, seo } = options
+  
+  const result = {
+    title: title,
+    description: description,
+    canonical: route.path,
+  }
+
+  if (seo) {
+    result.title = seo.title
+    result.description = seo.description
+    result.og_title = seo.og_title
+    result.og_description = seo.og_description
+    result.keywords = seo.keywords
+    result.canonical = seo?.canonical || result.canonical
+    result.robots = seo?.robots
+  }
+
+  result.canonical = getSiteUrl(result.canonical, true)
+
+  if (route.query?.page) {
+    result.robots = 'noindex,follow'
+  }
+
+  return {
+    title: result.title,
+    meta: metaGenerator(result),
+    link: [
+      {
+        rel: 'canonical',
+        href: getSiteUrl(result.canonical || route.path, true),
+      },
+    ],
+  }
 }

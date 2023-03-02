@@ -18,20 +18,28 @@
           :index="index"
           :block="block"
         />
+        <journal-author :author="article.author" />
       </div>
     </article>
+    <journal-list :posts-list="article.similar_posts">
+      <template #header>
+        <h2>Похожие статьи</h2>
+      </template>
+    </journal-list>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
-import metaGenerator from '~/lib/meta'
-import { getSiteUrl } from '~/lib/utils'
+
+import { getHead } from '~/lib/utils'
 
 import JournalStatistic from '~/components/Sections/Journal/JournalStatistic.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
 import ArticleNavigation from '~/components/Article/ArticleNavigation.vue'
+import JournalAuthor from '~/components/Sections/Journal/JournalAuthor.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
 
 export default defineComponent({
   name: 'ArticlePage',
@@ -39,6 +47,8 @@ export default defineComponent({
     JournalStatistic,
     ArticleRender,
     ArticleNavigation,
+    JournalAuthor,
+    JournalList,
   },
   async asyncData(ctx: Context) {
     const article: any = await ctx.$repositories.journal.getPost(
@@ -59,6 +69,14 @@ export default defineComponent({
     return {
       article,
     }
+  },
+  head() {
+    return getHead({
+      title: this.article?.title,
+      description: `${this.article?.title} - на эту тему представдлена статья в блоге`,
+      route: this.$route,
+      seo: this.article.seo || this.article.page,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
@@ -100,28 +118,13 @@ export default defineComponent({
       this.$repositories.journal.incrementPostViews(this.article.slug)
     }
   },
-  head() {
-    return {
-      title: this.article?.title,
-      meta: metaGenerator(this.article?.seo),
-      link: [
-        {
-          rel: 'canonical',
-          href: getSiteUrl(
-            this.article?.seo?.canonical || this.$route.path,
-            true
-          ),
-        },
-      ],
-    }
-  },
 })
 </script>
 
 <style lang="scss" module>
 .article {
   width: 100%;
-  padding: 80px 40px;
+  padding: 80px 0;
 
   &__grid {
     @include grid-container;

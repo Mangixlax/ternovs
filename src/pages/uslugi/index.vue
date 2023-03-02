@@ -71,6 +71,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
@@ -96,13 +98,20 @@ export default defineComponent({
 
     return {
       categoriesList: categoriesListResponse.data,
+      categoriesListResponse: categoriesListResponse,
       postList: postListResponse.data.slice(-10),
       isLoading: false as boolean,
     }
   },
+  head() {
+    return getHead({
+      title: `Услуги клиники Терновс. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `Наша стоматология №1 в вопросе здоровых улыбок`,
+      route: this.$route,
+      seo: this.categoriesListResponse.page,
+    })
+  },
   created() {
-    console.log()
-
     this.$store.commit('setBreadCrumbs', [
       {
         name: 'Главная',

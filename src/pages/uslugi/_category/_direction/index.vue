@@ -44,7 +44,7 @@
           tag="nuxt-link"
           :to="{
             name: 'zhurnal-category',
-            params: { category: direction.slug },
+            params: { category: direction.category.slug },
           }"
           :style="{ margin: '0 auto' }"
         >
@@ -58,6 +58,8 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
+
+import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
@@ -84,7 +86,14 @@ export default defineComponent({
       isLoading: false as boolean,
     }
   },
-
+  head() {
+    return getHead({
+      title: `Услуги клиники Терновых по направлению ${this.direction.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `${this.direction.excerpt}`,
+      route: this.$route,
+      seo: this.direction.seo,
+    })
+  },
   created() {
     this.$store.commit('setBreadCrumbs', [
       {

@@ -20,8 +20,17 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
+import { getHead } from '~/lib/utils'
+
 export default defineComponent({
   name: 'ContactsPage',
+  head() {
+    return getHead({
+      title: `Авторская стоматология Терновых - О нашей компании | Ternovs.ru`,
+      description: `Узнайте больше о нашей компании и о том, как мы помогаем нашим пациентам достичь здоровых и красивых улыбок.`,
+      route: this.$route,
+    })
+  },
   created() {
     this.$store.commit('setBreadCrumbs', [
       {

@@ -7,9 +7,7 @@
           Всё оборудование, которое используется в стоматологии, можно условно
           разделить на несколько видов.
         </p>
-        <ui-form-button>
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
     </div>
     <sections-about-content-block
@@ -24,6 +22,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { AboutContentBlock } from '~/types/models/models.js'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
 
@@ -32,6 +32,13 @@ export default defineComponent({
   components: {
     UiFormButton,
     SectionsAboutContentBlock,
+  },
+  head() {
+    return getHead({
+      title: `Оборудование клиники стоматологии Терновых`,
+      description: `Мы используем только современное оборудование для лечения и диагностики заболеваний полости рта и зубов. Узнайте больше о нашем оборудовании и технологиях.`,
+      route: this.$route,
+    })
   },
   data() {
     return {

@@ -65,7 +65,7 @@ export default defineComponent({
 .img {
   width: 100%;
   border-radius: 16px;
-  height: 600px;
+  height: auto;
   object-fit: cover;
 
   &.with-caption {
@@ -78,6 +78,10 @@ export default defineComponent({
     > span {
       padding: 0 96px;
     }
+  }
+
+  .img {
+    height: 600px;
   }
 }
 </style>

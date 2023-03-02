@@ -8,9 +8,7 @@
           этическому и качественному уходу, мотивированному достижением их
           философии стоматологии.
         </p>
-        <ui-form-button>
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
     </div>
     <sections-prices-content-block
@@ -27,6 +25,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { PricesContentBlock } from '~/types/models/prices.js'
 import { Context } from '@nuxt/types'
+
+import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsPricesContentBlock from '~/components/Sections/Prices/SectionsPricesContentBlock.vue'
@@ -45,6 +45,13 @@ export default defineComponent({
       directionList: directionListResponse.data as PricesContentBlock[],
       isLoading: false as boolean,
     }
+  },
+  head() {
+    return getHead({
+      title: `Цены на услуги в стоматологии Терновс. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `Наши цены в стоматологии Терновс вас приятно удивят`,
+      route: this.$route,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
