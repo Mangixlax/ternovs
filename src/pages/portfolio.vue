@@ -39,6 +39,7 @@
       :key="index"
       :block="block"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -50,12 +51,14 @@ import { getHead } from '~/lib/utils'
 
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'PortfolioPage',
   components: {
     BaseScrollBlock,
     SectionsAboutContentBlock,
+    LayoutCallback,
   },
   head() {
     return getHead({

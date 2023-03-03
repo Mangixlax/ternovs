@@ -52,6 +52,7 @@
         </ui-form-button>
       </template>
     </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -66,6 +67,7 @@ import ArticleRender from '~/components/Article/ArticleRender.vue'
 import BaseImageCompare from '@/components/Base/BaseImageCompare.vue'
 import SectionsPricesContentBlock from '@/components/Sections/Prices/SectionsPricesContentBlock.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ServicesDetailPageDescription',
@@ -75,6 +77,7 @@ export default defineComponent({
     BaseImageCompare,
     SectionsPricesContentBlock,
     JournalList,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const directionResponse = await ctx.$repositories.services.getDirection(

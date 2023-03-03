@@ -24,6 +24,7 @@
         />
       </template>
     </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -37,6 +38,7 @@ import JournalNavigation from '~/components/Sections/Journal/JournalNavigation.v
 import JournalList from '~/components/Sections/Journal/JournalList.vue'
 import BasePagination from '~/components/Base/BasePagination.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   components: {
@@ -44,6 +46,7 @@ export default defineComponent({
     JournalNavigation,
     JournalList,
     BasePagination,
+    LayoutCallback,
   },
   mixins: [journalMixin],
   head() {

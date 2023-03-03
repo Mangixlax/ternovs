@@ -18,6 +18,7 @@
       :title="block.name"
       :description="block.short_excerpt"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -30,12 +31,14 @@ import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsPricesContentBlock from '~/components/Sections/Prices/SectionsPricesContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'PricesPage',
   components: {
     UiFormButton,
     SectionsPricesContentBlock,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const directionListResponse =

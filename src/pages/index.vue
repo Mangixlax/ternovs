@@ -6,6 +6,7 @@
     <sections-home-benefits />
     <sections-home-services />
     <sections-home-reviews />
+    <layout-callback />
   </main>
 </template>
 
@@ -20,6 +21,7 @@ import SectionsHomeAbout from '@/components/Sections/Home/SectionsHomeAbout.vue'
 import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefits.vue'
 import SectionsHomeReviews from '@/components/Sections/Home/SectionsHomeReviews/SectionsHomeReviews.vue'
 import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServices.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -30,6 +32,7 @@ export default defineComponent({
     SectionsHomeBenefits,
     SectionsHomeReviews,
     SectionsHomeServices,
+    LayoutCallback,
   },
   head() {
     return getHead({

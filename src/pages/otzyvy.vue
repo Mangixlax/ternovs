@@ -1,6 +1,7 @@
 <template>
   <main>
     <sections-reviews />
+    <layout-callback />
   </main>
 </template>
 
@@ -10,11 +11,13 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import { getHead } from '~/lib/utils'
 
 import SectionsReviews from '@/components/Sections/Reviews/SectionsReviews.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ReviewsPage',
   components: {
     SectionsReviews,
+    LayoutCallback,
   },
   head() {
     return getHead({

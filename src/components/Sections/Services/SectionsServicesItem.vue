@@ -1,7 +1,7 @@
 <template>
   <div :class="$style['services__item']">
     <img
-      alt="Изображение услуги"
+      :alt="item.name"
       :src="image"
       :class="$style['services__item-avatar-author']"
     />

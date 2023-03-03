@@ -16,6 +16,7 @@
     <sections-home-benefits />
     <sections-home-services />
     <sections-about-our-team />
+    <layout-callback />
   </main>
 </template>
 
@@ -27,6 +28,7 @@ import { getHead } from '~/lib/utils'
 import SectionsHomeBenefits from '@/components/Sections/Home/SectionsHomeBenefits/SectionsHomeBenefits.vue'
 import SectionsHomeServices from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServices.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'AboutPage',
@@ -34,6 +36,7 @@ export default defineComponent({
     SectionsHomeBenefits,
     SectionsHomeServices,
     SectionsAboutOurTeam,
+    LayoutCallback,
   },
   head() {
     return getHead({

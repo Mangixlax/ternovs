@@ -64,6 +64,7 @@
         </ui-form-button>
       </template>
     </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -77,6 +78,7 @@ import SectionsServices from '@/components/Sections/Services/SectionsServices.vu
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ServicesPage',
@@ -85,6 +87,7 @@ export default defineComponent({
     BaseScrollBlock,
     JournalList,
     UiFormButton,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     let [categoriesListResponse, postListResponse] = await Promise.all([

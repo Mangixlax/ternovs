@@ -32,6 +32,7 @@
         </ui-form-button>
       </template>
     </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -44,6 +45,7 @@ import { getHead } from '~/lib/utils'
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ServicesDetailPage',
@@ -51,6 +53,7 @@ export default defineComponent({
     SectionsServices,
     JournalList,
     UiFormButton,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const categoryResponse = await ctx.$repositories.services.getCategory(

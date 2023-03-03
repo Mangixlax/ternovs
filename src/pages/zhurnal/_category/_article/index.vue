@@ -26,6 +26,7 @@
         <h2>Похожие статьи</h2>
       </template>
     </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -40,6 +41,7 @@ import ArticleRender from '~/components/Article/ArticleRender.vue'
 import ArticleNavigation from '~/components/Article/ArticleNavigation.vue'
 import JournalAuthor from '~/components/Sections/Journal/JournalAuthor.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ArticlePage',
@@ -49,6 +51,7 @@ export default defineComponent({
     ArticleNavigation,
     JournalAuthor,
     JournalList,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const article: any = await ctx.$repositories.journal.getPost(

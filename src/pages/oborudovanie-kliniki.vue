@@ -15,6 +15,7 @@
       :key="index"
       :block="block"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -26,12 +27,14 @@ import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'EquipmentPage',
   components: {
     UiFormButton,
     SectionsAboutContentBlock,
+    LayoutCallback,
   },
   head() {
     return getHead({
