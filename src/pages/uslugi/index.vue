@@ -14,14 +14,14 @@
         <base-scroll-block>
           <div :class="$style['services__grid-links']">
             <nuxt-link
+              v-for="(item, index) in categoriesList"
+              :key="index"
               :to="{
                 name: 'uslugi-category',
-                params: { category: item.category.value },
+                params: { category: item.slug },
               }"
-              v-for="(item, index) in servicesList"
-              :key="index"
             >
-              {{ item.category.label }}
+              {{ item.short_name }}
             </nuxt-link>
           </div>
         </base-scroll-block>
@@ -29,7 +29,7 @@
     </div>
     <div :class="$style['services__list']">
       <sections-services
-        v-for="(item, index) in servicesList"
+        v-for="(item, index) in categoriesList"
         :key="index"
         :item="item"
       />
@@ -39,6 +39,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import { Context } from '@nuxt/types'
+
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 
@@ -48,10 +50,14 @@ export default defineComponent({
     SectionsServices,
     BaseScrollBlock,
   },
-  computed: {
-    servicesList() {
-      return this.$store.getters['services/getServicesList']
-    },
+  async asyncData(ctx: Context) {
+    const categoriesListResponse =
+      await ctx.$repositories.services.getCategoriesList()
+
+    return {
+      categoriesList: categoriesListResponse.data || ([] as any),
+      isLoading: false as boolean,
+    }
   },
 })
 </script>

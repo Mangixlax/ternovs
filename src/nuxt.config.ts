@@ -1,8 +1,6 @@
-import webpack from 'webpack'
 import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRender } from '@nuxt/types/config/render'
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
-import { NuxtRouteConfig } from '@nuxt/types/config/router'
 
 const isDev = process.env.NODE_ENV === 'development'
 const time = new Date().valueOf()
@@ -23,6 +21,7 @@ export default <NuxtConfig>{
   env: {
     BASE_URL: process.env.BASE_URL,
     APP_ENV: process.env.APP_ENV,
+    CDN_PATH: process.env.CDN_PATH,
   },
 
   head: {
@@ -53,10 +52,6 @@ export default <NuxtConfig>{
         content: 'yes',
         hid: 'apple-mobile-web-app-capable',
       },
-      {
-        name: 'dmca-site-verification',
-        content: 'amc2UXZNN2I2VVlPWkI2WEZ3c2QvbGlMQS9TdXhaZWNTcmJ2R3BGS1oybz01',
-      },
     ],
     link: [
       { rel: 'dns-prefetch', href: '//fonts.gstatic.com' },
@@ -67,13 +62,7 @@ export default <NuxtConfig>{
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
       },
     ],
-    script: [
-      {
-        type: 'text/javascript',
-        async: true,
-        src: 'https://app.avodata.ru/px/pixel.js?token=88008c32371a962d391ce491fb9ab82f',
-      },
-    ],
+    script: [],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -84,6 +73,7 @@ export default <NuxtConfig>{
     '~plugins/axios',
     '~plugins/vuelidate.ts',
     '~plugins/slider-swiper.js',
+    '~api/RepositoryPlugin.ts',
     { src: '~directives/vue-click-outside.ts', mode: 'client' },
     { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', mode: 'client' },
     { src: '~plugins/modal/index.ts', mode: 'client' },
@@ -99,6 +89,9 @@ export default <NuxtConfig>{
 
     // https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
+
+    // https://github.com/nuxt-community/dayjs-module,
+    '@nuxtjs/dayjs',
   ],
 
   /**
@@ -119,9 +112,18 @@ export default <NuxtConfig>{
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    // https://github.com/nuxt-community/svg-sprite-module
     '@nuxtjs/svg-sprite',
+
+    // https://github.com/nuxt/image
     '@nuxt/image',
+
+    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+
+    // https://github.com/rigor789/vue-scrollto
+    'vue-scrollto/nuxt',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -173,6 +175,18 @@ export default <NuxtConfig>{
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.BASE_URL || 'http://nginx:8080',
+    proxy: process.env.USE_PRODUCTION_API,
+  },
+
+  proxy: {
+    '/api-dev': {
+      target: process.env.API_URL_FIXED,
+      pathRewrite: { '^/api-dev/': '/api/' },
+    },
+  },
+
+  publicRuntimeConfig: {
+    productionApi: process.env.USE_PRODUCTION_API,
   },
 
   svgSprite: {
@@ -181,7 +195,18 @@ export default <NuxtConfig>{
 
   image: {
     dir: 'assets/images',
-    domains: [process.env.BASE_URL],
+    domains: [process.env.BASE_URL, process.env.CDN_PATH],
+    alias: {
+      s3: [process.env.CDN_PATH, process.env.APP_ENV, 'app/public'].join('/'),
+      media: [process.env.CDN_PATH, process.env.APP_ENV, 'media'].join('/'),
+    },
+  },
+
+  dayjs: {
+    locales: ['ru'],
+    defaultLocale: 'ru',
+    defaultTimeZone: 'Europe/Moscow',
+    plugins: ['utc', 'timezone'],
   },
 
   /*

@@ -113,7 +113,7 @@ export default defineComponent({
               }">
               <span class="cutdown-bullet__counter">
                 <span class="cutdown-bullet__count">${i + 1}</span>
-                <svg width="26" height="26">
+                <svg>
                   <circle
                     class="bg"
                     cx="13"
@@ -132,7 +132,7 @@ export default defineComponent({
                     r="13"
                     fill="none"
                     stroke="#39A05F"
-                    stroke-width="2"
+                    stroke-width="2.5"
                     stroke-dasharray="80"
                   />
 
