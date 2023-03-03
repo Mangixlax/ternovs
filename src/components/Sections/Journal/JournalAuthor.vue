@@ -1,18 +1,21 @@
 <template>
   <div :class="$style['author']">
     <img
-      v-if="author.avatar"
-      :src="$img(`/s1${author.avatar.path}`, { format: 'webp' })"
+      v-if="author.photo"
+      :src="image"
       loading="lazy"
       decoding="async"
       :class="$style['author-avatar']"
     />
-    <svg-icon
-      v-else
-      name="avatar"
-      :class="$style['author-avatar--fake']"
-    />
-    <div :class="$style['author-name']">{{ author.name }}</div>
+    <span v-else :class="$style['author-avatar--fake']">
+      <svg-icon name="journal/avatar" />
+    </span>
+    <div :class="$style['author-name']">
+      <h3>
+        {{ author.name }}
+      </h3>
+      <span> {{ author.caption }} </span>
+    </div>
   </div>
 </template>
 
@@ -20,12 +23,22 @@
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
 
 // TODO: TBD
-
 export default defineComponent({
   name: 'JournalAuthor',
   props: {
     author: { type: Object as PropType<any>, default: () => {} },
-    color: { type: String, default: '' },
+  },
+  computed: {
+    image(): any {
+      const filePath = this.author.photo.filename
+        .match(/.{1,3}/g)
+        .slice(0, 3)
+        .join('/')
+
+      return this.$img(`s3/` + filePath + '/' + this.author.photo.filename, {
+        format: 'webp',
+      })
+    },
   },
 })
 </script>
@@ -34,16 +47,21 @@ export default defineComponent({
 .author {
   display: flex;
   margin: 0 auto;
-  text-align: center;
   align-items: center;
+  flex-direction: column;
 
   &-avatar {
-    height: 81px;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
 
     &--fake {
-      height: 32px;
-      width: 32px;
+      display: flex;
+
+      > svg {
+        height: 100px;
+        width: 100px;
+      }
     }
   }
 
@@ -52,6 +70,30 @@ export default defineComponent({
     @include font-p-regular-160;
     color: $color-gray-100;
     margin-left: 10px;
+    flex-direction: column;
+    margin-top: 16px;
+
+    > h3 {
+      @include font-h6-medium;
+      margin: 0;
+      margin-bottom: 8px;
+    }
+
+    > span {
+      @include font-lead-regular-160;
+      display: block;
+    }
+  }
+
+  @include media-breakpoint-up('lg') {
+    flex-direction: row;
+    padding: 24px 96px;
+    align-items: flex-start;
+
+    &-name {
+      margin-left: 24px;
+      margin-top: 0;
+    }
   }
 }
 </style>

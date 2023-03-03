@@ -34,6 +34,37 @@
         :item="item"
       />
     </div>
+    <journal-list
+      :posts-list="postList"
+      :is-loading="isLoading"
+      ref="journalList"
+    >
+      <template #header>
+        <h2>Другие наши услуги</h2>
+        <p>
+          Ежедневно в нашу клинику обращаются десятки новых пациентов, но
+          вопросы, которые они задают - одни и те же. Масштабы заблуждений в
+          области стоматологии поражают воображение: многие боятся врачей,
+          кто-то не доверяет им, а другие - агрессивны и недоверчивы по
+          отношению к медицине в целом. При этом практически все пациенты читают
+          разные форумы в интернете и занимаются самолечением. Мы решили, что с
+          этим нужно бороться.
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal',
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -41,23 +72,63 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ServicesPage',
   components: {
     SectionsServices,
     BaseScrollBlock,
+    JournalList,
+    UiFormButton,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
-    const categoriesListResponse =
-      await ctx.$repositories.services.getCategoriesList()
+    let [categoriesListResponse, postListResponse] = await Promise.all([
+      ctx.$repositories.services.getCategoriesList(),
+      ctx.$repositories.journal.getPostsList({
+        query: {
+          per_page: 1000,
+        },
+      }),
+    ])
 
     return {
-      categoriesList: categoriesListResponse.data || ([] as any),
+      categoriesList: categoriesListResponse.data,
+      categoriesListResponse: categoriesListResponse,
+      postList: postListResponse.data.slice(-10),
       isLoading: false as boolean,
     }
+  },
+  head() {
+    return getHead({
+      title: `Услуги клиники Терновс. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `Наша стоматология №1 в вопросе здоровых улыбок`,
+      route: this.$route,
+      seo: this.categoriesListResponse.page,
+    })
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Услуги',
+        route: {
+          name: 'uslugi',
+        },
+      },
+    ])
   },
 })
 </script>

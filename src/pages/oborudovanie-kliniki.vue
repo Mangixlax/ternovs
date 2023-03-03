@@ -7,9 +7,7 @@
           Всё оборудование, которое используется в стоматологии, можно условно
           разделить на несколько видов.
         </p>
-        <ui-form-button @click="onShowCallback">
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
     </div>
     <sections-about-content-block
@@ -17,6 +15,7 @@
       :key="index"
       :block="block"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -24,14 +23,25 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { AboutContentBlock } from '~/types/models/models.js'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'EquipmentPage',
   components: {
     UiFormButton,
     SectionsAboutContentBlock,
+    LayoutCallback,
+  },
+  head() {
+    return getHead({
+      title: `Оборудование клиники стоматологии Терновых`,
+      description: `Мы используем только современное оборудование для лечения и диагностики заболеваний полости рта и зубов. Узнайте больше о нашем оборудовании и технологиях.`,
+      route: this.$route,
+    })
   },
   data() {
     return {
@@ -84,18 +94,21 @@ export default defineComponent({
       ],
     }
   },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
         },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
+      },
+      {
+        name: 'Оборудование клиники',
+        route: {
+          name: 'oborudovanie-kliniki',
+        },
+      },
+    ])
   },
 })
 </script>

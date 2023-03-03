@@ -8,9 +8,7 @@
           этическому и качественному уходу, мотивированному достижением их
           философии стоматологии.
         </p>
-        <ui-form-button @click="onShowCallback">
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
     </div>
     <sections-prices-content-block
@@ -20,6 +18,7 @@
       :title="block.name"
       :description="block.short_excerpt"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -28,14 +27,18 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import { PricesContentBlock } from '~/types/models/prices.js'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsPricesContentBlock from '~/components/Sections/Prices/SectionsPricesContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'PricesPage',
   components: {
     UiFormButton,
     SectionsPricesContentBlock,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const directionListResponse =
@@ -46,18 +49,28 @@ export default defineComponent({
       isLoading: false as boolean,
     }
   },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
+  head() {
+    return getHead({
+      title: `Цены на услуги в стоматологии Терновс. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `Наши цены в стоматологии Терновс вас приятно удивят`,
+      route: this.$route,
+    })
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
         },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
+      },
+      {
+        name: 'Цены на услуги',
+        route: {
+          name: 'ceny-na-uslugi',
+        },
+      },
+    ])
   },
 })
 </script>

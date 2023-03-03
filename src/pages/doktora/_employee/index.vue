@@ -4,7 +4,7 @@
       <div :class="$style['our_team__grid-container']">
         <img
           :src="
-            $img(`/sections/about/employees/${employeeById.folder}/avatar.png`)
+            $img(`/sections/about/employees/${employeeById.slug}/avatar.png`)
           "
           :alt="`Сотрудник компании - ${employeeById.name}`"
         />
@@ -12,7 +12,7 @@
         <h1>{{ employeeById.name }}</h1>
         <div>{{ employeeById.expierence }}</div>
         <p>{{ employeeById.description }}</p>
-        <ui-form-button @click="onShowCallback">
+        <ui-form-button>
           Записаться на прием
         </ui-form-button>
       </div>
@@ -31,6 +31,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
+import { Context } from '@nuxt/types'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeamAccordion from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamAccordion.vue'
@@ -43,28 +44,41 @@ export default defineComponent({
     SectionsAboutOurTeamAccordion,
     SectionsAboutOurTeamSertificates,
   },
-  computed: {
-    employeeById(): Employee {
-      return this.$store.getters['employees/getEmployeeById'](
-        this.employeeIdByRoute - 1
-      )
-    },
-    employeeIdByRoute(): number {
-      return (this as any).$route.path.split('/').slice(1, -1).pop().split('-').pop()
-    },
+  async asyncData(ctx: Context) {
+    const employee = await ctx.store.getters['employees/getEmployeeBySlug'](
+      ctx.params.employee
+    )
+
+    if (!employee) {
+      ctx.error({ statusCode: 404 })
+    }
+
+    return { employeeById: employee as Employee }
   },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
         },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
+      },
+      {
+        name: 'Наша комманда',
+        route: {
+          name: 'doktora',
+        },
+      },
+      {
+        name: this.employeeById.name,
+        route: {
+          name: 'doktora-employee',
+          params: {
+            employee: this.employeeById.slug,
+          },
+        },
+      },
+    ])
   },
 })
 </script>

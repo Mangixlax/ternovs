@@ -2,7 +2,6 @@
   <div>
     <base-header />
     <nuxt />
-    <layout-callback />
     <layout-accordion />
     <base-footer />
   </div>
@@ -12,7 +11,6 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 import BaseHeader from '@/components/Base/BaseHeader/BaseHeader.vue'
-import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 import LayoutAccordion from '@/components/Layout/LayoutAccordion.vue'
 import BaseFooter from '@/components/Base/BaseFooter/BaseFooter.vue'
 
@@ -20,7 +18,6 @@ export default defineComponent({
   name: 'DefaultLayout',
   components: {
     BaseHeader,
-    LayoutCallback,
     LayoutAccordion,
     BaseFooter,
   },

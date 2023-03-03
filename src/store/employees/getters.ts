@@ -1,3 +1,4 @@
+import { Employee } from './../../types/models/employee.d';
 import { GetterTree } from 'vuex/types'
 import { RootState } from '~/store'
 import { OurTeamState } from '~/store/employees/state'
@@ -8,8 +9,8 @@ const getters: OurTeamGetterContext = {
   getEmployeesList: (state: OurTeamState) => {
     return state.employees
   },
-  getEmployeeById: (state) => (id: number) => {
-    return state.employees[id]
+  getEmployeeBySlug: (state) => (slug: string) => {
+    return state.employees.find(employee => employee.slug == slug)
   },
 }
 export default getters

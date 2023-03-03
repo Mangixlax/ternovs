@@ -136,7 +136,6 @@ export default defineComponent({
         grid-template-columns: 1fr 1fr;
         grid-column: 1 / 11;
         grid-gap: 0;
-        padding: 0 72px;
       }
       &-slot {
         width: 100%;

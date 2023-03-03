@@ -5,9 +5,7 @@
         <h1>{{ direction.title }}</h1>
         <p>{{ direction.excerpt }}</p>
         <div>
-          <ui-form-button @click="onShowCallback">
-            Записаться на прием
-          </ui-form-button>
+          <ui-form-button> Записаться на прием </ui-form-button>
         </div>
       </div>
       <div :class="$style['services__grid-article']">
@@ -19,13 +17,42 @@
         />
       </div>
     </div>
-    <!-- <sections-services-detail-description
-      :descriprion="content.description"
-    /> -->
     <sections-prices-content-block
       :block="direction.services"
       title="Цены на услуги"
     />
+    <journal-list
+      :posts-list="direction.journal_posts"
+      :is-loading="isLoading"
+      ref="journalList"
+    >
+      <template #header>
+        <h2>Другие наши услуги</h2>
+        <p>
+          Ежедневно в нашу клинику обращаются десятки новых пациентов, но
+          вопросы, которые они задают - одни и те же. Масштабы заблуждений в
+          области стоматологии поражают воображение: многие боятся врачей,
+          кто-то не доверяет им, а другие - агрессивны и недоверчивы по
+          отношению к медицине в целом. При этом практически все пациенты читают
+          разные форумы в интернете и занимаются самолечением. Мы решили, что с
+          этим нужно бороться.
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal-category',
+            params: { category: direction.category.slug },
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
+    <layout-callback />
   </main>
 </template>
 
@@ -33,18 +60,24 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
-import SectionsServicesDetailDescription from '@/components/Sections/Services/Detail/SectionsServicesDetailDescription.vue'
+import BaseImageCompare from '@/components/Base/BaseImageCompare.vue'
 import SectionsPricesContentBlock from '@/components/Sections/Prices/SectionsPricesContentBlock.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ServicesDetailPageDescription',
   components: {
     UiFormButton,
     ArticleRender,
-    SectionsServicesDetailDescription,
+    BaseImageCompare,
     SectionsPricesContentBlock,
+    JournalList,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const directionResponse = await ctx.$repositories.services.getDirection(
@@ -52,22 +85,52 @@ export default defineComponent({
     )
 
     return {
-      direction: directionResponse,
+      direction: directionResponse.data,
       isLoading: false as boolean,
     }
   },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
+  head() {
+    return getHead({
+      title: `Услуги клиники Терновых по направлению ${this.direction.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      description: `${this.direction.excerpt}`,
+      route: this.$route,
+      seo: this.direction.seo,
+    })
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
         },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
-    },
+      },
+      {
+        name: 'Услуги',
+        route: {
+          name: 'uslugi',
+        },
+      },
+      {
+        name: this.direction.category.name,
+        route: {
+          name: 'uslugi-category',
+          params: {
+            category: this.direction.category.slug,
+          },
+        },
+      },
+      {
+        name: this.direction.name,
+        route: {
+          name: 'uslugi-category-direction',
+          params: {
+            category: this.direction.category.slug,
+            direction: this.direction.slug,
+          },
+        },
+      },
+    ])
   },
 })
 </script>

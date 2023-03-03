@@ -1,25 +1,25 @@
-<template functional>
+<template>
   <component
-    :is="props.tag"
+    :is="tag"
     ref="button"
-    v-on="listeners"
-    v-bind="data.attrs"
+    v-on="$listeners"
+    v-bind="$attrs"
     :class="[
-      data.staticClass,
-      data.class,
       {
         [$style['button']]: true,
-        [$style['button--gray']]: props.variant === 'gray',
-        [$style['button--md']]: props.variant === 'md',
-        [$style['button--xl']]: props.variant === 'xl',
-        [$style['button--full-size']]: props.fullSize,
-        [$style['button--disable-hover']]: props.disableHover,
-        [$style['button--disable-active']]: props.disableActive,
+        [$style['button--gray']]: variant === 'gray',
+        [$style['button--md']]: variant === 'md',
+        [$style['button--xl']]: variant === 'xl',
+        [$style['button--full-size']]: fullSize,
+        [$style['button--disable-hover']]: disableHover,
+        [$style['button--disable-active']]: disableActive,
+        [$style['button--loading']]: isLoading,
         [$style['button--padding-left']]: $slots['icon-before'],
         [$style['button--padding-right']]: $slots['icon-after'],
       },
     ]"
-    :disabled="props.disabled"
+    :disabled="disabled"
+    @click="handleClick"
   >
     <span
       v-if="$slots['icon-before']"
@@ -27,7 +27,8 @@
     >
       <slot name="icon-before" />
     </span>
-    <slot />
+    <span :class="$style['content']"><slot /></span>
+    <loader v-if="isLoading" />
     <span
       v-if="$slots['icon-after']"
       :class="[$style['icon'], $style['icon--after']]"
@@ -40,11 +41,16 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
+import Loader from '~/components/Common/Loader.vue'
+
 export default defineComponent({
   name: 'UiFormButton',
   model: {
     prop: 'value',
     event: 'input',
+  },
+  components: {
+    Loader,
   },
   props: {
     tag: { type: String, default: 'button' },
@@ -57,6 +63,38 @@ export default defineComponent({
     disableHover: { type: Boolean, default: false },
     disableActive: { type: Boolean, default: false },
     action: { type: String, default: '' },
+    loading: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      isLoading: this.loading,
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.$listeners.click || this.tag == 'nuxt-link' || this.tag == 'a') {
+        return
+      } else {
+        this.onShowCallback()
+      }
+    },
+    onShowCallback() {
+      this.isLoading = true
+      this.$modal.show({
+        bind: {
+          name: 'Callback',
+        },
+        on: {
+          'before-open': () => {
+            this.isLoading = false
+          },
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
+          ),
+      })
+    },
   },
 })
 </script>
@@ -74,7 +112,7 @@ export default defineComponent({
   background-color: $color-primary-100;
   min-height: 42px;
   position: relative;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-in;
   touch-action: manipulation;
   color: $color-white-100;
   text-decoration: none;
@@ -108,7 +146,7 @@ export default defineComponent({
 
   &:active:not(&--disable-active):not(:disabled) {
     transition: none;
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
 
   &:active:not(&--disable-active)::before {
@@ -137,6 +175,12 @@ export default defineComponent({
 
   &--padding-right {
     padding: 15px 16px 15px 20px;
+  }
+
+  &--loading {
+    .content {
+      opacity: 0.16;
+    }
   }
 }
 

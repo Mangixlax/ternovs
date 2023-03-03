@@ -53,6 +53,7 @@ export default defineComponent({
     background-color: $color-primary-6;
     color: $color-primary-100;
     padding: 4px 14px 2px 14px;
+    cursor: pointer;
 
     &--active {
       background-color: $color-primary-100;

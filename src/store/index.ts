@@ -8,7 +8,9 @@ interface RootActionContext extends ActionContext<RootState, RootState> {}
 
 export const state = () => ({
   categoriesList: [],
+  journalCategoriesList: [],
   isBot: false,
+  breadCrumbs: [],
 })
 /**
  * Getters
@@ -17,6 +19,12 @@ export const getters: GetterTree<RootState, RootState> = {
   getCategoriesList(state: RootState): any {
     return state.categoriesList
   },
+  getJournalCategoriesList(state: RootState): any {
+    return state.journalCategoriesList
+  },
+  getBreadCrumbs(state: RootState) {
+    return state.breadCrumbs
+  },
 }
 
 /**
@@ -24,7 +32,13 @@ export const getters: GetterTree<RootState, RootState> = {
  */
 export const mutations: MutationTree<RootState> = {
   setCategoriesList(state: RootState, value: any) {
-    state.categoriesList = value.data
+    state.categoriesList = value.catalog.categories
+  },
+  setJournalCategoriesList(state: RootState, value: any) {
+    state.journalCategoriesList = value.journal.categories
+  },
+  setBreadCrumbs(state: RootState, list = []) {
+    state.breadCrumbs = list
   },
 }
 
@@ -32,21 +46,17 @@ export const mutations: MutationTree<RootState> = {
  * Actions
  */
 export const actions: ActionTree<RootState, RootState> = {
-  nuxtServerInit({ state, dispatch }: RootActionContext, { req }) {
-    if (!state.isBot) {
-      return Promise.all([dispatch('fetchCategoriesList')])
-    }
+  nuxtServerInit({ dispatch }: RootActionContext) {
+    return Promise.all([dispatch('fetchMainData')])
   },
-  fetchCategoriesList({
-    commit,
-    dispatch,
-  }: RootActionContext): Promise<any | null> {
+  fetchMainData({ commit }: RootActionContext): Promise<any | null> {
     return new Promise((resolve) => {
-      this.$repositories.services
-        .getCategoriesList()
+      this.$axios
+        .$get('/api/v1/main')
         .then(async (data: any) => {
           // @TODO TBD
           commit('setCategoriesList', data)
+          commit('setJournalCategoriesList', data)
           resolve(data)
         })
         .catch(() => resolve(null))

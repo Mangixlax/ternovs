@@ -39,6 +39,7 @@
       :key="index"
       :block="block"
     />
+    <layout-callback />
   </main>
 </template>
 
@@ -46,14 +47,25 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { PortfolioBlocks } from '~/types/models/models.js'
 
+import { getHead } from '~/lib/utils'
+
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'PortfolioPage',
   components: {
     BaseScrollBlock,
     SectionsAboutContentBlock,
+    LayoutCallback,
+  },
+  head() {
+    return getHead({
+      title: `Портфолио работ стоматологии Терновых | Ternovs.ru`,
+      description: `В этом разделе вы найдете примеры наших работ и увидите результаты лечения наших пациентов. Ознакомьтесь с нашим портфолио и убедитесь в качестве наших услуг.`,
+      route: this.$route,
+    })
   },
   data() {
     return {
@@ -197,6 +209,22 @@ export default defineComponent({
         },
       },
     }
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Портфолио',
+        route: {
+          name: 'portfolio',
+        },
+      },
+    ])
   },
 })
 </script>

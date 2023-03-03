@@ -14,14 +14,51 @@
         </span>
       </div>
     </div>
+    <layout-callback />
+    <layout-address />
+    <sections-contacts-about />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
+import { getHead } from '~/lib/utils'
+
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
+import LayoutAddress from '@/components/Layout/LayoutAddress.vue'
+import SectionsContactsAbout from '@/components/Sections/Contacts/SectionsContactsAbout.vue'
+
 export default defineComponent({
   name: 'ContactsPage',
+  components: {
+    LayoutCallback,
+    LayoutAddress,
+    SectionsContactsAbout,
+  },
+  head() {
+    return getHead({
+      title: `Авторская стоматология Терновых - О нашей компании | Ternovs.ru`,
+      description: `Узнайте больше о нашей компании и о том, как мы помогаем нашим пациентам достичь здоровых и красивых улыбок.`,
+      route: this.$route,
+    })
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Контакты',
+        route: {
+          name: 'contacts',
+        },
+      },
+    ])
+  },
 })
 </script>
 

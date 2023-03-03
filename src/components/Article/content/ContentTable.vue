@@ -49,17 +49,16 @@ export default defineComponent({
 .table {
   min-width: 100%;
 
-  &-row {
-  }
-
   &-col {
-    @include font-p-regular-160;
-    padding: 4px;
-    color: $color-gray-88;
+    @include font-lead-regular-160;
+    padding: 4px 12px;
+    color: $color-gray-100;
     min-width: 160px;
+    vertical-align: top;
 
     &--heading {
-      @include font-p-regular-160;
+      @include font-lead-medium-160;
+      border-bottom: 1px solid $color-gray-6;
     }
 
     mark {
@@ -84,6 +83,13 @@ export default defineComponent({
     &:last-child {
       padding-right: 0;
     }
+  }
+}
+
+@include media-breakpoint-up('lg') {
+  .wrapper {
+    padding: 0 96px;
+    margin: 32px 0;
   }
 }
 </style>

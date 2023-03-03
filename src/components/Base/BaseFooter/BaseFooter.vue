@@ -1,5 +1,6 @@
 <template>
   <footer :class="$style['footer']">
+    <common-bread-crumbs />
     <div :class="$style['footer__row']">
       <base-fast-links
         :title="item.title"
@@ -81,18 +82,20 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { fastLinks } from '@/types/components/footer'
 
+import CommonBreadCrumbs from '@/components/Common/CommonBreadCrumbs.vue'
 import BaseFastLinks from '@/components/Base/BaseFastLinks/BaseFastLinks.vue'
 import UiFormInputSubmit from '@/components/Ui/Form/UiFormInputSubmit.vue'
 
 export default defineComponent({
   name: 'BaseFooter',
   components: {
+    CommonBreadCrumbs,
     BaseFastLinks,
     UiFormInputSubmit,
   },
-  computed: {
-    fastLinks(): fastLinks[] {
-      return [
+  data() {
+    return {
+      fastLinks: [
         {
           title: 'О клинике',
           links: [
@@ -108,7 +111,6 @@ export default defineComponent({
                 name: 'portfolio',
               },
             },
-
             {
               label: 'Оборудование',
               route: {
@@ -119,124 +121,48 @@ export default defineComponent({
         },
         {
           title: 'Наши услуги',
-          links: [
-            {
-              label: 'Терапия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Гигиена',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Имплантация',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Хирургия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Ортодонтия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Отбеливание зубов',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Протезирование',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Обезболивание',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Цены на услуги',
-              route: {
-                name: 'uslugi',
-              },
-            },
-          ],
+          links: [],
         },
         {
           title: 'В журнале',
-          links: [
-            {
-              label: 'Терапия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Гигиена',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Имплантация',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Хирургия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Ортодонтия',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Отбеливание зубов',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Протезирование',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Обезболивание',
-              route: {
-                name: 'uslugi',
-              },
-            },
-            {
-              label: 'Цены на услуги',
-              route: {
-                name: 'uslugi',
-              },
-            },
-          ],
+          links: [],
         },
-      ]
+      ],
+    }
+  },
+  computed: {
+    servicesLinks() {
+      return this.$store.getters['getCategoriesList'].map((item: any) => {
+        return {
+          label: item.short_name,
+          route: {
+            name: 'uslugi-category',
+            params: {
+              category: item.slug,
+            },
+          },
+        }
+      })
     },
+    journalLinks() {
+      return this.$store.getters['getJournalCategoriesList'].map(
+        (item: any) => {
+          return {
+            label: item.title,
+            route: {
+              name: 'zhurnal-category',
+              params: {
+                category: item.slug,
+              },
+            },
+          }
+        }
+      )
+    },
+  },
+  mounted() {
+    this.fastLinks[1].links = this.servicesLinks
+    this.fastLinks[2].links = this.journalLinks
   },
 })
 </script>
@@ -309,7 +235,6 @@ export default defineComponent({
     &-agreement {
       @include font-small-regular;
       color: $color-gray-64;
-      vertical-align: middle;
       margin-top: 16px;
       display: block;
       max-width: 360px;

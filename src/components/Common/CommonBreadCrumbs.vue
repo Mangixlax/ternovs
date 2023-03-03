@@ -5,6 +5,7 @@
       :key="i"
       :class="$style['breadcrumbs__item']"
     >
+      <svg-icon v-if="i != 0" name="sort-right" />
       <nuxt-link
         :to="crumb.route"
         :title="crumb.name"
@@ -29,7 +30,7 @@ export default defineComponent({
   name: 'CommonBreadCrumbs',
   computed: {
     ...mapGetters({
-      breadcrumbs: 'getBreadcrumbs',
+      breadcrumbs: 'getBreadCrumbs',
     }),
   },
   jsonld(): WithContext<BreadcrumbList> {
@@ -73,43 +74,47 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  @include container;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
+  display: none;
 
   &__item {
     display: flex;
     align-items: center;
 
-    & + &:before {
-      content: '/';
-      display: inline-block;
-      margin-right: 12px;
-      color: $color-gray-24;
+    > svg {
+      width: 11px;
+      height: 11px;
+      fill: $color-gray-16;
+      margin-right: 10px;
     }
 
     &-link {
+      @include font-small-regular;
       display: flex;
       align-items: center;
       text-decoration: none;
-      color: $color-gray-48;
-      margin-right: 12px;
-      @include font-small-medium;
-
-      svg {
-        width: 18px;
-        height: 18px;
-        fill: $color-gray-80;
-      }
+      color: $color-gray-72;
+      margin-right: 10px;
+      padding: 6px 0 4px;
 
       &.disabled {
         pointer-events: none;
-        color: $color-gray-32;
+        color: $color-gray-40;
         text-decoration: none;
       }
     }
+  }
+
+  @include media-breakpoint-up('md') {
+    display: flex;
+    margin-bottom: 48px;
+  }
+
+  @include media-breakpoint-up('lg') {
+    margin-bottom: 32px;
+  }
+
+  @include media-breakpoint-up('xl') {
+    margin-bottom: 64px;
   }
 }
 </style>

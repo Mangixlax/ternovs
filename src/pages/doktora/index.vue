@@ -31,6 +31,22 @@ export default defineComponent({
     UiFormButton,
     SectionsAboutOurTeam,
   },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
+        },
+      },
+      {
+        name: 'Наша комманда',
+        route: {
+          name: 'doktora',
+        },
+      },
+    ])
+  },
 })
 </script>
 

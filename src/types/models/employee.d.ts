@@ -3,7 +3,7 @@ import { AccordionItem } from '@/types/components/components'
 export interface Employee {
   id: number
   name: string
-  folder: string
+  slug: string
   position: string
   expierence: string
   description: string

@@ -20,8 +20,8 @@ export default class JournalRepository extends BaseRepository {
     })
   }
 
-  incrementPostViews(id: number | string) {
-    return this.axios.$get(`/api/v1/journal/posts/${id}/view`)
+  incrementPostViews(slug: string) {
+    return this.axios.$get(`/api/v1/journal/posts/${slug}/view`)
   }
 
   getCategoriesList(params: any = {}) {

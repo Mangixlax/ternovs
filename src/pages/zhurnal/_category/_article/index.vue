@@ -18,20 +18,30 @@
           :index="index"
           :block="block"
         />
+        <journal-author :author="article.author" />
       </div>
     </article>
+    <journal-list :posts-list="article.similar_posts">
+      <template #header>
+        <h2>Похожие статьи</h2>
+      </template>
+    </journal-list>
+    <layout-callback />
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
-import metaGenerator from '~/lib/meta'
-import { getSiteUrl } from '~/lib/utils'
+
+import { getHead } from '~/lib/utils'
 
 import JournalStatistic from '~/components/Sections/Journal/JournalStatistic.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
 import ArticleNavigation from '~/components/Article/ArticleNavigation.vue'
+import JournalAuthor from '~/components/Sections/Journal/JournalAuthor.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'ArticlePage',
@@ -39,6 +49,9 @@ export default defineComponent({
     JournalStatistic,
     ArticleRender,
     ArticleNavigation,
+    JournalAuthor,
+    JournalList,
+    LayoutCallback,
   },
   async asyncData(ctx: Context) {
     const article: any = await ctx.$repositories.journal.getPost(
@@ -60,51 +73,52 @@ export default defineComponent({
       article,
     }
   },
-  // created() {
-  //   this.$store.commit('setBreadcrumbs', [
-  //     {
-  //       name: 'Журнал',
-  //       route: {
-  //         name: 'journal-category',
-  //       },
-  //     },
-  //     {
-  //       name: (this as any).article?.category?.title,
-  //       route: {
-  //         name: 'journal-category',
-  //         params: { category: (this as any).article?.category?.slug },
-  //       },
-  //     },
-  //     {
-  //       name: (this as any).article.title,
-  //       route: {
-  //         name: 'journal-category-article',
-  //         params: {
-  //           category: (this as any).article?.category?.slug,
-  //           article: (this as any).article.slug,
-  //         },
-  //       },
-  //     },
-  //   ])
-  // },
-  mounted() {
-    if (this.article?.id) {
-      this.$repositories.journal.incrementPostViews(this.article.id)
-    }
-  },
   head() {
-    return {
+    return getHead({
       title: this.article?.title,
-      meta: metaGenerator(this.article?.seo),
-      link: [
-        {
-          rel: 'canonical',
-          href: getSiteUrl(
-            this.article?.seo?.canonical || this.$route.path,
-            true
-          ),
+      description: `${this.article?.title} - на эту тему представдлена статья в блоге`,
+      route: this.$route,
+      seo: this.article.seo || this.article.page,
+    })
+  },
+  created() {
+    this.$store.commit('setBreadCrumbs', [
+      {
+        name: 'Главная',
+        route: {
+          name: 'index',
         },
-      ],
+      },
+      {
+        name: 'Журнал',
+        route: {
+          name: 'zhurnal',
+        },
+      },
+      {
+        name: this.article.category.title,
+        route: {
+          name: 'zhurnal-category',
+          params: {
+            category: this.article.category.slug,
+          },
+        },
+      },
+      {
+        name: this.article.title,
+        route: {
+          name: 'zhurnal-category-article',
+          params: {
+            category: this.article.category.slug,
+            article: this.article.slug,
+          },
+        },
+      },
+    ])
+  },
+  mounted() {
+    if (this.article?.slug) {
+      this.$repositories.journal.incrementPostViews(this.article.slug)
     }
   },
 })
@@ -113,7 +127,7 @@ export default defineComponent({
 <style lang="scss" module>
 .article {
   width: 100%;
-  padding: 80px 40px;
+  padding: 80px 0;
 
   &__grid {
     @include grid-container;

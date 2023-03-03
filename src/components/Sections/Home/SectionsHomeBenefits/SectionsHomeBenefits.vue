@@ -37,7 +37,7 @@
           Опорой клиники являются её собственные профессиональные стоматологи с
           колоссальным стажем работы.
         </p>
-        <ui-form-button @click="onShowCallback">
+        <ui-form-button>
           Записаться на прием
         </ui-form-button>
       </div>
@@ -96,19 +96,6 @@ export default defineComponent({
           },
         },
       }
-    },
-  },
-  methods: {
-    onShowCallback() {
-      this.$modal.show({
-        bind: {
-          name: 'Callback',
-        },
-        component: () =>
-          import(
-            '~/components/Modal/Content/Callback/ModalContentCallback.vue'
-          ),
-      })
     },
   },
 })
