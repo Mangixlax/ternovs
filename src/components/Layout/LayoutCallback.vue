@@ -32,7 +32,9 @@
             </span>
           </ui-form-group>
         </div>
-        <ui-form-button> Записаться на прием </ui-form-button>
+        <ui-form-button :loading="isLoading" @click="onSubmit">
+          Записаться на прием
+        </ui-form-button>
       </div>
       <div :class="$style['callback__grid-decore']">
         <img
@@ -119,7 +121,55 @@ export default defineComponent({
         label: 'Первичный',
         value: '1',
       },
+      isLoading: false,
     }
+  },
+  methods: {
+    onSubmit() {
+      if (this.isLoading || this.isFormInvalid) return
+
+      this.isLoading = true
+
+      this.$axios
+        .$post('/api/v1/forms/simple-form', {
+          page: window.location.href,
+          ...this.form,
+          visit: this.dropdownControlSelected.value,
+        })
+        .then(() => {
+          this.showFinishModal({
+            title: 'Заявка на обратный звонок отправлена!',
+            description: 'Наш менеджер свяжится с Вами в ближайшее время.',
+          })
+          this.isLoading = false
+        })
+        .catch(() => {
+          this.showFinishModal({
+            title: 'Произошла ошибка',
+            description: 'Что-то пошло не так, попробуйте пожалуйста позже.',
+          })
+          this.isLoading = false
+        })
+    },
+    showFinishModal(text: { title: string; description: string }) {
+      this.$modal.show({
+        bind: {
+          name: 'CallbackSuccess',
+          title: text.title,
+          description: text.description,
+        },
+        on: {
+          'before-open': () => {
+            // Hide this modal before opening a new modal
+            this.$modal.hide(this.name)
+          },
+        },
+        component: () =>
+          import(
+            '~/components/Modal/Content/Callback/ModalContentCallbackFinish.vue'
+          ),
+      })
+    },
   },
 })
 </script>

@@ -40,6 +40,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import { Form } from '@/types/models/Form'
 
 import { mask } from 'vue-the-mask'
 import { validationMixin } from 'vuelidate'
@@ -57,11 +58,6 @@ interface DropdownItem {
   value: string
 }
 
-interface Form {
-  phone: string
-  visit: string
-  agree_collect_data: boolean | string
-}
 export default defineComponent({
   name: 'ModalContentCallback',
   components: {
@@ -80,13 +76,11 @@ export default defineComponent({
         required,
         minLength: minLength(18),
       },
-      visit: {},
       agree_collect_data: {
         isChecked: (value: boolean) => value,
       },
     },
   },
-
   props: {
     name: { type: String, required: true },
   },
@@ -96,7 +90,6 @@ export default defineComponent({
       isLoading: <boolean>false,
       form: <Form>{
         phone: '',
-        visit: '',
         agree_collect_data: true,
       },
       dropdownControls: <DropdownItem[]>[
@@ -116,33 +109,43 @@ export default defineComponent({
     }
   },
   computed: {
-    isValidForm(): boolean {
+    isFormInvalid(): boolean {
       return this.$v.$invalid && !this.form.agree_collect_data
     },
   },
   methods: {
     onSubmit() {
-      if (this.isLoading || !this.isValidForm) return
+      if (this.isLoading || this.isFormInvalid) return
 
       this.isLoading = true
 
       this.$axios
-        .$post('')
+        .$post('/api/v1/forms/simple-form', {
+          page: window.location.href,
+          ...this.form,
+          visit: this.dropdownControlSelected.value,
+        })
         .then(() => {
-          this.showSuccessModal()
+          this.showFinishModal({
+            title: 'Заявка на обратный звонок отправлена!',
+            description: 'Наш менеджер свяжится с Вами в ближайшее время.',
+          })
           this.isLoading = false
         })
         .catch(() => {
-          this.showSuccessModal()
+          this.showFinishModal({
+            title: 'Произошла ошибка',
+            description: 'Что-то пошло не так, попробуйте пожалуйста позже.',
+          })
           this.isLoading = false
         })
     },
-    showSuccessModal() {
+    showFinishModal(text: { title: string; description: string }) {
       this.$modal.show({
         bind: {
           name: 'CallbackSuccess',
-          dateTime: this.callbackDateTimeValues,
-          phone: this.callbackPhone,
+          title: text.title,
+          description: text.description,
         },
         on: {
           'before-open': () => {
@@ -152,7 +155,7 @@ export default defineComponent({
         },
         component: () =>
           import(
-            '~/components/Modal/Content/Callback/ModalContentCallbackSuccess.vue'
+            '~/components/Modal/Content/Callback/ModalContentCallbackFinish.vue'
           ),
       })
     },

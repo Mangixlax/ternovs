@@ -2,17 +2,12 @@
   <modal-wrapper-simple v-bind="{ ...$attrs, ...$props }" v-on="$listeners">
     <div :class="$style['modal-callback-success']">
       <div :class="$style['modal-callback-success__title']">
-        Заявка на обратный звонок отправлена!
+        {{ title }}
       </div>
       <div :class="$style['modal-callback-success__description']">
-        Наш менеджер свяжится с Вами в ближайшее время.
+        {{ description }}
       </div>
-      <ui-form-button
-        variant="info"
-        font-variant="size-14-medium"
-        full-size
-        @click="onClose"
-      >
+      <ui-form-button variant="info" full-size @click="onClose">
         Хорошо
       </ui-form-button>
       <common-timer-text
@@ -48,6 +43,8 @@ export default defineComponent({
   props: {
     name: { type: String, required: true },
     dateTime: { type: Object, default: () => ({}) },
+    title: { type: String, default: '' },
+    description: { type: String, default: '' },
   },
   methods: {
     onClose() {
