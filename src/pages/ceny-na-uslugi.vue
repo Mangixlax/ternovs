@@ -18,6 +18,32 @@
       :title="block.name"
       :description="block.short_excerpt"
     />
+    <journal-list
+      :posts-list="postsList"
+      :is-loading="isLoading"
+      ref="journalList"
+      v-if="postsList.length"
+    >
+      <template #header>
+        <h2>Другие наши услуги</h2>
+        <p>
+          {{ postsListResponse.category.excerpt }}
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal-category',
+            params: { category: postsListResponse.category.slug },
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
     <layout-callback />
   </main>
 </template>
@@ -31,6 +57,7 @@ import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsPricesContentBlock from '~/components/Sections/Prices/SectionsPricesContentBlock.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
@@ -38,14 +65,27 @@ export default defineComponent({
   components: {
     UiFormButton,
     SectionsPricesContentBlock,
+    JournalList,
     LayoutCallback,
   },
   async asyncData(ctx: Context) {
-    const directionListResponse =
-      await ctx.$repositories.services.getDirectionsList()
+    let [directionListResponse, postsListResponse] = await Promise.all([
+      ctx.$repositories.services.getDirectionsList(),
+      ctx.$repositories.journal.getPostsList({
+        query: {
+          search: {
+            category_slug: 'uslugi',
+          },
+          page: ctx.route.query.page || 1,
+          per_page: 6,
+        },
+      }),
+    ])
 
     return {
       directionList: directionListResponse.data as PricesContentBlock[],
+      postsList: postsListResponse.data || ([] as any),
+      postsListResponse: postsListResponse,
       isLoading: false as boolean,
     }
   },

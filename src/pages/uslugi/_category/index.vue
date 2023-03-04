@@ -60,8 +60,6 @@ export default defineComponent({
       ctx.params.category
     )
 
-    console.log(categoryResponse)
-
     return {
       category: categoryResponse,
       isLoading: false as boolean,

@@ -16,20 +16,70 @@
       </div>
     </div>
     <sections-about-our-team />
+    <journal-list
+      :posts-list="postsList"
+      :is-loading="isLoading"
+      ref="journalList"
+      v-if="postsList.length"
+    >
+      <template #header>
+        <h2>Новости клиники</h2>
+        <p>
+          Ежедневно в нашу клинику обращаются десятки новых пациентов, но
+          вопросы, которые они задают - одни и те же. Масштабы заблуждений в
+          области стоматологии поражают воображение: многие боятся врачей,
+          кто-то не доверяет им, а другие - агрессивны и недоверчивы по
+          отношению к медицине в целом. При этом практически все пациенты читают
+          разные форумы в интернете и занимаются самолечением. Мы решили, что с
+          этим нужно бороться.
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal',
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import { Context } from '@nuxt/types'
 
 import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
   name: 'AboutOurTeamPage',
   components: {
     UiFormButton,
     SectionsAboutOurTeam,
+    JournalList,
+    LayoutCallback,
+  },
+  async asyncData(ctx: Context) {
+    const postsListResponse = await ctx.$repositories.journal.getPostsList({
+      query: {
+        page: ctx.route.query.page || 1,
+        per_page: 6,
+      },
+    })
+
+    return {
+      postsList: postsListResponse.data || ([] as any),
+      postsListResponse: postsListResponse,
+      isLoading: false,
+    }
   },
   created() {
     this.$store.commit('setBreadCrumbs', [

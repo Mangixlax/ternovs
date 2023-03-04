@@ -35,7 +35,7 @@
       />
     </div>
     <journal-list
-      :posts-list="postList"
+      :posts-list="postsList"
       :is-loading="isLoading"
       ref="journalList"
     >
@@ -90,7 +90,7 @@ export default defineComponent({
     LayoutCallback,
   },
   async asyncData(ctx: Context) {
-    let [categoriesListResponse, postListResponse] = await Promise.all([
+    let [categoriesListResponse, postsListResponse] = await Promise.all([
       ctx.$repositories.services.getCategoriesList(),
       ctx.$repositories.journal.getPostsList({
         query: {
@@ -102,7 +102,7 @@ export default defineComponent({
     return {
       categoriesList: categoriesListResponse.data,
       categoriesListResponse: categoriesListResponse,
-      postList: postListResponse.data.slice(-10),
+      postsList: postsListResponse.data.slice(-10),
       isLoading: false as boolean,
     }
   },
