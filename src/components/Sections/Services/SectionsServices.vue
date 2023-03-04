@@ -2,16 +2,16 @@
   <div :class="$style['services']">
     <div :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
-        <h1>{{ item.name }}</h1>
-        <span>{{ item.excerpt }}</span>
+        <h1>{{ name }}</h1>
+        <span>{{ excerpt }}</span>
       </div>
       <div :class="$style['services__grid-row']">
         <div :class="$style['services__grid-row-container']">
           <sections-services-item
-            v-for="(serviseItem, index) in item.directions"
+            v-for="(serviseItem, index) in directions"
             :key="index"
             :item="serviseItem"
-            :category-slug="item.slug"
+            :category-slug="serviseItem.slug"
           />
         </div>
         <div :class="$style['services__grid-row-slider']">
@@ -21,13 +21,13 @@
             :class="$style['slider']"
           >
             <swiper-slide
-              v-for="(serviseItem, index) in item.directions"
+              v-for="(serviseItem, index) in directions"
               :key="index"
               :class="$style['slider__slide']"
             >
               <sections-services-item
                 :item="serviseItem"
-                :category-slug="item.slug"
+                :category-slug="serviseItem.slug"
               />
             </swiper-slide>
             <div slot="pagination" :class="$style['slider__navigation']">
@@ -54,7 +54,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
-import { Service } from '~/types/models/Servises.js'
+import { ServiceItem } from '~/types/models/Servises'
 
 import SectionsServicesItem from '@/components/Sections/Services/SectionsServicesItem.vue'
 
@@ -64,7 +64,9 @@ export default defineComponent({
     SectionsServicesItem,
   },
   props: {
-    item: { type: Object as PropType<Service>, default: () => {} },
+    name: { type: String, default: '' },
+    excerpt: { type: String, default: '' },
+    directions: { type: Array as PropType<ServiceItem[]> , default: () => [] } 
   },
   computed: {
     swiperOption(): SwiperOptions {
@@ -82,6 +84,10 @@ export default defineComponent({
         },
       }
     },
+  },
+  mounted() {
+    console.log(this.directions);
+    
   },
 })
 </script>

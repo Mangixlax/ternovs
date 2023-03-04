@@ -31,7 +31,9 @@
       <sections-services
         v-for="(item, index) in categoriesList"
         :key="index"
-        :item="item"
+        :name="item.name"
+        :excerpt="item.excerpt"
+        :directions="item.directions"
       />
     </div>
     <journal-list
@@ -98,7 +100,7 @@ export default defineComponent({
         },
       }),
     ])
-
+      
     return {
       categoriesList: categoriesListResponse.data,
       categoriesListResponse: categoriesListResponse,
