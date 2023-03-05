@@ -39,6 +39,32 @@
       :key="index"
       :block="block"
     />
+    <journal-list
+      :posts-list="postsList"
+      :is-loading="isLoading"
+      ref="journalList"
+      v-if="postsList.length"
+    >
+      <template #header>
+        <h2>Другое оборудование</h2>
+        <p>
+          {{ postsListResponse.category.excerpt }}
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal-category',
+            params: { category: postsListResponse.category.slug },
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
     <layout-callback />
   </main>
 </template>
@@ -46,11 +72,14 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { PortfolioBlocks } from '~/types/models/models.js'
+import { Context } from '@nuxt/types'
 
 import { getHead } from '~/lib/utils'
 
 import BaseScrollBlock from '@/components/Base/BaseScrollBlock/BaseScrollBlock.vue'
 import SectionsAboutContentBlock from '@/components/Sections/About/SectionsAboutContentBlock.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
+import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
@@ -58,7 +87,26 @@ export default defineComponent({
   components: {
     BaseScrollBlock,
     SectionsAboutContentBlock,
+    JournalList,
+    UiFormButton,
     LayoutCallback,
+  },
+  async asyncData(ctx: Context) {
+    const postsListResponse = await ctx.$repositories.journal.getPostsList({
+      query: {
+        search: {
+          category_slug: 'nashi-raboty',
+        },
+        page: ctx.route.query.page || 1,
+        per_page: 6,
+      },
+    })
+
+    return {
+      postsList: postsListResponse.data || ([] as any),
+      postsListResponse: postsListResponse,
+      isLoading: false,
+    }
   },
   head() {
     return getHead({

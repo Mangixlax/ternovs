@@ -1,6 +1,10 @@
 <template>
   <main :class="$style['services']">
-    <sections-services :item="category" />/
+    <sections-services
+      :name="category.name"
+      :excerpt="category.excerpt"
+      :directions="category.directions"
+    />
     <journal-list
       :posts-list="category.journal_posts"
       :is-loading="isLoading"
@@ -59,8 +63,6 @@ export default defineComponent({
     const categoryResponse = await ctx.$repositories.services.getCategory(
       ctx.params.category
     )
-
-    console.log(categoryResponse)
 
     return {
       category: categoryResponse,

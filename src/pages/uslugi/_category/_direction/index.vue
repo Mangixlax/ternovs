@@ -17,9 +17,15 @@
         />
       </div>
     </div>
-    <sections-prices-content-block
-      :block="direction.services"
-      title="Цены на услуги"
+    <div :class="$style['services__grid-prices']">
+      <sections-prices-content-block
+        :block="direction.services"
+        title="Цены на услуги"
+      />
+    </div>
+    <sections-services
+      name="Другие услуги по этому направлению"
+      :directions="similar_directions"
     />
     <journal-list
       :posts-list="direction.journal_posts"
@@ -64,8 +70,8 @@ import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
-import BaseImageCompare from '@/components/Base/BaseImageCompare.vue'
 import SectionsPricesContentBlock from '@/components/Sections/Prices/SectionsPricesContentBlock.vue'
+import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
@@ -74,8 +80,8 @@ export default defineComponent({
   components: {
     UiFormButton,
     ArticleRender,
-    BaseImageCompare,
     SectionsPricesContentBlock,
+    SectionsServices,
     JournalList,
     LayoutCallback,
   },
@@ -84,8 +90,11 @@ export default defineComponent({
       ctx.params.direction
     )
 
+    console.log(directionResponse)
+
     return {
       direction: directionResponse.data,
+      similar_directions: directionResponse.similar_directions,
       isLoading: false as boolean,
     }
   },
@@ -138,14 +147,15 @@ export default defineComponent({
 <style lang="scss" module>
 .services {
   width: 100%;
-  padding: 80px 0 0;
+  padding: 80px 0 40px;
 
   &__grid {
     @include grid-container;
 
     &-container {
       grid-column: 1 / 5;
-
+      padding-bottom: 40px;
+      
       > h1 {
         @include font-h1-medium;
         margin: 0;
@@ -174,6 +184,10 @@ export default defineComponent({
       }
     }
 
+    &-prices {
+      padding: 40px 0;
+    }
+
     &-article {
       grid-column: 1 / 5;
       grid-row: 2 / 2;
@@ -193,10 +207,11 @@ export default defineComponent({
   }
 
   @include media-breakpoint-up('lg') {
-    padding: 96px 0 0;
+    padding: 96px 0 0px;
 
     &__grid {
       &-container {
+        padding-bottom: 48px;
         grid-column: 1 / 11;
 
         > h1 {
@@ -215,19 +230,24 @@ export default defineComponent({
           padding: 0 192px 0 96px;
         }
       }
-    }
 
-    &-article {
-      grid-column: 1 / 11;
+      &-article {
+        grid-column: 1 / 11;
+      }
+
+      &-prices {
+        padding: 72px 0;
+      }
     }
   }
 
   @include media-breakpoint-up('xl') {
-    padding: 144px 0 0;
+    
 
     &__grid {
       &-container {
         grid-column: 1 / 13;
+        padding-bottom: 72px;
       }
 
       &-article {

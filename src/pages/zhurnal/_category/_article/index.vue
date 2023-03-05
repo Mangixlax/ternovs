@@ -21,7 +21,10 @@
         <journal-author :author="article.author" />
       </div>
     </article>
-    <journal-list :posts-list="article.similar_posts">
+    <journal-list
+      :posts-list="article.similar_posts"
+      v-if="article.similar_posts.length"
+    >
       <template #header>
         <h2>Похожие статьи</h2>
       </template>
@@ -117,6 +120,8 @@ export default defineComponent({
     ])
   },
   mounted() {
+    console.log(this.article);
+    
     if (this.article?.slug) {
       this.$repositories.journal.incrementPostViews(this.article.slug)
     }

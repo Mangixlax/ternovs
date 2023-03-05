@@ -2,6 +2,8 @@ import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRender } from '@nuxt/types/config/render'
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
 
+import sitemap from './sitemap'
+
 const isDev = process.env.NODE_ENV === 'development'
 const time = new Date().valueOf()
 
@@ -56,7 +58,6 @@ export default <NuxtConfig>{
     link: [
       { rel: 'dns-prefetch', href: '//fonts.gstatic.com' },
       { rel: 'dns-prefetch', href: '//fonts.googleapis.com' },
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
@@ -94,6 +95,8 @@ export default <NuxtConfig>{
     '@nuxtjs/dayjs',
   ],
 
+  sitemap,
+
   /**
    * Loading config
    */
@@ -124,7 +127,23 @@ export default <NuxtConfig>{
 
     // https://github.com/rigor789/vue-scrollto
     'vue-scrollto/nuxt',
+
+    // Custom modules
+    '~modules/yandex-metrika',
+
+    // https://github.com/nuxt-community/sitemap-module
+    '@nuxtjs/sitemap',
   ],
+
+  yandexMetrika: {
+    // TODO: TBD
+    id: '92680896',
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true,
+    debug: isDev,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

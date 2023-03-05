@@ -45,7 +45,7 @@ export default defineComponent({
   props: {
     controls: { type: Array as PropType<DropdownItem[]>, default: () => [] },
     label: { type: String, default: '' },
-    value: { type: Object as PropType<DropdownListValue>, default: () => ({}) },
+    value: { type: Object as PropType<DropdownItem>, default: () => ({}) },
   },
   data() {
     return {

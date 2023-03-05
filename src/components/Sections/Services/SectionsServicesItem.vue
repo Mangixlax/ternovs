@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { ServiceItem } from '~/types/models/Servises.js'
+import { ServiceItem } from '~/types/models/Servises'
 
 export default defineComponent({
   name: 'SectionsServicesItem',

@@ -12,9 +12,7 @@
         <h1>{{ employeeById.name }}</h1>
         <div>{{ employeeById.expierence }}</div>
         <p>{{ employeeById.description }}</p>
-        <ui-form-button>
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
     </div>
     <sections-about-our-team-accordion
@@ -25,6 +23,37 @@
       v-if="employeeById.sertificates"
       :employee="employeeById"
     />
+    <journal-list
+      :posts-list="postsList"
+      :is-loading="isLoading"
+      ref="journalList"
+      v-if="postsList.length"
+    >
+      <template #header>
+        <h2>Новости клиники</h2>
+        <p>
+          Ежедневно в нашу клинику обращаются десятки новых пациентов, но
+          вопросы, которые они задают - одни и те же. Масштабы заблуждений в
+          области стоматологии поражают воображение: многие боятся врачей,
+          кто-то не доверяет им, а другие - агрессивны и недоверчивы по
+          отношению к медицине в целом. При этом практически все пациенты читают
+          разные форумы в интернете и занимаются самолечением. Мы решили, что с
+          этим нужно бороться.
+        </p>
+      </template>
+      <template #footer>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal',
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
+      </template>
+    </journal-list>
   </div>
 </template>
 
@@ -36,6 +65,7 @@ import { Context } from '@nuxt/types'
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeamAccordion from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamAccordion.vue'
 import SectionsAboutOurTeamSertificates from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamSertificates.vue'
+import JournalList from '@/components/Sections/Journal/JournalList.vue'
 
 export default defineComponent({
   name: 'AbouAboutOurTeamDetailPagetOurTeamPage',
@@ -43,6 +73,7 @@ export default defineComponent({
     UiFormButton,
     SectionsAboutOurTeamAccordion,
     SectionsAboutOurTeamSertificates,
+    JournalList,
   },
   async asyncData(ctx: Context) {
     const employee = await ctx.store.getters['employees/getEmployeeBySlug'](
@@ -53,7 +84,19 @@ export default defineComponent({
       ctx.error({ statusCode: 404 })
     }
 
-    return { employeeById: employee as Employee }
+    const postsListResponse = await ctx.$repositories.journal.getPostsList({
+      query: {
+        page: ctx.route.query.page || 1,
+        per_page: 6,
+      },
+    })
+
+    return {
+      employeeById: employee as Employee,
+      postsList: postsListResponse.data || ([] as any),
+      postsListResponse: postsListResponse,
+      isLoading: false,
+    }
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
