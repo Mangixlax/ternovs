@@ -57,7 +57,7 @@ export default defineComponent({
     padding-right: 0;
   }
 
-  span {
+  > span {
     @include font-p-medium-160;
     color: $color-gray-100;
   }

@@ -5,11 +5,13 @@ import paragraph from '~/components/Article/content/ContentParagraph.vue'
 import header from '~/components/Article/content/ContentHeader.vue'
 import delimiter from '~/components/Article/content/ContentDivider.vue'
 import image from '~/components/Article/content/ContentImage.vue'
+import imageComparison from '~/components/Article/content/ContentImageComparsion.vue'
 import embed from '~/components/Article/content/ContentEmbed.vue'
 import code from '~/components/Article/content/ContentCode.vue'
 import list from '~/components/Article/content/ContentList.vue'
 import linkTool from '~/components/Article/content/ContentLinkTool.vue'
 import table from '~/components/Article/content/ContentTable.vue'
+import faq from '~/components/Article/content/ContentFaq.vue'
 
 export default defineComponent({
   functional: true,
@@ -31,11 +33,13 @@ export default defineComponent({
         header,
         delimiter,
         image,
+        imageComparison,
         embed,
         code,
         list,
         linkTool,
         table,
+        faq,
       },
     },
   },

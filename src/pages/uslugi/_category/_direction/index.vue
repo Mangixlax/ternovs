@@ -70,7 +70,6 @@ import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import ArticleRender from '~/components/Article/ArticleRender.vue'
-import BaseImageCompare from '@/components/Base/BaseImageCompare.vue'
 import SectionsPricesContentBlock from '@/components/Sections/Prices/SectionsPricesContentBlock.vue'
 import SectionsServices from '@/components/Sections/Services/SectionsServices.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
@@ -81,7 +80,6 @@ export default defineComponent({
   components: {
     UiFormButton,
     ArticleRender,
-    BaseImageCompare,
     SectionsPricesContentBlock,
     SectionsServices,
     JournalList,
