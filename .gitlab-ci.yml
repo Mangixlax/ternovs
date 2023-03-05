@@ -1,8 +1,6 @@
 variables:
-  NETWORK_NAME: "sabr_net"
-  BACKEND_CONTAINER_NAME: "backend"
+  NETWORK_NAME: "ternovs_net"
   FRONTEND_CONTAINER_NAME: "frontend"
-  REDIS_CONTAINER_NAME: "redis"
 
 stages:
   - build-prod

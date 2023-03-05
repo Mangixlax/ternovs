@@ -29,8 +29,6 @@
       "@nuxt/image",
       "@nuxtjs/axios",
       "@types/node",
-      "@types/lodash.debounce",
-      "@types/object-path",
       "@types/vue-the-mask",
       "dayjs/plugin/relativeTime",
     ]

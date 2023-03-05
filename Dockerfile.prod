@@ -1,0 +1,62 @@
+# Building stage
+FROM node:18.13-alpine3.16 as frontend-build
+
+USER root
+RUN mkdir -p /srv/frontend
+
+COPY ./src /srv/frontend
+
+WORKDIR /srv/frontend
+
+# Set the environment variable for openssl
+ENV NODE_OPTIONS='--openssl-legacy-provider'
+ENV GENERATE_SOURCEMAP false
+
+RUN : \
+    && yarn install \
+    && yarn build \
+    && yarn cache clean \
+    && :
+
+# Copy builded app
+FROM node:18.13-alpine3.16
+
+# Set the environment variable for openssl
+ENV NODE_OPTIONS='--openssl-legacy-provider'
+
+ARG USER=node
+ARG UID=1000
+ARG GID=1000
+
+USER root
+
+RUN : \
+    && set -xe \
+    # Install supervisor
+    && apk add --update --no-cache supervisor \
+    # Clear apk cache
+    && rm -rf /var/cache/apk/* \
+    # Make workdir
+    && mkdir -p /srv/frontend \
+    # Change permissions
+    && chown -R ${UID}:${GID} /srv/frontend \
+    && chmod -R 775 /srv/frontend \
+    && chown -R ${UID}:${GID} /run \
+    && :
+
+# Switch to use a non-root user from here on
+USER ${UID}:${GID}
+
+# Set the working directory
+WORKDIR /srv/frontend
+
+# Copy files from the build stage
+COPY --from=frontend-build /srv/frontend /srv/frontend
+
+# Create the supervisord configuration file
+CMD ls -al ./
+COPY ./docker/prod/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+EXPOSE 3000
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
