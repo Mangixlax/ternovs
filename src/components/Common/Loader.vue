@@ -1,10 +1,9 @@
-<template functional>
-  <span
-    :class="[
-      $style['loader'],
-    ]"
-  >
-    <svg-icon name="loader"/>
+<template>
+  <span :class="{
+    [$style['loader']]: true,
+    [$style['loader--green']]: color === 'green',
+  }">
+    <svg-icon name="loader" />
   </span>
 </template>
 
@@ -14,7 +13,9 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   // @ts-ignore
   name: 'Loader',
-  functional: true,
+  props: {
+    color: { type: String, default: '' },
+  },
 })
 </script>
 
@@ -37,8 +38,15 @@ export default defineComponent({
     height: 24px;
     width: 24px;
     animation: rotation 1s ease-in-out infinite;
+    fill: $color-white-100;
   }
 
+  &--green {
+    svg {
+      fill: $color-primary-100;
+    }
+  }
+  
   @keyframes rotation {
     0% {
       transform: rotate(0deg);

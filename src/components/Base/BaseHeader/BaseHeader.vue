@@ -84,7 +84,7 @@ export default defineComponent({
           route: { name: 'o-kompanii' },
           list: [
             {
-              label: 'Комманда',
+              label: 'Команда',
               route: { name: 'doktora' },
             },
             {

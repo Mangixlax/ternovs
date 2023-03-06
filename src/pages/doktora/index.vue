@@ -90,7 +90,7 @@ export default defineComponent({
         },
       },
       {
-        name: 'Наша комманда',
+        name: 'Наша команда',
         route: {
           name: 'doktora',
         },

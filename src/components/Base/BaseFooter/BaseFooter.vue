@@ -12,6 +12,7 @@
           <base-fast-links
             title="Контакты"
             :class="$style['footer__row-fastlink']"
+            tag="address"
           >
             <template>
               <span :class="$style['footer__row-text']">
