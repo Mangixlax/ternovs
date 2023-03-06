@@ -39,7 +39,6 @@
     <journal-list
       :posts-list="postsList"
       :is-loading="isLoading"
-      ref="journalList"
     >
       <template #header>
         <h2>Другие наши услуги</h2>

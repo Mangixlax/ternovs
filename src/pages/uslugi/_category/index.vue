@@ -8,7 +8,6 @@
     <journal-list
       :posts-list="category.journal_posts"
       :is-loading="isLoading"
-      ref="journalList"
     >
       <template #header>
         <h2>Другие наши услуги</h2>

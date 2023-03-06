@@ -46,7 +46,7 @@ export default defineComponent({
 
 <style lang="scss" module>
 .figure {
-  margin: 18px 0;
+  margin: 32px 0;
 
   & > p {
     margin: 0;

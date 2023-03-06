@@ -164,8 +164,8 @@ export default defineComponent({
     &-diamond {
       position: absolute;
       top: 100px;
-      right: -67px;
-      height: 90px;
+      right: -96px;
+      height: 128px;
       width: auto;
     }
   }

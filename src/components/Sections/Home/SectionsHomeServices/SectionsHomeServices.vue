@@ -210,8 +210,8 @@ export default defineComponent({
         position: absolute;
         left: 0;
         top: 140px;
-        left: -67px;
-        height: 90px;
+        left: -96px;
+        height: 128px;
         width: auto;
       }
 
