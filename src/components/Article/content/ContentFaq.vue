@@ -46,9 +46,6 @@ export default defineComponent({
       mainEntity: items,
     }
   },
-  mounted() {
-    console.log(this.block)
-  },
 })
 </script>
 

@@ -29,8 +29,6 @@ export default defineComponent({
   },
   computed: {
     image_1(): any {
-      console.log(this.block.data.images[0].url)
-
       const filePath = this.block.data.images[0].url
         .match(/.{1,3}/g)
         .slice(0, 3)
@@ -60,7 +58,6 @@ export default defineComponent({
 <style lang="scss" module>
 .compare {
   width: 100%;
-
 
   &__slider {
     width: 100%;

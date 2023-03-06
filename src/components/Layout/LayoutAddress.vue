@@ -21,15 +21,19 @@
         <nuxt-link :to="{ name: 'o-kompanii' }">
           Клиника находится по адресу:
           <span>
-            Московская область, г. Клин, ул. Чайковского, д. 105,<br />
-            к. 2, пом. 3
+            <span
+              v-html="
+                `Московская область, г. Клин, ул. Чайковского, д. 105,<br />
+            к. 2, пом. 3`
+              "
+            ></span>
             <svg-icon name="map-pin"> </svg-icon>
           </span>
         </nuxt-link>
         <ui-form-button
           variant="gray"
           tag="a"
-          href="https://yandex.ru/maps/213/moscow/?ll=37.617700%2C55.755863&z=10"
+          href="https://yandex.ru/maps/10733/klin/house/ulitsa_chaykovskogo_105k1/Z08YcQFmTEUPQFtsfX9weH5hYQ==/?ll=36.766509%2C56.319225&z=16.89"
           target="_blank"
         >
           Маршрут в Яндекс.Картах
@@ -65,6 +69,7 @@ export default defineComponent({
       position: absolute;
       inset: 0;
       grid-column: 1 / 5;
+      z-index: 0;
 
       &-container {
         position: relative;
@@ -85,6 +90,8 @@ export default defineComponent({
       padding: 12px 12px 0 12px;
       display: flex;
       flex-direction: column;
+      pointer-events: all;
+      z-index: 1;
 
       > span {
         @include font-h6-medium;
@@ -110,9 +117,8 @@ export default defineComponent({
           height: 28px;
           width: 28px;
           fill: $color-primary-100;
-        }
-        span svg {
-          vertical-align: bottom;
+          margin-top: -8px;
+          vertical-align: middle;
         }
       }
     }
@@ -161,10 +167,6 @@ export default defineComponent({
           svg {
             height: 30px;
             width: 30px;
-          }
-
-          span svg {
-            vertical-align: bottom;
           }
         }
       }

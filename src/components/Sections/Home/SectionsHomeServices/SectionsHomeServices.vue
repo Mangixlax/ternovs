@@ -4,15 +4,14 @@
       <div :class="$style['services__grid-text']">
         <h2>
           Оказываем услуги <br />
-          по 4 направлениям
+          {{ servicesCountText }}
         </h2>
         <span>
-          Выбрав интересующие направление вы сможете ознакомиться как со списком
-          услуги, так качество работы на всех этапах.
+          Новейшее оборудование и методики позволяют добиться блестящего
+          результата работы как в прямом, так и переносном смысле. Десятки тысяч
+          довольных пациентов уже получили свою возможность снова улыбаться.
         </span>
-        <ui-form-button>
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button> Записаться на прием </ui-form-button>
       </div>
       <div :class="$style['services__grid-decore']">
         <img
@@ -33,7 +32,7 @@
       <div :class="$style['services__grid-row']">
         <div :class="$style['services__grid-row-container']">
           <sections-home-services-item
-            v-for="(item, index) in services"
+            v-for="(item, index) in servicesLinks"
             :key="index"
             :item="item"
           />
@@ -76,6 +75,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
 import { HomeServiceItem } from '@/types/models/home'
+
+import { pluralize } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsHomeServicesItem from '@/components/Sections/Home/SectionsHomeServices/SectionsHomeServicesItem.vue'
@@ -139,6 +140,32 @@ export default defineComponent({
           },
         },
       }
+    },
+    servicesLinks() {
+      return this.$store.getters['getCategoriesList'].map((item: any) => {
+        return {
+          name: item.short_name,
+          image: item.image,
+          excerpt: item.excerpt,
+          route: {
+            name: 'uslugi-category',
+            params: {
+              category: item.slug,
+            },
+          },
+        }
+      })
+    },
+    servicesCountText(): string {
+      const serviceCount = this.servicesLinks.length
+      const apartmentsWord: string = pluralize(
+        serviceCount,
+        'направлению',
+        'направлению',
+        'направлениям',
+        'направлениям'
+      )
+      return `по ${serviceCount} ${apartmentsWord}`
     },
   },
 })
@@ -272,18 +299,20 @@ export default defineComponent({
     padding: 144px 0 171px 0;
 
     &__grid {
+      grid-row-gap: 72px;
+
       &-text {
         grid-column: 2 / 7;
         padding-right: 72px;
       }
 
       &-decore {
-        grid-column: 7 / 11;
+        grid-column: 7 / 12;
         top: -288px;
       }
 
       &-row {
-        grid-column: 2 / 11;
+        grid-column: 2 / 12;
       }
     }
   }
@@ -301,7 +330,7 @@ export default defineComponent({
     &-next {
       padding: 8px 0 8px 14px;
     }
-    
+
     svg {
       height: 30px;
       width: 30px;

@@ -90,8 +90,6 @@ export default defineComponent({
       ctx.params.direction
     )
 
-    console.log(directionResponse)
-
     return {
       direction: directionResponse.data,
       similar_directions: directionResponse.similar_directions,
@@ -155,7 +153,7 @@ export default defineComponent({
     &-container {
       grid-column: 1 / 5;
       padding-bottom: 40px;
-      
+
       > h1 {
         @include font-h1-medium;
         margin: 0;
@@ -242,8 +240,6 @@ export default defineComponent({
   }
 
   @include media-breakpoint-up('xl') {
-    
-
     &__grid {
       &-container {
         grid-column: 1 / 13;
