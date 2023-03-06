@@ -4,6 +4,7 @@
       v-model="form.phone"
       v-mask="'+7 (###) ###-##-##'"
       :class="$style['input__instance']"
+      placeholder="Номер телефона"
     />
     <span :class="$style['input__submit']">
       <loader v-if="isLoading" />
