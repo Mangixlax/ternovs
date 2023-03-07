@@ -38,12 +38,20 @@
       </div>
       <div :class="$style['callback__grid-decore']">
         <img
-          :src="$img('/layout/callback-decore.png')"
+          :src="
+            $img('/layout/callback-decore.png', {
+              format: 'webp',
+            })
+          "
           alt="Стоматологическая клиника"
           :class="$style['callback__grid-clinic']"
         />
         <img
-          :src="$img('/layout/diamond.png')"
+          :src="
+            $img('/layout/diamond.png', {
+              format: 'webp',
+            })
+          "
           alt="diamond"
           :class="$style['callback__grid-diamond']"
           ref="rellax"

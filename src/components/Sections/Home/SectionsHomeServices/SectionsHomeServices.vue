@@ -15,12 +15,20 @@
       </div>
       <div :class="$style['services__grid-decore']">
         <img
-          :src="$img('/sections/home/serviсes-decore.png')"
+          :src="
+            $img('/sections/home/serviсes-decore.png', {
+              format: 'webp',
+            })
+          "
           alt="Девушка с красивыми зубами"
           :class="$style['services__grid-decore-image']"
         />
         <img
-          :src="$img('/layout/diamond.png')"
+          :src="
+            $img('/layout/diamond.png', {
+              format: 'webp',
+            })
+          "
           alt="diamond"
           v-rellax="{
             speed: 3,

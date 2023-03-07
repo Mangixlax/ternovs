@@ -4,7 +4,9 @@
       <div :class="$style['our_team__grid-container']">
         <img
           :src="
-            $img(`/sections/about/employees/${employeeById.slug}/avatar.png`)
+            $img(`/sections/about/employees/${employeeById.slug}/avatar.png`, {
+              format: 'webp',
+            })
           "
           :alt="`Сотрудник компании - ${employeeById.name}`"
         />

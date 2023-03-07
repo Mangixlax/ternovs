@@ -12,7 +12,11 @@
       <div :class="$style['reviews__grid-decore']">
         <div :class="$style['reviews__grid-decore-container']">
           <img
-            :src="$img('/sections/home/reviews-bg.png')"
+            :src="
+              $img('/sections/home/reviews-bg.png', {
+                format: 'webp',
+              })
+            "
             alt="Графика зуба в образе брилианта"
             v-rellax="{
               speed: 4,

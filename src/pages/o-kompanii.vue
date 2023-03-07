@@ -9,7 +9,13 @@
           специалистов, комфорта и максимально возможного отсутствия боли при
           процедурах.
         </p>
-        <img :src="$img('/sections/about/our-team.jpg')" alt="Наша команда" />
+        <p>
+          <img
+            :src="$img('/sections/about/our-team.jpg', { format: 'webp' })"
+            alt="Наша команда"
+            :class="$style['about__grid-container-image']"
+          />
+        </p>
         <span>Команда клиники «Авторская стоматология Терновых»</span>
       </div>
     </div>
@@ -132,14 +138,14 @@ export default defineComponent({
         color: $color-gray-100;
       }
 
-      > p {
+      > p:first-of-type {
         @include font-lead-regular-160;
         margin: 0;
         margin-bottom: 40px;
         color: $color-gray-88;
       }
 
-      > img {
+      &-image {
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -171,7 +177,7 @@ export default defineComponent({
           padding: 0 192px 0 96px;
         }
 
-        > p {
+        > p:first-of-type {
           margin-bottom: 48px;
           padding: 0 192px 0 96px;
         }
@@ -193,7 +199,7 @@ export default defineComponent({
           margin-bottom: 32px;
         }
 
-        > p {
+        > p:first-of-type {
           margin-bottom: 72px;
           padding-right: 192px;
         }

@@ -28,12 +28,20 @@
       </div>
       <div :class="$style['about__grid-decore']">
         <img
-          :src="$img('/sections/home/about-decore.png')"
+          :src="
+            $img('/sections/home/about-decore.png', {
+              format: 'webp',
+            })
+          "
           alt="Стоматологическая клиника"
           :class="$style['about__grid-bg']"
         />
         <img
-          :src="$img('/layout/diamond.png')"
+          :src="
+            $img('/layout/diamond.png', {
+              format: 'webp',
+            })
+          "
           alt="diamond"
           :class="$style['about__grid-diamond']"
           v-rellax="{

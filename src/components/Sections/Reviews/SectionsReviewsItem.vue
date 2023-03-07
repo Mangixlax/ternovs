@@ -3,12 +3,20 @@
     <div :class="$style['reviews__item-panel']">
       <div :class="$style['reviews__item-avatar']">
         <img
-          :src="$img(`/sections/reviews/${item.avatar}.png`)"
+          :src="
+            $img(`/sections/reviews/${item.avatar}.png`, {
+              format: 'webp',
+            })
+          "
           alt="Автор отзыва"
           :class="$style['reviews__item-avatar-author']"
         />
         <img
-          :src="$img(`/sections/reviews/${item.platform.logo}.png`)"
+          :src="
+            $img(`/sections/reviews/${item.platform.logo}.png`, {
+              format: 'webp',
+            })
+          "
           alt="Платформа отзыва"
           :class="$style['reviews__item-avatar-platform']"
         />
@@ -32,7 +40,12 @@
     </div>
     <h2>{{ item.title }}</h2>
     <p>{{ item.text }}</p>
-    <span :class="$style['reviews__item-platform']">
+    <span
+      :class="[
+        $style['reviews__item-platform'],
+        $style['reviews__item-platform--mobile'],
+      ]"
+    >
       На платформе
       <a :href="item.platform.link">{{ item.platform.label }}</a> с оценкой
       {{ item.platform.link }} {{ item.platform.stars }}
@@ -58,7 +71,7 @@ export default defineComponent({
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 24px;
+  padding: 20px 0;
 
   & + & {
     border-top: solid 2px $color-gray-4;
@@ -138,9 +151,14 @@ export default defineComponent({
   }
 
   @include media-breakpoint-up('md') {
+    padding: 24px 0;
+
     &-platform {
       &--desktop {
         display: flex;
+      }
+      &--mobile {
+        display: none;
       }
     }
   }

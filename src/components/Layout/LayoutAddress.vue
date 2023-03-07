@@ -4,7 +4,11 @@
       <div :class="$style['address__grid-decore']">
         <div :class="$style['address__grid-decore-container']">
           <img
-            :src="$img('/layout/emblem-mini.png')"
+            :src="
+              $img('/layout/emblem-mini.png', {
+                format: 'webp',
+              })
+            "
             alt="Графика зуба в образе брилианта"
             v-rellax="{
               speed: 2,
