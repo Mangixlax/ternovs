@@ -63,6 +63,8 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeamAccordion from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamAccordion.vue'
 import SectionsAboutOurTeamSertificates from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamSertificates.vue'
@@ -98,6 +100,13 @@ export default defineComponent({
       postsListResponse: postsListResponse,
       isLoading: false,
     }
+  },
+  head() {
+    return getHead({
+      title: `${this.employeeById.name} - опытный специалист в лечении зубов | Ternovs.ru`,
+      description: `${this.employeeById.name} - профессионал с богатым опытом лечения зубов. На странице вы найдете информацию о его квалификации, образовании и профессиональных достижениях, а также отзывы от благодарных пациентов. Запишитесь на прием к доктору Терновых и получите высококачественное лечение зубов в комфортных условиях авторской стоматологии.`,
+      route: this.$route,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [

@@ -112,7 +112,7 @@ export default defineComponent({
       > p {
         @include font-lead-regular-160;
         margin: 0;
-        color: $color-gray-100;
+        color: $color-gray-88;
       }
     }
   }

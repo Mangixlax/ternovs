@@ -205,7 +205,7 @@ export default defineComponent({
 
       > span {
         @include font-lead-regular-160;
-        color: $color-gray-100;
+        color: $color-gray-88;
         margin-bottom: 24px;
       }
     }

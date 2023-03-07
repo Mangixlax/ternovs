@@ -70,7 +70,7 @@ export default defineComponent({
   },
   head() {
     return getHead({
-      title: `Услуги клиники Терновс в категории ${this.category.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      title: `Услуги клиники Терновс в категории ${this.category.short_name.toLowerCase()}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
       description: `${this.category.excerpt}`,
       route: this.$route,
       seo: this.category.page,

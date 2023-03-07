@@ -54,7 +54,7 @@ export default defineComponent({
 .ol {
   margin: 18px 0;
   padding: 0 24px;
-  color: $color-gray-100;
+  color: $color-gray-88;
   .li {
     @include font-lead-regular-160;
 

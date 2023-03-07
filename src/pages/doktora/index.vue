@@ -60,6 +60,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Context } from '@nuxt/types'
 
+import { getHead } from '~/lib/utils'
+
 import UiFormButton from '~/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeam from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeam.vue'
 import JournalList from '@/components/Sections/Journal/JournalList.vue'
@@ -86,6 +88,13 @@ export default defineComponent({
       postsListResponse: postsListResponse,
       isLoading: false,
     }
+  },
+  head() {
+    return getHead({
+      title: `Встречайте нашу команду докторов - авторскую стоматологию Терновых | Ternovs.ru`,
+      description: `Наши доктора - это профессионалы своего дела с многолетним опытом работы в стоматологии. Мы стремимся предоставить лучшее лечение для наших пациентов, используя современные технологии и инновационные методы лечения. Узнайте больше о нашей команде докторов и наших услугах на сайте авторской стоматологии Терновых.`,
+      route: this.$route,
+    })
   },
   created() {
     this.$store.commit('setBreadCrumbs', [

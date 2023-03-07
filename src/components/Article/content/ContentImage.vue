@@ -59,7 +59,7 @@ export default defineComponent({
 
   > span {
     @include font-p-medium-160;
-    color: $color-gray-100;
+    color: $color-gray-64;
   }
 }
 .img {

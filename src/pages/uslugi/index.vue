@@ -36,10 +36,7 @@
         :directions="item.directions"
       />
     </div>
-    <journal-list
-      :posts-list="postsList"
-      :is-loading="isLoading"
-    >
+    <journal-list :posts-list="postsList" :is-loading="isLoading">
       <template #header>
         <h2>Другие наши услуги</h2>
         <p>
@@ -99,7 +96,7 @@ export default defineComponent({
         },
       }),
     ])
-      
+
     return {
       categoriesList: categoriesListResponse.data,
       categoriesListResponse: categoriesListResponse,
@@ -157,7 +154,7 @@ export default defineComponent({
       > span {
         @include font-lead-regular-160;
         display: block;
-        color: $color-gray-100;
+        color: $color-gray-88;
         padding: 0 12px;
         margin-bottom: 24px;
       }

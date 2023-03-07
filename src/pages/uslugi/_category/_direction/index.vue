@@ -99,7 +99,7 @@ export default defineComponent({
   },
   head() {
     return getHead({
-      title: `Услуги клиники Терновых по направлению ${this.direction.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      title: `Услуги клиники Терновых по направлению - ${this.direction.name.toLowerCase()}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
       description: `${this.direction.excerpt}`,
       route: this.$route,
       seo: this.direction.seo,
@@ -166,7 +166,7 @@ export default defineComponent({
       > p {
         @include font-lead-regular-160;
         display: block;
-        color: $color-gray-100;
+        color: $color-gray-88;
         margin-bottom: 24px;
       }
 

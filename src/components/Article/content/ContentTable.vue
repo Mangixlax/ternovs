@@ -52,13 +52,14 @@ export default defineComponent({
   &-col {
     @include font-lead-regular-160;
     padding: 4px 12px;
-    color: $color-gray-100;
+    color: $color-gray-88;
     min-width: 160px;
     vertical-align: top;
 
     &--heading {
       @include font-lead-medium-160;
       border-bottom: 1px solid $color-gray-6;
+      color: $color-gray-100;
     }
 
     mark {

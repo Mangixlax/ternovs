@@ -85,13 +85,14 @@ export default defineComponent({
         @include font-h5-medium;
         display: block;
         margin-bottom: 8px;
-        color: $color-gray-88;
+        color: $color-gray-100;
       }
 
       > p {
         @include font-lead-regular-160;
         margin: 0;
         margin-bottom: 24px;
+        color: $color-gray-88;
       }
 
       > a {
