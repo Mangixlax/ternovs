@@ -147,7 +147,7 @@ export default defineComponent({
         @include font-lead-regular-160;
         margin: 0;
         margin-bottom: 24px;
-        color: $color-gray-100;
+        color: $color-gray-88;
       }
     }
 
@@ -241,7 +241,7 @@ export default defineComponent({
     &__grid {
       &-container {
         grid-column: 2 / 13;
-        
+
         > h1 {
           margin-bottom: 32px;
         }

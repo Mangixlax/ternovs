@@ -4,21 +4,36 @@
       <div :class="$style['prices__grid-container']">
         <h2 v-if="title">{{ title }}</h2>
         <p v-if="description">{{ description }}</p>
-        <ul :class="$style['prices__grid-list']">
-          <li v-for="(item, index) in block" @click="onShowCallback">
-            <div :class="$style['prices__grid-list_text']">
-              {{ item.name }}
-              <span>
-                Цена от {{ getFormatNumber(item.price_min) }} ₽ до
-                {{ getFormatNumber(item.price_max) }} ₽ за услугу</span
-              >
-            </div>
-            <div :class="$style['prices__grid-list_svg']">
-              <svg-icon name="external-link" />
-            </div>
-            <div :class="$style['prices__grid-list_svg--mobile']">
-              <span>Записаться</span>
-              <svg-icon name="back-arrow" />
+        <ul
+          :class="{
+            [$style['prices__grid-list']]: true,
+          }"
+        >
+          <li v-for="(item, index) in block" @click="onShowCallback(index)">
+            <div
+              :class="{
+                [$style['prices__grid-list-item']]: true,
+                [$style['prices__grid-list-item--disable']]:
+                  isModalOpen && activeItemIndex === index,
+              }"
+            >
+              <loader v-if="isLoading" color="green" />
+              <div :class="$style['prices__grid-list_text']">
+                {{ item.name }}
+                <span>
+                  Цена от {{ getFormatNumber(item.price_min) }} ₽ до
+                  {{ getFormatNumber(item.price_max) }} ₽ за услугу</span
+                >
+              </div>
+              <div :class="$style['prices__grid-list_appointment']">
+                <span>Записаться</span>
+                <div :class="$style['prices__grid-list_svg']">
+                  <svg-icon name="external-link" />
+                </div>
+                <div :class="$style['prices__grid-list_svg--mobile']">
+                  <svg-icon name="back-arrow" />
+                </div>
+              </div>
             </div>
           </li>
         </ul>
@@ -32,21 +47,43 @@ import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { PriceListItem } from '~/types/models/prices.js'
 import { formatNumber } from '~/lib/utils'
 
+import Loader from '~/components/Common/Loader.vue'
+
 export default defineComponent({
   name: 'SectionsPricesContentBlock',
+  components: {
+    Loader,
+  },
   props: {
     title: { type: String, default: '' },
     description: { type: String, default: '' },
     block: { type: Array as PropType<PriceListItem[]>, default: () => [] },
   },
+  data() {
+    return {
+      isLoading: false,
+      isModalOpen: false,
+    }
+  },
   methods: {
     getFormatNumber(value: number): string {
       return formatNumber(value)
     },
-    onShowCallback() {
+    onShowCallback(index: number) {
+      this.activeItemIndex = index
+      this.isLoading = true
       this.$modal.show({
         bind: {
           name: 'Callback',
+        },
+        on: {
+          'before-open': () => {
+            this.isLoading = false
+            this.isModalOpen = true
+          },
+          'before-close': () => {
+            this.isModalOpen = false
+          },
         },
         component: () =>
           import(
@@ -98,14 +135,23 @@ export default defineComponent({
       margin: 0;
       list-style: none;
 
-      > li {
+      &-item {
         padding: 16px 0 11px;
         display: flex;
         flex-direction: column;
         color: $color-gray-100;
         grid-gap: 6px;
-        border-top: 2px solid transparent;
         cursor: pointer;
+        position: relative;
+
+        &--disable {
+          opacity: 0.4;
+        }
+      }
+
+      > li {
+        border-top: 2px solid transparent;
+        transition: background-color 0.25s ease, border-radius 0.25s ease;
 
         & + li {
           border-top: 2px solid $color-gray-4;
@@ -122,6 +168,13 @@ export default defineComponent({
 
           svg {
             fill: $color-primary-100;
+            transition: fill 0.25s ease;
+          }
+
+          .prices__grid-list_appointment {
+            > span {
+              opacity: 1;
+            }
           }
         }
       }
@@ -137,8 +190,20 @@ export default defineComponent({
         }
       }
 
-      &_svg {
+      &_appointment {
         padding: 11px 0 9px;
+        display: flex;
+        align-items: center;
+
+        > span {
+          @include font-lead-medium-160;
+          margin-top: 1px;
+          color: $color-gray-100;
+          transition: opacity 0.25s ease;
+        }
+      }
+
+      &_svg {
         display: none;
 
         > svg {
@@ -148,15 +213,6 @@ export default defineComponent({
         }
 
         &--mobile {
-          display: flex;
-          align-items: center;
-
-          > span {
-            @include font-lead-medium-160;
-            margin-top: 1px;
-            color: $color-gray-100;
-          }
-
           > svg {
             height: 30px;
             width: 30px;
@@ -174,12 +230,22 @@ export default defineComponent({
       }
 
       &-list {
-        > li {
+        &-item {
           padding: 16px 0;
           flex-direction: row;
           grid-gap: initial;
           justify-content: space-between;
           align-items: center;
+        }
+
+        &_text {
+          margin-right: 8px;
+        }
+
+        &_appointment {
+          > span {
+            margin-right: 4px;
+          }
         }
 
         &_svg {
@@ -208,17 +274,8 @@ export default defineComponent({
       }
 
       &-list {
-        > li {
+        &-item {
           padding: 20px 24px;
-        }
-
-        &_svg {
-          display: block;
-          height: fit-content;
-
-          &--mobile {
-            display: none;
-          }
         }
       }
     }
@@ -232,6 +289,23 @@ export default defineComponent({
 
         > p {
           padding-right: 192px;
+        }
+      }
+
+      &-list {
+        &_svg {
+          display: block;
+          height: fit-content;
+
+          &--mobile {
+            display: none;
+          }
+        }
+
+        &_appointment {
+          > span {
+            opacity: 0;
+          }
         }
       }
     }

@@ -4,7 +4,9 @@
       <div :class="$style['our_team__grid-container']">
         <img
           :src="
-            $img(`/sections/about/employees/${employeeById.slug}/avatar.png`)
+            $img(`/sections/about/employees/${employeeById.slug}/avatar.png`, {
+              format: 'webp',
+            })
           "
           :alt="`Сотрудник компании - ${employeeById.name}`"
         />
@@ -26,7 +28,6 @@
     <journal-list
       :posts-list="postsList"
       :is-loading="isLoading"
-      ref="journalList"
       v-if="postsList.length"
     >
       <template #header>
@@ -61,6 +62,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Employee } from '@/types/models/employee'
 import { Context } from '@nuxt/types'
+
+import { getHead } from '~/lib/utils'
 
 import UiFormButton from '@/components/Ui/Form/UiFormButton.vue'
 import SectionsAboutOurTeamAccordion from '@/components/Sections/About/SectionsAboutOurTeam/SectionsAboutOurTeamAccordion.vue'
@@ -98,6 +101,13 @@ export default defineComponent({
       isLoading: false,
     }
   },
+  head() {
+    return getHead({
+      title: `${this.employeeById.name} - опытный специалист в лечении зубов | Ternovs.ru`,
+      description: `${this.employeeById.name} - профессионал с богатым опытом лечения зубов. На странице вы найдете информацию о его квалификации, образовании и профессиональных достижениях, а также отзывы от благодарных пациентов. Запишитесь на прием к доктору Терновых и получите высококачественное лечение зубов в комфортных условиях авторской стоматологии.`,
+      route: this.$route,
+    })
+  },
   created() {
     this.$store.commit('setBreadCrumbs', [
       {
@@ -107,7 +117,7 @@ export default defineComponent({
         },
       },
       {
-        name: 'Наша комманда',
+        name: 'Наша команда',
         route: {
           name: 'doktora',
         },

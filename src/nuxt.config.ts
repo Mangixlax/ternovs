@@ -1,7 +1,9 @@
+import webpack from 'webpack'
 import { NuxtConfig } from '@nuxt/types'
 import { NuxtOptionsRender } from '@nuxt/types/config/render'
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
 
+import getScopedName from './lib/getScopedName'
 import sitemap from './sitemap'
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -252,7 +254,22 @@ export default <NuxtConfig>{
 
     extractCSS: false,
 
-    loaders: {},
+    loaders: {
+      cssModules: {
+        modules: isDev
+          ? {
+              localIdentName: '[local]_[hash:hex:8]',
+            }
+          : {
+              // @ts-ignore
+              getLocalIdent: (
+                context: webpack.loader.LoaderContext,
+                localIdentName: string,
+                localName: string
+              ) => getScopedName(localName, context.resourcePath),
+            },
+      },
+    },
 
     html: {
       minify: {

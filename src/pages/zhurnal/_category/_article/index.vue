@@ -120,8 +120,6 @@ export default defineComponent({
     ])
   },
   mounted() {
-    console.log(this.article);
-    
     if (this.article?.slug) {
       this.$repositories.journal.incrementPostViews(this.article.slug)
     }

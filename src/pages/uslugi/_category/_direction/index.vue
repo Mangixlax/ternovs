@@ -26,11 +26,12 @@
     <sections-services
       name="Другие услуги по этому направлению"
       :directions="similar_directions"
+      v-if="similar_directions.length"
     />
     <journal-list
       :posts-list="direction.journal_posts"
       :is-loading="isLoading"
-      ref="journalList"
+      v-if="direction.journal_posts.length"
     >
       <template #header>
         <h2>Другие наши услуги</h2>
@@ -90,8 +91,6 @@ export default defineComponent({
       ctx.params.direction
     )
 
-    console.log(directionResponse)
-
     return {
       direction: directionResponse.data,
       similar_directions: directionResponse.similar_directions,
@@ -100,7 +99,7 @@ export default defineComponent({
   },
   head() {
     return getHead({
-      title: `Услуги клиники Терновых по направлению ${this.direction.short_name}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
+      title: `Услуги клиники Терновых по направлению - ${this.direction.name.toLowerCase()}. Стоматология, лечениие, зубы, личный опыт | Ternovs.ru`,
       description: `${this.direction.excerpt}`,
       route: this.$route,
       seo: this.direction.seo,
@@ -151,11 +150,12 @@ export default defineComponent({
 
   &__grid {
     @include grid-container;
+    grid-row-gap: 0;
 
     &-container {
       grid-column: 1 / 5;
-      padding-bottom: 40px;
-      
+      margin-bottom: 8px;
+
       > h1 {
         @include font-h1-medium;
         margin: 0;
@@ -166,7 +166,7 @@ export default defineComponent({
       > p {
         @include font-lead-regular-160;
         display: block;
-        color: $color-gray-100;
+        color: $color-gray-88;
         margin-bottom: 24px;
       }
 
@@ -211,8 +211,8 @@ export default defineComponent({
 
     &__grid {
       &-container {
-        padding-bottom: 48px;
         grid-column: 1 / 11;
+        margin-bottom: 16px;
 
         > h1 {
           padding: 0 192px 0 96px;
@@ -242,12 +242,10 @@ export default defineComponent({
   }
 
   @include media-breakpoint-up('xl') {
-    
-
     &__grid {
       &-container {
         grid-column: 1 / 13;
-        padding-bottom: 72px;
+        margin-bottom: 40px;
       }
 
       &-article {

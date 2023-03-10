@@ -37,9 +37,7 @@
           Опорой клиники являются её собственные профессиональные стоматологи с
           колоссальным стажем работы.
         </p>
-        <ui-form-button>
-          Записаться на прием
-        </ui-form-button>
+        <ui-form-button>Записаться на прием</ui-form-button>
       </div>
     </div>
   </section>
@@ -133,6 +131,7 @@ export default defineComponent({
       p {
         @include font-lead-regular-160;
         margin: 0;
+        color: $color-gray-88;
 
         & + p {
           margin-top: 8px;
@@ -156,11 +155,13 @@ export default defineComponent({
         @include font-h3-medium;
         margin: 0;
         margin-bottom: 24px;
+        color: $color-gray-100;
       }
 
       p {
         @include font-lead-regular-160;
         margin: 0;
+        color: $color-gray-88;
 
         & + p {
           margin-top: 8px;

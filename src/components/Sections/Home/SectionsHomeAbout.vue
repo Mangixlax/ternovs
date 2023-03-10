@@ -28,12 +28,20 @@
       </div>
       <div :class="$style['about__grid-decore']">
         <img
-          :src="$img('/sections/home/about-decore.png')"
+          :src="
+            $img('/sections/home/about-decore.png', {
+              format: 'webp',
+            })
+          "
           alt="Стоматологическая клиника"
           :class="$style['about__grid-bg']"
         />
         <img
-          :src="$img('/layout/diamond.png')"
+          :src="
+            $img('/layout/diamond.png', {
+              format: 'webp',
+            })
+          "
           alt="diamond"
           :class="$style['about__grid-diamond']"
           v-rellax="{
@@ -77,13 +85,14 @@ export default defineComponent({
         @include font-h5-medium;
         display: block;
         margin-bottom: 8px;
-        color: $color-gray-88;
+        color: $color-gray-100;
       }
 
       > p {
         @include font-lead-regular-160;
         margin: 0;
         margin-bottom: 24px;
+        color: $color-gray-88;
       }
 
       > a {
@@ -164,8 +173,8 @@ export default defineComponent({
     &-diamond {
       position: absolute;
       top: 100px;
-      right: -67px;
-      height: 90px;
+      right: -96px;
+      height: 128px;
       width: auto;
     }
   }

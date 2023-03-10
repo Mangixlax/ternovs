@@ -86,7 +86,10 @@ export default defineComponent({
         spaceBetween: 24,
         autoHeight: true,
         loop: true,
-    
+        autoplay: {
+          delay: 5700,
+          disableOnInteraction: false,
+        },
         pagination: {
           el: '.swiper-pagination',
           clickable: true,

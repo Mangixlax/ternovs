@@ -12,6 +12,7 @@
           <base-fast-links
             title="Контакты"
             :class="$style['footer__row-fastlink']"
+            tag="address"
           >
             <template>
               <span :class="$style['footer__row-text']">
@@ -21,11 +22,11 @@
                 href="tel:+79153525899"
                 :class="$style['footer__row-link--green']"
               >
-                8(915) 352-58-99
+                8 (915) 352-58-99
               </a>
               <a
                 href="mailto:info@ternovs.dental"
-                :class="$style['footer__row-link--green']"
+                :class="$style['footer__row-link--green-small']"
               >
                 info@ternovs.dental
               </a>
@@ -33,7 +34,7 @@
                 Ежедневно с 10:00 до 21:00
               </span>
               <span :class="$style['footer__row-text']">
-                Московская область, г. Клин, ул. Чайковского, д. 105, к. 2,пом.3
+                Московская область, г. Клин, ул. Чайковского, д. 105, к. 2, пом. 3
               </span>
             </template>
           </base-fast-links>
@@ -48,7 +49,7 @@
           нашей клиники!
         </div>
         <div :class="$style['footer__row-input']">
-          <ui-form-input-submit placeholder="Номер телефона" />
+          <ui-form-input-submit />
         </div>
         <div :class="$style['footer__row-agreement']">
           Нажимая кнопку «<svg-icon name="form/submit" />», я подтверждаю и даю
@@ -203,6 +204,13 @@ export default defineComponent({
         margin-bottom: 12px;
         color: $color-primary-100;
         text-decoration: none;
+
+        &-small {
+          @include font-p-regular-160;
+          text-decoration: none;
+          margin-bottom: 12px;
+          color: $color-primary-100;
+        }
       }
     }
 

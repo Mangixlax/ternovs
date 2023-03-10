@@ -1,7 +1,11 @@
 <template>
   <div :class="$style['our_team__item']">
     <img
-      :src="$img(`/sections/about/employees/${item.slug}/avatar.png`)"
+      :src="
+        $img(`/sections/about/employees/${item.slug}/avatar.png`, {
+          format: 'webp',
+        })
+      "
       :alt="`Сотрудник компании - ${item.name}`"
     />
     <h3>{{ item.name }}</h3>

@@ -8,7 +8,11 @@
       :style="{ height: contentHeight }"
       :class="$style['fastlinks__wrapper']"
     >
-      <ol :class="$style['fastlinks__list']" ref="linkContainer">
+      <component
+        :is="tag"
+        :class="$style['fastlinks__list']"
+        ref="linkContainer"
+      >
         <li
           v-for="(link, i) in list"
           :key="i"
@@ -23,7 +27,7 @@
           </nuxt-link>
         </li>
         <slot />
-      </ol>
+      </component>
     </div>
     <slot :name="`link-${$vnode.key}`" />
   </section>
@@ -43,6 +47,7 @@ export default defineComponent({
     title: { type: String, default: '' },
     list: { type: Array as PropType<fastLink[]>, default: () => [] },
     active: { type: Boolean, default: false },
+    tag: { type: String, default: 'ol' },
   },
   data() {
     return {
@@ -57,14 +62,13 @@ export default defineComponent({
       } else {
         this.showAccordion()
       }
-
       if (this.$parent?.$children.length) {
         for (const $child of this.$parent.$children) {
           if (
             ($child as any)._name.includes('BaseFastLinks') &&
             (this as any)._uid !== ($child as any)._uid
           ) {
-            ;$child.hideAccordion()
+            $child.hideAccordion()
           }
         }
       }

@@ -9,7 +9,11 @@
           </p>
         </div>
         <img
-          :src="$img(`/sections/about/photos/${block.image?.src}`)"
+          :src="
+            $img(`/sections/about/photos/${block.image?.src}`, {
+              format: 'webp',
+            })
+          "
           :alt="block.image?.caption"
         />
         <span> {{ block.image?.caption }} </span>

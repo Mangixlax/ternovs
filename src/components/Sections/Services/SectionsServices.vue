@@ -66,7 +66,7 @@ export default defineComponent({
   props: {
     name: { type: String, default: '' },
     excerpt: { type: String, default: '' },
-    directions: { type: Array as PropType<ServiceItem[]> , default: () => [] } 
+    directions: { type: Array as PropType<ServiceItem[]>, default: () => [] },
   },
   computed: {
     swiperOption(): SwiperOptions {
@@ -84,10 +84,6 @@ export default defineComponent({
         },
       }
     },
-  },
-  mounted() {
-    console.log(this.directions);
-    
   },
 })
 </script>

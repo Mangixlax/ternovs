@@ -4,7 +4,6 @@
     <journal-list
       :posts-list="postsList"
       :is-loading="isLoading"
-      ref="journalList"
       v-if="postsList.length"
     >
       <template #header>

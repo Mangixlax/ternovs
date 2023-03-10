@@ -57,7 +57,17 @@
             :item="item"
           />
         </div>
-        <ui-form-button variant="gray">Показать больше</ui-form-button>
+        <ui-form-button
+          variant="gray"
+          tag="nuxt-link"
+          :to="{
+            name: 'zhurnal-category',
+            params: { category: 'istorii-pacientov' },
+          }"
+          :style="{ margin: '0 auto' }"
+        >
+          Показать больше
+        </ui-form-button>
       </div>
     </div>
   </section>

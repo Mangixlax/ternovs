@@ -1,7 +1,11 @@
 <template>
   <div :class="$style['platform__item']">
     <img
-      :src="$img(`/sections/reviews/platforms/${item.image}`)"
+      :src="
+        $img(`/sections/reviews/platforms/${item.image}`, {
+          format: 'webp',
+        })
+      "
       :alt="item.name"
     />
     <div :class="$style['platform__item-rating']">

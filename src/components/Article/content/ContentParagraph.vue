@@ -29,7 +29,7 @@ export default defineComponent({
 <style lang="scss" module>
 .p {
   @include font-lead-regular-160;
-  color: $color-gray-100;
+  color: $color-gray-88;
   margin: 24px 0;
 
   &:first-child {

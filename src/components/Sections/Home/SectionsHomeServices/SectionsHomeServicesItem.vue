@@ -1,10 +1,10 @@
 <template>
   <div :class="$style['services__item']">
     <div :class="$style['services__item-icon']">
-      <svg-icon :name="item.icon" />
+      <img :src="image" :alt="`${item.name}`" />
     </div>
-    <div :class="$style['services__item-title']">{{ item.title }}</div>
-    <div :class="$style['services__item-text']">{{ item.text }}</div>
+    <div :class="$style['services__item-title']">{{ item.name }}</div>
+    <div :class="$style['services__item-text']">{{ item.excerpt }}</div>
     <nuxt-link :to="item.route" :class="$style['services__item-link']">
       <span>К услугам</span>
       <svg-icon :name="'back-arrow'" />
@@ -13,13 +13,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { HomeServiceItem } from '@/types/models/home'
+import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'SectionsHomeServicesItem',
   props: {
-    item: { type: Object as PropType<HomeServiceItem>, default: () => {} },
+    item: { type: Object, default: () => {} },
+  },
+  computed: {
+    image(): any {
+      if (this.item.image) {
+        const filePath = (this as any).item.image.filename
+          .match(/.{1,3}/g)
+          .slice(0, 3)
+          .join('/')
+
+        return this.$img(`s3/` + filePath + '/' + this.item.image.filename, {
+          format: 'webp',
+        })
+      } else {
+        return null
+      }
+    },
   },
 })
 </script>
@@ -39,10 +54,9 @@ export default defineComponent({
     margin-bottom: 16px;
     display: flex;
 
-    svg {
+    img {
       height: 30px;
       width: 30px;
-      fill: $color-primary-100;
     }
   }
 
