@@ -52,7 +52,7 @@
             :class="$style['slider']"
           >
             <swiper-slide
-              v-for="(item, i) in services"
+              v-for="(item, i) in servicesLinks"
               :key="i"
               :class="$style['slider__slide']"
             >
@@ -82,7 +82,6 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { SwiperOptions } from 'swiper'
-import { HomeServiceItem } from '@/types/models/home'
 
 import { pluralize } from '~/lib/utils'
 
@@ -94,44 +93,6 @@ export default defineComponent({
   components: {
     UiFormButton,
     SectionsHomeServicesItem,
-  },
-  data() {
-    return {
-      services: <HomeServiceItem[]>[
-        {
-          icon: 'tooth-cracked',
-          title: 'Ортопедия',
-          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-          route: {
-            name: 'uslugi',
-          },
-        },
-        {
-          icon: 'tooth-caries',
-          title: 'Терапия',
-          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-          route: {
-            name: 'uslugi',
-          },
-        },
-        {
-          icon: 'dental-implant',
-          title: 'Хирургия',
-          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-          route: {
-            name: 'uslugi',
-          },
-        },
-        {
-          icon: 'dental-crown',
-          title: 'Ортопедия',
-          text: 'Краткое описане, которое раскрывает  и мотивирует узнать больше',
-          route: {
-            name: 'uslugi',
-          },
-        },
-      ],
-    }
   },
   computed: {
     swiperOption(): SwiperOptions {
@@ -292,8 +253,9 @@ export default defineComponent({
 
         &-container {
           width: 100%;
-          display: flex;
-          grid-gap: 24px;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-gap: 48px;
         }
 
         &-slider {
