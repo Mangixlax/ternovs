@@ -10,7 +10,7 @@
         </div>
         <img
           :src="
-            $img(`/sections/about/photos/${block.image?.src}`, {
+            $img(`/sections/about/equipment/${block.image?.src}`, {
               format: 'webp',
             })
           "

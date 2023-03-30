@@ -21,9 +21,8 @@
               <div :class="$style['prices__grid-list_text']">
                 {{ item.name }}
                 <span>
-                  Цена от {{ getFormatNumber(item.price_min) }} ₽ до
-                  {{ getFormatNumber(item.price_max) }} ₽ за услугу</span
-                >
+                  {{ getPriceText(item) }}
+                </span>
               </div>
               <div :class="$style['prices__grid-list_appointment']">
                 <span>Записаться</span>
@@ -65,9 +64,15 @@ export default defineComponent({
       isModalOpen: false,
     }
   },
+  computed: {},
   methods: {
-    getFormatNumber(value: number): string {
-      return formatNumber(value)
+    getPriceText(item: any): string {
+      if (item.price_max) {
+        return `Цена от ${formatNumber(item.price_min)} ₽ до
+        ${formatNumber(this.item.price_max)}} ₽ за услугу`
+      } else {
+        return `Цена ${formatNumber(item.price_min)} ₽ за услугу`
+      }
     },
     onShowCallback(index: number) {
       this.activeItemIndex = index
