@@ -59,9 +59,6 @@ export default defineComponent({
       this.isShowDropdown = false
     },
   },
-  mounted() {
-    console.log(this.sticky);
-  },
 })
 </script>
 
@@ -93,7 +90,7 @@ export default defineComponent({
 
   > ul {
     position: absolute;
-    padding: 20px;
+    padding: 16px 20px;
     top: 100%;
     list-style: none;
     background: #eef7f1;
@@ -124,7 +121,7 @@ export default defineComponent({
         @include font-p-regular-160;
         text-decoration: none;
         color: $color-gray-100;
-        padding-top: 4px;
+        padding: 4px 0;
         white-space: nowrap;
 
         > svg {
@@ -133,10 +130,14 @@ export default defineComponent({
           height: 11px;
           fill: $color-gray-100;
         }
+
+        &:hover {
+          color: $color-primary-100;
+        }
       }
 
       & + li {
-        margin-top: 14px;
+        margin-top: 10px;
       }
     }
   }

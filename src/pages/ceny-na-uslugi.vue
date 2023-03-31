@@ -75,11 +75,12 @@ export default defineComponent({
           search: {
             category_slug: 'uslugi',
           },
-          page: ctx.route.query.page || 1,
-          per_page: 6,
         },
+        page: ctx.route.query.page || 1,
+        per_page: 6,
       }),
     ])
+    console.log(directionListResponse, '123')
 
     return {
       directionList: directionListResponse.data as PricesContentBlock[],

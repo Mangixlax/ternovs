@@ -7,9 +7,7 @@
       :active="i == 0"
       :class="$style['accordions-item']"
     >
-      <p>
-        {{ accordion.answer }}
-      </p>
+      <p v-html="accordion.answer" />
     </base-accordion-item>
   </div>
 </template>

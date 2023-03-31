@@ -4,8 +4,11 @@
       <div :class="$style['services__grid-container']">
         <h1>{{ direction.title }}</h1>
         <p>{{ direction.excerpt }}</p>
-        <div>
-          <ui-form-button> Записаться на прием </ui-form-button>
+        <div :class="$style['services__grid-container-buttons']">
+          <ui-form-button variant="gray"> Записаться на прием </ui-form-button>
+          <ui-form-button @click="onScrollToPrice">
+            Перейти к ценам
+          </ui-form-button>
         </div>
       </div>
       <div :class="$style['services__grid-article']">
@@ -17,7 +20,7 @@
         />
       </div>
     </div>
-    <div :class="$style['services__grid-prices']">
+    <div :class="$style['services__grid-prices']" ref="priceList">
       <sections-prices-content-block
         :block="direction.services"
         title="Цены на услуги"
@@ -105,6 +108,11 @@ export default defineComponent({
       seo: this.direction.seo,
     })
   },
+  methods: {
+    onScrollToPrice() {
+      this.$scrollTo(this.$refs.priceList, 500, { offset: -100 })
+    },
+  },
   created() {
     this.$store.commit('setBreadCrumbs', [
       {
@@ -181,6 +189,11 @@ export default defineComponent({
         @include font-lead-regular-160;
         color: $color-gray-64;
         margin-bottom: 24px;
+      }
+
+      &-buttons {
+        display: flex;
+        grid-gap: 16px;
       }
     }
 

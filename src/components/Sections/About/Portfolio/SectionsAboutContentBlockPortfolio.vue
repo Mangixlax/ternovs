@@ -8,15 +8,29 @@
             {{ paragraph }}
           </p>
         </div>
-        <img
+        <base-image-comparison
+          :first-image="
+            $img(`/sections/about/portfolio/${block.comparison.images[0]}`, {
+              format: 'webp',
+            })
+          "
+          :second-image="
+            $img(`/sections/about/portfolio/${block.comparison.images[1]}`, {
+              format: 'webp',
+            })
+          "
+          :caption="block.comparison.caption"
+        />
+        <!-- <img
           :src="
-            $img(`/sections/about/${block.image?.src}`, {
+            $img(`/sections/about/portfolio/${block.images?.src}`, {
               format: 'webp',
             })
           "
           :alt="block.image?.caption"
-        />
-        <span> {{ block.image?.caption }} </span>
+        /> -->
+
+        <!-- <span> {{ block.comparison?.caption }} </span> -->
         <div :class="$style['about_content__grid-container']">
           <div
             :class="$style['about_content__grid-container--text']"
@@ -35,12 +49,19 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import { AboutContentBlock } from '~/types/models/models.js'
+import { AboutContentBlockPortfolio } from '~/types/models/models.js'
+import BaseImageComparison from '~/components/Base/BaseImageComparison/BaseImageComparison.vue'
 
 export default defineComponent({
-  name: 'SectionsAboutContentBlock',
+  name: 'SectionsAboutContentBlockPortfolio',
+  components: {
+    BaseImageComparison,
+  },
   props: {
-    block: { type: Object as PropType<AboutContentBlock>, default: () => {} },
+    block: {
+      type: Object as PropType<AboutContentBlockPortfolio>,
+      default: () => {},
+    },
   },
 })
 </script>
