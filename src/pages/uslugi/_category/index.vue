@@ -5,7 +5,7 @@
       :excerpt="category.excerpt"
       :directions="category.directions"
     />
-    <journal-list
+    <!-- <journal-list
       :posts-list="category.journal_posts"
       :is-loading="isLoading"
     >
@@ -34,7 +34,7 @@
           Показать больше
         </ui-form-button>
       </template>
-    </journal-list>
+    </journal-list> -->
     <layout-callback />
   </main>
 </template>
