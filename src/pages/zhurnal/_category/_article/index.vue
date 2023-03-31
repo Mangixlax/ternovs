@@ -79,7 +79,7 @@ export default defineComponent({
   head() {
     return getHead({
       title: this.article?.title,
-      description: `${this.article?.title} - на эту тему представдлена статья в блоге`,
+      description: ``,
       route: this.$route,
       seo: this.article.seo || this.article.page,
     })
