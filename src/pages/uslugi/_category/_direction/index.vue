@@ -1,11 +1,11 @@
 <template>
   <main :class="$style['services']">
-    <div :class="$style['services__grid']">
+    <section :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
         <h1>{{ direction.title }}</h1>
         <p>{{ direction.excerpt }}</p>
         <div :class="$style['services__grid-container-buttons']">
-          <ui-form-button variant="gray"> Записаться на прием </ui-form-button>
+          <ui-form-button> Записаться на прием </ui-form-button>
           <ui-form-button @click="onScrollToPrice">
             Перейти к ценам
           </ui-form-button>
@@ -19,7 +19,7 @@
           :block="block"
         />
       </div>
-    </div>
+    </section>
     <div :class="$style['services__grid-prices']" ref="priceList">
       <sections-prices-content-block
         :block="direction.services"

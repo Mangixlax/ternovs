@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style['services']">
+  <section :class="$style['services']">
     <div :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
         <h1>{{ name }}</h1>
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
