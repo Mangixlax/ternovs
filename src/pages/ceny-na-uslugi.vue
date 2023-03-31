@@ -80,8 +80,6 @@ export default defineComponent({
         per_page: 6,
       }),
     ])
-    console.log(directionListResponse, '123')
-
     return {
       directionList: directionListResponse.data as PricesContentBlock[],
       postsList: postsListResponse.data || ([] as any),
