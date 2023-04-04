@@ -12,7 +12,7 @@
     >
       <template #header>
         <h2>
-          Записи в журнале по направлению
+          Записи в журнале в категории
           {{ category.short_name.toLowerCase() }}
         </h2>
         <p>
