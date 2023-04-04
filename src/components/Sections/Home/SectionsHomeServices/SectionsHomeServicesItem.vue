@@ -5,9 +5,11 @@
     </div>
     <div :class="$style['services__item-title']">{{ item.name }}</div>
     <div :class="$style['services__item-text']">{{ item.excerpt }}</div>
-    <nuxt-link :to="item.route" :class="$style['services__item-link']">
+    <span :class="$style['services__item-link']">
       <span>К услугам</span>
       <svg-icon :name="'back-arrow'" />
+    </span>
+    <nuxt-link :to="item.route" :class="$style['services__item-link--full']">
     </nuxt-link>
   </div>
 </template>
@@ -44,7 +46,8 @@ export default defineComponent({
   width: 100%;
   display: flex;
   flex-direction: column;
-
+  position: relative;
+  
   &-icon {
     padding: 19px 17px 23px 17px;
     border-radius: 0 0 100px 100px;
@@ -87,6 +90,11 @@ export default defineComponent({
       height: 30px;
       width: 30px;
       fill: $color-primary-100;
+    }
+
+    &--full {
+      position: absolute;
+      inset: 0;
     }
   }
 }

@@ -75,12 +75,11 @@ export default defineComponent({
           search: {
             category_slug: 'uslugi',
           },
-          page: ctx.route.query.page || 1,
-          per_page: 6,
         },
+        page: ctx.route.query.page || 1,
+        per_page: 6,
       }),
     ])
-
     return {
       directionList: directionListResponse.data as PricesContentBlock[],
       postsList: postsListResponse.data || ([] as any),

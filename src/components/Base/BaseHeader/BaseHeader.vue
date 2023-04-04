@@ -2,9 +2,11 @@
   <header
     :class="{
       [$style['header']]: true,
+      [$style['header--sticky']]: sticky,
       [$style['mobile-open']]: isMobileMenuOpen,
     }"
     :style="{ '--scrollbar-width': `${scrollbarWidth}px` }"
+    ref="header"
   >
     <div :class="$style['header__grid']">
       <div :class="$style['header__grid-inner']">
@@ -15,11 +17,12 @@
               v-for="(item, index) in extendedMenu"
               :key="index"
               :item="item"
+              :sticky="sticky"
             />
           </ul>
         </nav>
         <div :class="$style['header__grid-contacts']">
-          <a href="tel:+79611911116"> 8 961 191 11 16 </a>
+          <a href="tel:+79253595999"> 8 925 359 59 99 </a>
           <span> г. Клин, ул. Чайковского, д. 105 </span>
         </div>
         <div
@@ -61,6 +64,7 @@ export default defineComponent({
       isShowOverlay: <boolean>false,
       isMobileMenuOpen: <boolean>false,
       scrollbarWidth: <number>15,
+      sticky: false,
     }
   },
   computed: {
@@ -131,14 +135,24 @@ export default defineComponent({
       this.scrollbarWidth =
         window.innerWidth - document.scrollingElement!.clientWidth
     },
+    isSticky() {
+      if ((window.pageYOffset !== 0)) {
+        this.sticky = true
+      } else {
+        this.sticky = false
+      }
+    },
   },
   mounted() {
+    this.isSticky()
     window.addEventListener('resize', this.calculateScrollbarWidth)
+    window.addEventListener('scroll', this.isSticky)
     this.calculateScrollbarWidth()
   },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.calculateScrollbarWidth)
+    window.removeEventListener('scroll', this.isSticky)
   },
 })
 </script>
@@ -151,6 +165,11 @@ export default defineComponent({
   top: 0;
   z-index: 10;
   background-color: #eef7f1;
+  transition: all 0.3s ease;
+
+  &--sticky {
+    background-color: #fff;
+  }
 
   &__grid {
     @include grid-container;

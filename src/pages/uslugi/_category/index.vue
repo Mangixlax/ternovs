@@ -6,11 +6,15 @@
       :directions="category.directions"
     />
     <journal-list
+      v-if="category.journal_posts.length"
       :posts-list="category.journal_posts"
       :is-loading="isLoading"
     >
       <template #header>
-        <h2>Другие наши услуги</h2>
+        <h2>
+          Записи в журнале в категории
+          {{ category.short_name.toLowerCase() }}
+        </h2>
         <p>
           Ежедневно в нашу клинику обращаются десятки новых пациентов, но
           вопросы, которые они задают - одни и те же. Масштабы заблуждений в
@@ -62,7 +66,6 @@ export default defineComponent({
     const categoryResponse = await ctx.$repositories.services.getCategory(
       ctx.params.category
     )
-
     return {
       category: categoryResponse,
       isLoading: false as boolean,

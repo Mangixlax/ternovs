@@ -1,5 +1,10 @@
 <template>
-  <li :class="$style['item']">
+  <li
+    :class="{
+      [$style['item']]: true,
+      [$style['item--sticky']]: sticky,
+    }"
+  >
     <nuxt-link
       :to="item.route"
       :class="$style['item-link']"
@@ -9,10 +14,25 @@
     </nuxt-link>
     <svg-icon name="dropdown-menu" v-if="item.list?.length" />
     <ul v-if="item.list?.length">
+      <svg-icon name="up" />
       <li v-for="(link, index) in item.list" :key="index">
         <nuxt-link :to="link.route" :active-class="$style['item-link--active']">
           {{ link.label }}
+
+          <!-- <svg-icon name="dropdown-menu" /> -->
         </nuxt-link>
+        <!-- <ul>
+          <li v-for="(link, index) in item.list" :key="index">
+            <nuxt-link
+              :to="link.route"
+              :active-class="$style['item-link--active']"
+            >
+              {{ link.label }}
+
+              <svg-icon name="dropdown-menu" />
+            </nuxt-link>
+          </li>
+        </ul> -->
       </li>
     </ul>
   </li>
@@ -26,6 +46,7 @@ export default defineComponent({
   name: 'BaseHeaderNavItem',
   props: {
     item: { type: Object as PropType<MenuItem>, default: () => {} },
+    sticky: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -36,14 +57,6 @@ export default defineComponent({
   watch: {
     $route() {
       this.isShowDropdown = false
-    },
-  },
-  methods: {
-    onMouseEnter() {
-      this.isHoverOnItem = true
-    },
-    onMouseLeave() {
-      this.isHoverOnItem = false
     },
   },
 })
@@ -77,30 +90,68 @@ export default defineComponent({
 
   > ul {
     position: absolute;
-    padding: 0 20px;
-    padding-bottom: 10px;
-    padding-top: 8px;
+    padding: 16px 20px;
     top: 100%;
     list-style: none;
-    opacity: 0;
     background: #eef7f1;
-    left: -20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
+    opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    border-radius: 8px;
+    border: 1px solid $color-gray-4;
+
+    > svg {
+      height: 4px;
+      width: 14px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      fill: #eef7f1;
+    }
 
     > li {
+      // width: 170px;
+
       a {
-        @include font-p-medium-160;
+        @include font-p-regular-160;
         text-decoration: none;
         color: $color-gray-100;
-        padding-top: 4px;
+        padding: 4px 0;
         white-space: nowrap;
+
+        > svg {
+          transform: rotate(-90deg);
+          width: 11px;
+          height: 11px;
+          fill: $color-gray-100;
+        }
+
+        &:hover {
+          color: $color-primary-100;
+        }
       }
 
       & + li {
-        margin-top: 8px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+
+
+  &--sticky {
+    > ul {
+      background-color: $color-white-100 !important;
+      transition: all 0.3s ease;
+
+      > svg {
+        fill: $color-white-100;
+        transition: all 0.3s ease;
       }
     }
   }
@@ -111,7 +162,7 @@ export default defineComponent({
       pointer-events: all;
     }
 
-    svg {
+    > svg {
       transform: rotate(180deg);
     }
   }

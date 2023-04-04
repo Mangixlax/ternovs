@@ -1,6 +1,6 @@
 <template>
   <main :class="$style['services']">
-    <div :class="$style['services__grid']">
+    <section :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
         <h1>Услуги стоматологии</h1>
         <span>
@@ -26,7 +26,7 @@
           </div>
         </base-scroll-block>
       </div>
-    </div>
+    </section>
     <div :class="$style['services__list']">
       <sections-services
         v-for="(item, index) in categoriesList"
@@ -172,6 +172,10 @@ export default defineComponent({
         background: $color-gray-4;
         color: $color-gray-100;
         border-radius: 30px;
+
+        &:hover {
+          color: $color-primary-100;
+        }
       }
     }
   }

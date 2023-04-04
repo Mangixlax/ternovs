@@ -28,7 +28,7 @@ const metaDefault = {
   },
   og_site_name: {
     property: 'og:site_name',
-    content: 'ProNovostroiki',
+    content: 'Ternovs',
   },
   og_url: {
     property: 'og:url',
@@ -76,15 +76,15 @@ const metaDefault = {
   },
   twitter_domain: {
     name: 'twitter:domain',
-    content: 'pronovostroiki.ru',
+    content: 'ternovs.dental',
   },
   twitter_site: {
     name: 'twitter:site',
-    content: '@pronovostroiki.ru',
+    content: '@ternovs.dental',
   },
   twitter_creator: {
     name: 'twitter:creator',
-    content: '@pronovostroiki.ru',
+    content: '@ternovs.dental',
   },
 
   robots: {

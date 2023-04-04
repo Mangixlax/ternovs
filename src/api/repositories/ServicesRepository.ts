@@ -13,7 +13,10 @@ export default class ServicesRepository extends BaseRepository {
   }
 
   getDirectionsList() {
-    return this.axios.$get(`/api/v1/catalog/directions/grid?`)
+    return this.axios.$get(`/api/v1/catalog/directions/grid?` +
+    QueryString.stringify(
+      { sort_column: 'sort_order', sort_order: 'asc', per_page: 1000 },
+    ))
   }
 
   getCategory(slug: string) {

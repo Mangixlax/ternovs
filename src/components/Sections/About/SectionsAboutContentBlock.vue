@@ -10,7 +10,7 @@
         </div>
         <img
           :src="
-            $img(`/sections/about/photos/${block.image?.src}`, {
+            $img(`/sections/about/${block.image?.src}`, {
               format: 'webp',
             })
           "
@@ -38,7 +38,7 @@ import { defineComponent, PropType } from '@nuxtjs/composition-api'
 import { AboutContentBlock } from '~/types/models/models.js'
 
 export default defineComponent({
-  name: 'SectionsAboutOurTeam',
+  name: 'SectionsAboutContentBlock',
   props: {
     block: { type: Object as PropType<AboutContentBlock>, default: () => {} },
   },

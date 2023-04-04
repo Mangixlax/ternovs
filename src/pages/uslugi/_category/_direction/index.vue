@@ -1,11 +1,14 @@
 <template>
   <main :class="$style['services']">
-    <div :class="$style['services__grid']">
+    <section :class="$style['services__grid']">
       <div :class="$style['services__grid-container']">
         <h1>{{ direction.title }}</h1>
         <p>{{ direction.excerpt }}</p>
-        <div>
+        <div :class="$style['services__grid-container-buttons']">
           <ui-form-button> Записаться на прием </ui-form-button>
+          <ui-form-button @click="onScrollToPrice">
+            Перейти к ценам
+          </ui-form-button>
         </div>
       </div>
       <div :class="$style['services__grid-article']">
@@ -16,8 +19,8 @@
           :block="block"
         />
       </div>
-    </div>
-    <div :class="$style['services__grid-prices']">
+    </section>
+    <div :class="$style['services__grid-prices']" ref="priceList">
       <sections-prices-content-block
         :block="direction.services"
         title="Цены на услуги"
@@ -34,7 +37,10 @@
       v-if="direction.journal_posts.length"
     >
       <template #header>
-        <h2>Другие наши услуги</h2>
+        <h2>
+          Записи в журнале по направлению
+          {{ direction.name.toLowerCase() }}
+        </h2>
         <p>
           Ежедневно в нашу клинику обращаются десятки новых пациентов, но
           вопросы, которые они задают - одни и те же. Масштабы заблуждений в
@@ -104,6 +110,11 @@ export default defineComponent({
       route: this.$route,
       seo: this.direction.seo,
     })
+  },
+  methods: {
+    onScrollToPrice() {
+      this.$scrollTo(this.$refs.priceList, 500, { offset: -100 })
+    },
   },
   created() {
     this.$store.commit('setBreadCrumbs', [
@@ -181,6 +192,11 @@ export default defineComponent({
         @include font-lead-regular-160;
         color: $color-gray-64;
         margin-bottom: 24px;
+      }
+
+      &-buttons {
+        display: flex;
+        grid-gap: 16px;
       }
     }
 

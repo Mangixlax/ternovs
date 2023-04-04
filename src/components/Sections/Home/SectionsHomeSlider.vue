@@ -19,13 +19,13 @@
         <swiper-slide :class="$style['slider__slide']">
           <div :class="$style['home_slider__slider-slide']">
             <span :class="$style['home_slider__slider-text']">
-              У нас есть зубная нить, которая
+              Хотите иметь здоровые зубы и десны?
             </span>
             <h2 :class="$style['home_slider__slider-title']">
-              Сохранит вашу улыбку чистой, великолепной!
+              Мы поможем вам достичь этой цели!
             </h2>
             <span :class="$style['home_slider__slider-description']">
-              Надоело стесняться и не улыбаться? Вы точно по адресу!
+              У нас работают опытные стоматологи и современное оборудование.
             </span>
             <ui-form-button>Записаться на прием</ui-form-button>
           </div>
@@ -33,13 +33,13 @@
         <swiper-slide :class="$style['slider__slide']">
           <div :class="$style['home_slider__slider-slide']">
             <span :class="$style['home_slider__slider-text']">
-              У нас есть зубная нить, которая
+              Чистые зубы - здоровый образ жизни!
             </span>
             <h2 :class="$style['home_slider__slider-title']">
-              Сохранит вашу улыбку чистой, великолепной!
+              Заботьтесь о своих зубах с нами!
             </h2>
             <span :class="$style['home_slider__slider-description']">
-              Надоело стесняться и не улыбаться? Вы точно по адресу!
+              Профессиональная чистка зубов - залог здоровья полости рта.
             </span>
             <ui-form-button>Записаться на прием</ui-form-button>
           </div>
