@@ -121,6 +121,18 @@ export default defineComponent({
               category: item.slug,
             },
           },
+          childList: item.directions.map((direction: any) => {
+            return {
+              label: direction.name,
+              route: {
+                name: 'uslugi-category-direction',
+                params: {
+                  category: item.slug,
+                  direction: direction.slug
+                },
+              },
+            }
+          }),
         }
       })
     },
@@ -136,7 +148,7 @@ export default defineComponent({
         window.innerWidth - document.scrollingElement!.clientWidth
     },
     isSticky() {
-      if ((window.pageYOffset !== 0)) {
+      if (window.pageYOffset !== 0) {
         this.sticky = true
       } else {
         this.sticky = false

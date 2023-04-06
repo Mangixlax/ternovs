@@ -9,4 +9,5 @@ export interface MenuItem {
 export interface MenuItemLink {
   label: string,
   route: Location
+  childList?: MenuItem[]
 }
