@@ -17,7 +17,7 @@
                   isModalOpen && activeItemIndex === index,
               }"
             >
-              <loader v-if="isLoading" color="green" />
+              <loader v-if="isLoading && activeItemIndex == index" color="green" />
               <div :class="$style['prices__grid-list_text']">
                 {{ item.name }}
                 <span>
