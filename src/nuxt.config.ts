@@ -103,7 +103,7 @@ export default <NuxtConfig>{
    * Loading config
    */
   loading: {
-    color: '#0066FF',
+    color: '#39A05F',
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

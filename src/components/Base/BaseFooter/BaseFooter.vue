@@ -19,10 +19,10 @@
                 Вы можете записаться на прием по телефону:
               </span>
               <a
-                href="tel:+79153525899"
+                href="tel:+79253595999"
                 :class="$style['footer__row-link--green']"
               >
-                8 (915) 352-58-99
+                8 (925) 359-59-99
               </a>
               <a
                 href="mailto:info@ternovs.dental"

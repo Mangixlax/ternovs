@@ -19,20 +19,18 @@
         <nuxt-link :to="link.route" :active-class="$style['item-link--active']">
           {{ link.label }}
 
-          <!-- <svg-icon name="dropdown-menu" /> -->
+          <svg-icon name="dropdown-menu" />
         </nuxt-link>
-        <!-- <ul>
-          <li v-for="(link, index) in item.list" :key="index">
+        <ul>
+          <li v-for="(child, index) in link.childList" :key="index">
             <nuxt-link
-              :to="link.route"
+              :to="child.route"
               :active-class="$style['item-link--active']"
             >
-              {{ link.label }}
-
-              <svg-icon name="dropdown-menu" />
+              {{ child.label }}
             </nuxt-link>
           </li>
-        </ul> -->
+        </ul>
       </li>
     </ul>
   </li>
@@ -80,7 +78,7 @@ export default defineComponent({
     }
   }
 
-  svg {
+  > svg {
     height: 11px;
     width: 11px;
     fill: $color-gray-100;
@@ -90,7 +88,7 @@ export default defineComponent({
 
   > ul {
     position: absolute;
-    padding: 16px 20px;
+    padding: 13px 0;
     top: 100%;
     list-style: none;
     background: #eef7f1;
@@ -98,9 +96,9 @@ export default defineComponent({
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
+    opacity: 0;
     border-radius: 8px;
     border: 1px solid $color-gray-4;
 
@@ -115,20 +113,25 @@ export default defineComponent({
     }
 
     > li {
-      // width: 170px;
+      width: 170px;
 
       a {
-        @include font-p-regular-160;
+        @include font-p-regular-130;
         text-decoration: none;
         color: $color-gray-100;
-        padding: 4px 0;
+        padding: 7px 20px;
         white-space: nowrap;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         > svg {
           transform: rotate(-90deg);
           width: 11px;
           height: 11px;
           fill: $color-gray-100;
+          transition: transform 0.3s ease;
         }
 
         &:hover {
@@ -136,13 +139,49 @@ export default defineComponent({
         }
       }
 
-      & + li {
-        margin-top: 10px;
+      > ul {
+        position: absolute;
+        left: 96%;
+        top: -1px;
+        background: #f6f6f6;
+        padding: 13px 20px;
+        list-style: none;
+        height: calc(100% + 2px);
+        display: flex;
+        flex-direction: column;
+        border-radius: 0 8px 8px 0;
+        border: 1px solid $color-gray-4;
+        opacity: 0;
+        pointer-events: none;
+        min-width: 300px;
+
+        a {
+          @include font-p-regular-130;
+          text-decoration: none;
+          color: $color-gray-100;
+          padding: 7px 0;
+          white-space: nowrap;
+
+          &:hover {
+            color: $color-primary-100;
+          }
+        }
+      }
+
+      &:hover {
+        > ul {
+          opacity: 1;
+          pointer-events: all;
+        }
+
+        > a {
+          > svg {
+            transform: rotate(90deg);
+          }
+        }
       }
     }
   }
-
-
 
   &--sticky {
     > ul {

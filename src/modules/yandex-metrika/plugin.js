@@ -34,8 +34,6 @@ export default ({ app: { router }, store }, inject) => {
 
     ym(<%= options.id %>, "getClientID", function (clientID) {
       ym(<%= options.id %>, "userParams", {
-        ip: store.state.ip,
-        all_ips: store.state.all_ips.join(', '),
         userAgent: navigator.userAgent,
         userLang: navigator.language,
         с_userid: clientID,
