@@ -18,10 +18,9 @@
       <li v-for="(link, index) in item.list" :key="index">
         <nuxt-link :to="link.route" :active-class="$style['item-link--active']">
           {{ link.label }}
-
-          <svg-icon name="dropdown-menu" />
+          <svg-icon name="dropdown-menu" v-if="link.childList?.length"/>
         </nuxt-link>
-        <ul>
+        <ul v-if="link.childList?.length">
           <li v-for="(child, index) in link.childList" :key="index">
             <nuxt-link
               :to="child.route"
@@ -113,8 +112,6 @@ export default defineComponent({
     }
 
     > li {
-      width: 170px;
-
       a {
         @include font-p-regular-130;
         text-decoration: none;
@@ -132,6 +129,7 @@ export default defineComponent({
           height: 11px;
           fill: $color-gray-100;
           transition: transform 0.3s ease;
+          margin-left: 40px;
         }
 
         &:hover {
