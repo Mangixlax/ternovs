@@ -13,14 +13,18 @@
             v-for="(item, index) in employee.sertificates?.list"
             :src="
               $img(
-                `/sections/about/employees/${employee.slug}/sertificates/${item}`,
+                `/sections/about/employees/${employee.slug}/sertificates/${item.src}`,
                 {
                   format: 'webp',
                 }
               )
             "
             :alt="`Сертификат сотрудника - ${employee.name}`"
-            :class="$style['accordion__grid-image']"
+            :class="{
+              [$style['accordion__grid-image']]: true,
+              [$style['accordion__grid-image--landscape']]:
+                item.orintation === 'landscape',
+            }"
           />
         </div>
         <div :class="$style['accordion__grid-row-slider']">
@@ -37,14 +41,18 @@
               <img
                 :src="
                   $img(
-                    `/sections/about/employees/${employee.slug}/sertificates/${item}`,
+                    `/sections/about/employees/${employee.slug}/sertificates/${item.src}`,
                     {
                       format: 'webp',
                     }
                   )
                 "
                 :alt="`Сертификат сотрудника - ${employee.name}`"
-                :class="$style['accordion__grid-image']"
+                :class="{
+                  [$style['accordion__grid-image']]: true,
+                  [$style['accordion__grid-image--landscape']]:
+                    item.orintation === 'landscape',
+                }"
               />
             </swiper-slide>
             <div slot="pagination" :class="$style['slider__navigation']">
@@ -89,7 +97,7 @@ export default defineComponent({
         breakpoints: {
           // when window width is >= 768
           768: {
-            slidesPerView: 3,
+            slidesPerView: 'auto',
           },
         },
       }
@@ -130,6 +138,10 @@ export default defineComponent({
 
       &-container {
         display: none;
+
+        img {
+          object-fit: cover;
+        }
       }
 
       &-slider {
@@ -141,6 +153,12 @@ export default defineComponent({
       width: 198px;
       height: 280px;
       border-radius: 12px;
+
+      &--landscape {
+        width: 280px;
+        height: 198px;
+        border-radius: 12px;
+      }
     }
   }
 
@@ -190,7 +208,7 @@ export default defineComponent({
         grid-column: 2 / 12;
 
         &-container {
-          grid-template-columns: 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr;
           grid-row-gap: 80px;
           grid-column-gap: 48px;
         }
