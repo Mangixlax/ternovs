@@ -18,5 +18,10 @@ export interface EmployeeAccordion {
 
 export interface EmployeeSertificates {
   text: string
-  list: string[]
+  list: EmployeeSertificate[]
+}
+
+export interface EmployeeSertificate {
+  src: string
+  orintation?: string
 }
