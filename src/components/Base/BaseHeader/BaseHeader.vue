@@ -109,6 +109,24 @@ export default defineComponent({
           label: 'Журнал',
           route: { name: 'zhurnal' },
         },
+        {
+          label: 'Пациентам',
+          route: { name: 'pacientam' },
+          list: [
+            {
+              label: 'Команда',
+              route: { name: 'doktora' },
+            },
+            {
+              label: 'Портфолио',
+              route: { name: 'portfolio' },
+            },
+            {
+              label: 'Оборудование',
+              route: { name: 'oborudovanie-kliniki' },
+            },
+          ],
+        },
       ]
     },
     servicesLinks() {
