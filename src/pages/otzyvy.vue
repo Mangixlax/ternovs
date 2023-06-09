@@ -1,11 +1,7 @@
 <template>
   <main>
     <sections-reviews />
-    <journal-list
-      :posts-list="postsList"
-      :is-loading="isLoading"
-      v-if="postsList.length"
-    >
+    <journal-list :posts-list="postsList" v-if="postsList.length">
       <template #header>
         <h2>Истории пациентов</h2>
         <p>
@@ -13,15 +9,10 @@
         </p>
       </template>
       <template #footer>
-        <ui-form-button
-          variant="gray"
-          tag="nuxt-link"
-          :to="{
-            name: 'zhurnal-category',
-            params: { category: postsListResponse.category.slug },
-          }"
-          :style="{ margin: '0 auto' }"
-        >
+        <ui-form-button variant="gray" tag="nuxt-link" :to="{
+          name: 'zhurnal-category',
+          params: { category: postsListResponse.category.slug },
+        }" :style="{ margin: '0 auto' }">
           Показать больше
         </ui-form-button>
       </template>

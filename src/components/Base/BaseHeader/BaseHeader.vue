@@ -1,46 +1,28 @@
 <template>
-  <header
-    :class="{
-      [$style['header']]: true,
-      [$style['header--sticky']]: sticky,
-      [$style['mobile-open']]: isMobileMenuOpen,
-    }"
-    :style="{ '--scrollbar-width': `${scrollbarWidth}px` }"
-    ref="header"
-  >
+  <header :class="{
+    [$style['header']]: true,
+    [$style['header--sticky']]: sticky,
+    [$style['mobile-open']]: isMobileMenuOpen,
+  }" :style="{ '--scrollbar-width': `${scrollbarWidth}px` }" ref="header">
     <div :class="$style['header__grid']">
       <div :class="$style['header__grid-inner']">
         <logo />
         <nav>
           <ul>
-            <base-header-nav-item
-              v-for="(item, index) in extendedMenu"
-              :key="index"
-              :item="item"
-              :sticky="sticky"
-            />
+            <base-header-nav-item v-for="(item, index) in extendedMenu" :key="index" :item="item" :sticky="sticky" />
           </ul>
         </nav>
         <div :class="$style['header__grid-contacts']">
           <a href="tel:+79253595999"> 8 925 359 59 99 </a>
           <span> г. Клин, ул. Чайковского, д. 105 </span>
         </div>
-        <div
-          :class="$style['header__grid-burger']"
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
-        >
-          <svg-icon
-            :name="isMobileMenuOpen ? 'close' : 'burger'"
-            :class="$style['header__container-burger-svg']"
-          />
+        <div :class="$style['header__grid-burger']" @click="isMobileMenuOpen = !isMobileMenuOpen">
+          <svg-icon :name="isMobileMenuOpen ? 'close' : 'burger'" :class="$style['header__container-burger-svg']" />
         </div>
       </div>
     </div>
-    <base-header-mobile
-      :menu="menu"
-      :is-mobile-menu-open="isMobileMenuOpen"
-      @closeMobileMenu="isMobileMenuOpen = false"
-    />
+    <base-header-mobile :menu="menu" :is-mobile-menu-open="isMobileMenuOpen"
+      @closeMobileMenu="isMobileMenuOpen = false" />
   </header>
 </template>
 
@@ -102,30 +84,30 @@ export default defineComponent({
           ],
         },
         {
+          label: 'Пациентам',
+          route: { name: 'pacientam' },
+          list: [
+            {
+              label: 'Безопасность и гарантии',
+              route: { name: 'pacientam-bezopasnost-i-garantii' },
+            },
+            {
+              label: 'Памятка пациенту',
+              route: { name: 'pacientam-pamyatka-pacientu' },
+            },
+            {
+              label: 'Документы',
+              route: { name: 'pacientam-dokumenty' },
+            },
+          ],
+        },
+        {
           label: 'Контакты',
           route: { name: 'kontakty' },
         },
         {
           label: 'Журнал',
           route: { name: 'zhurnal' },
-        },
-        {
-          label: 'Пациентам',
-          route: { name: 'pacientam' },
-          list: [
-            {
-              label: 'Команда',
-              route: { name: 'doktora' },
-            },
-            {
-              label: 'Портфолио',
-              route: { name: 'portfolio' },
-            },
-            {
-              label: 'Оборудование',
-              route: { name: 'oborudovanie-kliniki' },
-            },
-          ],
         },
       ]
     },
@@ -211,10 +193,10 @@ export default defineComponent({
       justify-content: space-between;
       align-items: center;
 
-      > nav {
+      >nav {
         display: none;
 
-        > ul {
+        >ul {
           display: flex;
           grid-gap: 20px;
         }
@@ -237,13 +219,13 @@ export default defineComponent({
       margin-left: auto;
       margin-right: 16px;
 
-      > a {
+      >a {
         @include font-lead-medium-130;
         color: $color-gray-100;
         text-decoration: none;
       }
 
-      > span {
+      >span {
         @include font-small-medium;
         color: $color-gray-72;
         white-space: nowrap;
@@ -255,6 +237,7 @@ export default defineComponent({
     &__grid {
       &-inner {
         grid-column: 1 / 9;
+
       }
 
       &-contacts {
@@ -269,14 +252,16 @@ export default defineComponent({
   @include media-breakpoint-up('lg') {
     &__grid {
       &-inner {
-        grid-column: 1 / 11;
 
-        > nav {
+        grid-column: 1 / 13;
+
+        >nav {
           display: flex;
           width: 100%;
 
-          > ul {
+          >ul {
             margin: 0 auto;
+            grid-gap: 16px;
           }
         }
       }
@@ -295,6 +280,12 @@ export default defineComponent({
     &__grid {
       &-inner {
         grid-column: 1 / 13;
+
+        >nav {
+          >ul {
+            grid-gap: 25px;
+          }
+        }
       }
     }
   }
