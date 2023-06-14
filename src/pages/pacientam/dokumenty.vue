@@ -615,7 +615,8 @@ export default defineComponent({
       }
 
       >p {
-        @include font-p-regular-160;
+        @include font-lead-regular-160;
+        color: $color-gray-88;
         margin: 0;
       }
     }
@@ -658,6 +659,7 @@ export default defineComponent({
       &-subtitle {
         @include font-p-regular-160;
         margin: 0;
+        color: $color-gray-88;
       }
 
       &-link {
