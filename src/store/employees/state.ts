@@ -34,37 +34,63 @@ const state = () => ({
         text: 'Сертификаты Бориса Сергеевича Терновых',
         list: [
           {
-            src: '1.png',
+            src: '1.jpg',
           },
           {
-            src: '3.png',
+            src: '2.jpg',
           },
           {
-            src: '4.png',
+            src: '3.jpg',
           },
           {
-            src: '5.png',
+            src: '4.jpg',
           },
           {
-            src: '7.png',
+            src: '5.jpg',
           },
           {
-            src: '8.png',
+            src: '6.jpg',
           },
           {
-            src: '2.png',
+            src: '7.jpg',
+          },
+          {
+            src: '8.jpg',
+          },
+          {
+            src: '9.jpg',
+          },
+          {
+            src: '10.jpg',
+          },
+          {
+            src: '11.jpg',
+          },
+          {
+            src: '12.jpg',
+          },
+          {
+            src: '13.jpg',
             orintation: 'landscape',
           },
           {
-            src: '6.png',
+            src: '14.jpg',
             orintation: 'landscape',
           },
           {
-            src: '9.png',
+            src: '15.jpg',
             orintation: 'landscape',
           },
           {
-            src: '10.png',
+            src: '16.jpg',
+            orintation: 'landscape',
+          },
+          {
+            src: '17.jpg',
+            orintation: 'landscape',
+          },
+          {
+            src: '18.jpg',
             orintation: 'landscape',
           },
         ],
@@ -96,6 +122,10 @@ const state = () => ({
           },
           {
             src: '5.png',
+            orintation: 'landscape',
+          },
+          {
+            src: '6.png',
             orintation: 'landscape',
           },
         ],
@@ -273,6 +303,15 @@ const state = () => ({
       expirience: 'Стаж работы более 10 лет',
       description:
         'Никита Сергеевич- опытный врач-стоматолог ортопед с более чем 10-летним стажем работы. Он специализируется на лечении и коррекции зубных дефектов с использованием инновационных технологий и материалов. В своей работе Никита придерживается индивидуального подхода к каждому пациенту и стремится достичь максимально эффективного результата.',
+      sertificates: {
+        text: 'Сертификаты Никиты Сергеевича Молодцова',
+        list: [
+          {
+            src: '1.jpg',
+            orintation: 'landscape',
+          },
+        ],
+      },
     },
     {
       name: 'Коханюк Илья Анатольевич',
