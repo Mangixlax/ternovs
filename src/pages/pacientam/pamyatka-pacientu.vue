@@ -27,7 +27,7 @@ import JournalList from '@/components/Sections/Journal/JournalList.vue'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
-  name: 'BezopasnostIGarantii',
+  name: 'PamyatkaPacientu',
   components: {
     ArticleRender,
     JournalAuthor,
