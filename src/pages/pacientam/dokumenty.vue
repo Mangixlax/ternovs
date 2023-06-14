@@ -197,7 +197,7 @@ import { getHead } from '~/lib/utils'
 import LayoutCallback from '@/components/Layout/LayoutCallback.vue'
 
 export default defineComponent({
-  name: 'BezopasnostIGarantii',
+  name: 'Dokumenty',
   components: {
     LayoutCallback,
   },
